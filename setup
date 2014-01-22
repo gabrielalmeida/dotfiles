@@ -5,7 +5,6 @@ if [ ! -d ~/.vim_backup ]; then
   mkdir ~/.vim_backup
 fi
 
-
 if [ ! -d ~/.vim_backup ]; then
   echo "Creating swp directory."
   mkdir ~/.vim_swp
@@ -14,5 +13,14 @@ fi
 echo "Creating vim symlinks"
 ln -nsf "$PWD"/vimrc ~/.vimrc
 ln -nsf "$PWD"/vim ~/.vim
+
+
+if [ ! -d vim/bundle ]; then
+  echo "Creating bundle directory."
+  mkdir vim/bundle
+fi
+
+echo "Cloning vundle into bundle directory"
+git clone https://github.com/gmarik/vundle.git vim/bundle/vundle
 
 echo "Vim setup is complete"

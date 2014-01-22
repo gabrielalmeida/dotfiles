@@ -5,7 +5,7 @@ if [ ! -d ~/.vim_backup ]; then
   mkdir ~/.vim_backup
 fi
 
-if [ ! -d ~/.vim_backup ]; then
+if [ ! -d ~/.vim_swp ]; then
   echo "Creating swp directory."
   mkdir ~/.vim_swp
 fi

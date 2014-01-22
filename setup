@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ ! -d ~/.vim_backup ]; then
+  echo "Creating backup directory."
+  mkdir ~/.vim_backup
+fi
+
+
+if [ ! -d ~/.vim_backup ]; then
+  echo "Creating swp directory."
+  mkdir ~/.vim_swp
+fi
+
+echo "Creating vim symlinks"
+ln -nsf "$PWD"/vimrc ~/.vimrc
+ln -nsf "$PWD"/vim ~/.vim
+
+echo "Vim setup is complete"

@@ -23,4 +23,7 @@ fi
 echo "Cloning vundle into bundle directory"
 git clone https://github.com/gmarik/vundle.git vim/bundle/vundle
 
+echo "Installing bundles"
+vim +BundleInstall +qall
+
 echo "Vim setup is complete"

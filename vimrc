@@ -24,7 +24,7 @@ set guioptions-=r
 set foldenable
 set foldmethod=manual
 set mouse=a
-set colorcolumn=80
+set colorcolumn=120
 set textwidth=80
 set backspace=indent,eol,start
 
@@ -54,9 +54,12 @@ Bundle "pangloss/vim-javascript"
 Bundle "groenewege/vim-less"
 Bundle "garbas/vim-snipmate"
 Bundle "honza/vim-snippets"
+Bundle "cmather/vim-meteor-snippets"
+Bundle "Raimondi/delimitMate"
 
 filetype plugin indent on
-colorscheme distinguished
+"colorscheme distinguished
+colorscheme vividchalk
 syntax on
 highlight ColorColumn ctermbg=white
 
@@ -95,7 +98,7 @@ endif
 autocmd QuickFixCmdPost *grep* cwindow
 
 if has("gui_running")
-  set guifont=Menlo\ Regular:h13
+  set guifont=Menlo\ Regular:h14
   " set guifont=Menlo\ Regular:h11
 endif
 
@@ -133,3 +136,6 @@ nnoremap <leader>w :w<cr>
 
 " NERDTreeToggle
 nnoremap <leader><Tab> :NERDTreeToggle<cr>
+
+" Split the line and insert cursor above in insert mode
+imap <C-c> <CR><Esc>O

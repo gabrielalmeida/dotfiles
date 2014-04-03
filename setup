@@ -14,16 +14,20 @@ echo "Creating vim symlinks"
 ln -nsf "$PWD"/vimrc ~/.vimrc
 ln -nsf "$PWD"/vim ~/.vim
 
+if [ -d vim/bundle ]; then
+  echo "Cleaning bundle directory."
+  rm -rf vim/bundle/*
+fi
 
 if [ ! -d vim/bundle ]; then
   echo "Creating bundle directory."
   mkdir vim/bundle
 fi
 
-echo "Cloning vundle into bundle directory"
-git clone https://github.com/gmarik/vundle.git vim/bundle/vundle
+echo "Cloning neobundle into bundle directory"
+git clone https://github.com/Shougo/neobundle.vim vim/bundle/neobundle.vim
 
 echo "Installing bundles"
-vim +BundleInstall +qall
+vim/bundle/neobundle.vim/bin/neoinstall
 
 echo "Vim setup is complete"

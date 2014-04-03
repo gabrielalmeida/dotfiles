@@ -1,5 +1,4 @@
-"call pathogen#infect()
-"call pathogen#helptags()
+
 " Settings
 set nocompatible
 set sh=/bin/bash
@@ -14,8 +13,8 @@ set autoindent
 set showcmd
 set tabstop=2
 set shiftwidth=2
-set nowrap
 set numberwidth=5
+set textwidth=80
 set ignorecase
 set smartcase
 set tags=./tags;
@@ -24,40 +23,53 @@ set guioptions-=r
 set foldenable
 set foldmethod=manual
 set mouse=a
-set colorcolumn=120
-set textwidth=80
+set colorcolumn=80
 set backspace=indent,eol,start
+set nowrap
 
 set completeopt=longest,menu
 set wildmode=list:longest,list:full
 set complete=.,t
 
-" Set up Vundle
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle "gmarik/vundle"
+
+" Set up NeoBundle
+set rtp+=~/.vim/bundle/neobundle.vim/
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+NeoBundleFetch "Shougo/neobundle.vim"
 
 " My bundles
-Bundle "kien/ctrlp.vim"
-Bundle "Lokaltog/vim-distinguished"
-Bundle "scrooloose/nerdtree"
-Bundle "tomtom/tlib_vim"
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "bling/vim-airline"
-Bundle "flazz/vim-colorschemes"
-Bundle "tpope/vim-fugitive"
-Bundle "tpope/vim-git"
-Bundle "tpope/vim-surround"
-Bundle "nono/vim-handlebars"
-Bundle "pangloss/vim-javascript"
-Bundle "groenewege/vim-less"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
-Bundle "cmather/vim-meteor-snippets"
-Bundle "Raimondi/delimitMate"
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+NeoBundle "Lokaltog/vim-distinguished"
+NeoBundle "scrooloose/nerdtree"
+NeoBundle "tomtom/tlib_vim"
+NeoBundle "MarcWeber/vim-addon-mw-utils"
+NeoBundle "bling/vim-airline"
+NeoBundle "flazz/vim-colorschemes"
+NeoBundle "tpope/vim-fugitive"
+NeoBundle "tpope/vim-git"
+NeoBundle "tpope/vim-surround"
+NeoBundle "nono/vim-handlebars"
+NeoBundle "pangloss/vim-javascript"
+NeoBundle "groenewege/vim-less"
+NeoBundle "garbas/vim-snipmate"
+NeoBundle "honza/vim-snippets"
+NeoBundle "cmather/vim-meteor-snippets"
+NeoBundle "Shougo/unite.vim"
+NeoBundle "kien/ctrlp.vim"
+NeoBundle "Shougo/vimshell.vim"
 
 filetype plugin indent on
+
+NeoBundleCheck
+
 "colorscheme distinguished
 colorscheme vividchalk
 syntax on
@@ -115,6 +127,7 @@ endfunc
 let mapleader = ","
 
 inoremap kj <Esc>
+inoremap <C-c> <Esc>
 nnoremap <Leader>n :call NumberToggle()<cr>
 
 " Is this for autocomplete?
@@ -137,5 +150,14 @@ nnoremap <leader>w :w<cr>
 " NERDTreeToggle
 nnoremap <leader><Tab> :NERDTreeToggle<cr>
 
-" Split the line and insert cursor above in insert mode
-imap <C-c> <CR><Esc>O
+
+" Unite
+let g:unite_source_history_yank_enable=1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <Leader>t :Unite -buffer-name=files -start-insert file_rec/async:!<cr>
+nnoremap <Leader>f :Unite -buffer-name=files -start-insert file<cr>
+nnoremap <Leader>r :Unite -buffer-name=mru -start-insert file_mru<cr>
+nnoremap <Leader>g :Unite -buffer-name=register -start-insert register<cr>
+nnoremap <Leader>o :Unite -buffer-name=outline -start-insert outline<cr>
+nnoremap <Leader>y :Unite -buffer-name=yank history/yank<cr>
+nnoremap <Leader>e :Unite -buffer-name=buffer buffer<cr>

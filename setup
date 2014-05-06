@@ -3,17 +3,17 @@ echo "Make sure git and curl are installed to get this setup working!"
 echo "Installing oh-my-zsh shell."
 curl -L http://install.ohmyz.sh | sh
 
-if [ ! -d ~/.dotfiles_backup]; then
+if [ ! -d ~/.dotfiles_backup ]; then
   echo "Creating backup directory."
   mkdir ~/.dotfiles_backup
 fi
 
-if [ -e ~/.zshrc]; then
+if [ -e ~/.zshrc ]; then
     mv ~/.zshrc ~/.dotfiles_backup
     echo ".zshrc Backed up"
 fi
 
-if [ -e ~/.tmux.conf]; then
+if [ -e ~/.tmux.conf ]; then
     mv ~/.tmux.conf ~/.dotfiles_backup
     echo ".tmux.conf Backed up"
 fi

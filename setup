@@ -29,4 +29,6 @@ cd ~/dotvim
 ./setup
 
 echo "Dotfiles setup is complete"
-echo "If you are not on zsh shell yet, do: \$zsh"
+
+zsh
+echo "Trying to change to zsh, if it does not occur try by yourself: \$zsh"

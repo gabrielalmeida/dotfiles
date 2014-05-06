@@ -20,6 +20,7 @@ fi
 
 echo "Creating dotfiles symlinks"
 ln -nsf "$PWD"/zshrc ~/.zshrc
+ln -nsf "$PWD"/gitconfig ~/.gitconfig
 ln -nsf "$PWD"/tmux.conf ~/.tmux.conf
 
 echo "I'll clone dotvim now:"

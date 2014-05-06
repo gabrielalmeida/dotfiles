@@ -4,7 +4,7 @@ dotvim
 My vim setup
 
 ```bash
-> git clone https://github.com/cmather/dotvim.git
-> cd dotvim
+> git clone https://github.com/gabrielalmeida/dotfiles
+> cd dotfiles
 > ./setup
 ```

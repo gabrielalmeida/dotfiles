@@ -1,7 +1,7 @@
-dotvim
+dotfiles
 ======
 
-My vim setup
+My dotfiles setup
 
 ```bash
 > git clone https://github.com/gabrielalmeida/dotfiles

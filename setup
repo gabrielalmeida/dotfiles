@@ -1,33 +1,31 @@
 #!/bin/bash
+echo "Make sure git and curl are installed to get this setup working!"
+echo "Installing oh-my-zsh shell."
+curl -L http://install.ohmyz.sh | sh
 
-if [ ! -d ~/.vim_backup ]; then
+if [ ! -d ~/.dotfiles_backup]; then
   echo "Creating backup directory."
-  mkdir ~/.vim_backup
+  mkdir ~/.dotfiles_backup
 fi
 
-if [ ! -d ~/.vim_swp ]; then
-  echo "Creating swp directory."
-  mkdir ~/.vim_swp
+if [ -e ~/.zshrc]; then
+    mv ~/.zshrc ~/.dotfiles_backup
+    echo ".zshrc Backed up"
 fi
 
-echo "Creating vim symlinks"
-ln -nsf "$PWD"/vimrc ~/.vimrc
-ln -nsf "$PWD"/vim ~/.vim
-
-if [ -d vim/bundle ]; then
-  echo "Cleaning bundle directory."
-  rm -rf vim/bundle/*
+if [ -e ~/.tmux.conf]; then
+    mv ~/.tmux.conf ~/.dotfiles_backup
+    echo ".tmux.conf Backed up"
 fi
 
-if [ ! -d vim/bundle ]; then
-  echo "Creating bundle directory."
-  mkdir vim/bundle
-fi
+echo "Creating dotfiles symlinks"
+ln -nsf "$PWD"/zshrc ~/.zshrc
+ln -nsf "$PWD"/tmux.conf ~/.tmux.conf
 
-echo "Cloning neobundle into bundle directory"
-git clone https://github.com/Shougo/neobundle.vim vim/bundle/neobundle.vim
+echo "I'll clone dotvim now:"
+git clone https://github.com/gabrielalmeida/dotvim ~/dotvim
+echo "Starting dotvim setup automatically!"
+~/dotvim/setup
 
-echo "Installing bundles"
-vim/bundle/neobundle.vim/bin/neoinstall
-
-echo "Vim setup is complete"
+echo "Dotfiles setup is complete"
+echo "If you are not on zsh shell yet, do: \$zsh"

@@ -25,7 +25,8 @@ ln -nsf "$PWD"/tmux.conf ~/.tmux.conf
 echo "I'll clone dotvim now:"
 git clone https://github.com/gabrielalmeida/dotvim ~/dotvim
 echo "Starting dotvim setup automatically!"
-~/dotvim/setup
+cd ~/dotvim
+./setup
 
 echo "Dotfiles setup is complete"
 echo "If you are not on zsh shell yet, do: \$zsh"

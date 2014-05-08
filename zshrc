@@ -45,7 +45,10 @@ ZSH_THEME="cloud"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github heroku osx command-not-found vi-mode tmux meteor node brew composer bower cloudappi common-aliases compleat gitfast git-extras laravel4 lol nyan rand-quote themes npm atom last-working-dir copydir copyfile cp dirpersist dircycle extract web-search)
+plugins=(git github heroku osx command-not-found vi-mode meteor node brew
+composer bower cloudappi common-aliases compleat gitfast git-extras 
+laravel4 lol nyan rand-quote themes npm atom last-working-dir copydir
+copyfile cp dirpersist dircycle extract web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,8 +75,14 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Aliases
+alias cle=clear
 alias cl=clear
 alias lc=cl
+alias tm='tmux'
+alias ta='tmux a'
+alias ts='tmux new-session -s'
+alias tl='tmux list-sessions'
+
 
 # Open Dev folder
 

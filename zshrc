@@ -47,8 +47,8 @@ ZSH_THEME="cloud"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git github heroku osx command-not-found vi-mode meteor node brew
 composer bower cloudappi common-aliases compleat gitfast git-extras 
-laravel4 lol nyan rand-quote themes npm atom last-working-dir copydir
-copyfile cp dirpersist dircycle extract web-search)
+laravel4 nyan themes npm atom last-working-dir copydir
+copyfile cp extract)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,3 +98,5 @@ function dev() {
 
 export PATH="$HOME/.parts/autoparts/bin:$PATH"
 eval "$(parts init -)"
+
+cd ~/

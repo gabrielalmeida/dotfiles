@@ -45,7 +45,10 @@ ZSH_THEME="cloud"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git heroku meteor node brew composer bower cloudappi common-aliases compleat gitfast git-extras laravel4 lol npm atom)
+plugins=(git github heroku osx command-not-found vi-mode meteor node brew
+composer bower cloudappi common-aliases compleat gitfast git-extras 
+laravel4 nyan themes npm atom last-working-dir copydir
+copyfile cp extract)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,8 +75,14 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Aliases
+alias cle=clear
 alias cl=clear
 alias lc=cl
+alias tm='tmux'
+alias ta='tmux a'
+alias ts='tmux new-session -s'
+alias tl='tmux list-sessions'
+
 
 # Open Dev folder
 
@@ -87,6 +96,13 @@ function dev() {
      fi
 }
 
+<<<<<<< HEAD
 # Uncomment if on Nitrous or Codio Boxes
 #export PATH="$HOME/.parts/autoparts/bin:$PATH"
 #eval "$(parts init -)"
+=======
+export PATH="$HOME/.parts/autoparts/bin:$PATH"
+eval "$(parts init -)"
+
+cd ~/
+>>>>>>> dc7c4b2fe0926aeefb50e8c16f69837e2982b65b

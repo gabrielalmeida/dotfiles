@@ -8,6 +8,12 @@ if [ ! -d ~/.dotfiles_backup ]; then
   mkdir ~/.dotfiles_backup
 fi
 
+if [ ! -d ~/bin.]; then
+  echo "Creating bin directory."
+  mkdir ~/bin
+fi
+
+
 if [ -e ~/.zshrc ]; then
     mv ~/.zshrc ~/.dotfiles_backup
     echo ".zshrc Backed up"
@@ -20,6 +26,7 @@ fi
 
 echo "Creating dotfiles symlinks"
 ln -nsf "$PWD"/zshrc ~/.zshrc
+ln -nsf "$PWD"/bin/* ~/bin
 ln -nsf "$PWD"/gitconfig ~/.gitconfig
 ln -nsf "$PWD"/tmux.conf ~/.tmux.conf
 

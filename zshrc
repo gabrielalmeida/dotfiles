@@ -96,13 +96,8 @@ function dev() {
      fi
 }
 
-<<<<<<< HEAD
 # Uncomment if on Nitrous or Codio Boxes
 #export PATH="$HOME/.parts/autoparts/bin:$PATH"
 #eval "$(parts init -)"
-=======
-export PATH="$HOME/.parts/autoparts/bin:$PATH"
-eval "$(parts init -)"
 
 cd ~/
->>>>>>> dc7c4b2fe0926aeefb50e8c16f69837e2982b65b

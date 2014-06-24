@@ -83,6 +83,9 @@ alias ta='tmux a'
 alias ts='tmux new-session -s'
 alias tl='tmux list-sessions'
 
+# setting TERM
+export TERM="xterm-256color"
+export LANG="en_US.UTF-8"
 
 # Open Dev folder
 

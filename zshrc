@@ -45,10 +45,13 @@ ZSH_THEME="cloud"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github heroku osx command-not-found vi-mode meteor node brew
+plugins=(git github heroku osx command-not-found  meteor node brew
 composer bower cloudappi common-aliases compleat gitfast git-extras 
 laravel4 nyan themes npm atom last-working-dir copydir
 copyfile cp extract)
+
+# Using bindkey -v instead of vi-mode plugin(it was freezing zsh)
+bindkey -v
 
 source $ZSH/oh-my-zsh.sh
 
@@ -103,4 +106,6 @@ function dev() {
 #export PATH="$HOME/.parts/autoparts/bin:$PATH"
 #eval "$(parts init -)"
 
+CLASSPATH=~/Dev/lucene-4.9.0:$CLASSPATH
+export CLASSPATH
 cd ~/

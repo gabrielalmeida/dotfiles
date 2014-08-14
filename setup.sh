@@ -34,7 +34,7 @@ echo "I'll clone dotvim now:"
 git clone https://github.com/gabrielalmeida/dotvim ~/dotvim
 echo "Starting dotvim setup automatically!"
 cd ~/dotvim
-./setup
+./setup.sh
 
 echo "Dotfiles setup is complete"
 

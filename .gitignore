@@ -1,5 +1,6 @@
-/bin
+bin
 vim/backup
 vim/swp
 vim/bundle
+zsh-plugins
 .DS_Store

@@ -3,24 +3,33 @@ echo "Make sure git and curl are installed to get this setup working!"
 echo "Installing oh-my-zsh shell."
 curl -L http://install.ohmyz.sh | sh
 
-if [ ! -d ~/.dotfiles_backup ]; then
+if [ ! -d ~/dotfiles_backup ]; then
   echo "Creating backup directory."
-  mkdir ~/.dotfiles_backup
+  mkdir ~/dotfiles_backup
 fi
 
-if [ ! -d ~/bin.]; then
+if [ ! -d ~/bin ]; then
   echo "Creating bin directory."
   mkdir ~/bin
 fi
 
-
 if [ -e ~/.zshrc ]; then
-    mv ~/.zshrc ~/.dotfiles_backup
+    mv -f ~/.zshrc ~/dotfiles_backup; rm -f ~/.zshrc
     echo ".zshrc Backed up"
 fi
 
+if [ -e ~/.gitconfig ]; then
+    mv ~/.gitconfig ~/dotfiles_backup; rm -f ~/.gitconfig
+    echo ".gitconfig Backed up"
+fi
+
+if [ -e ~/dotvim ]; then
+    mv -f ~/dotvim ~/dotfiles_backup; rm -rf ~/dotvim
+    echo "dotvim dir Backed up"
+fi
+
 if [ -e ~/.tmux.conf ]; then
-    mv ~/.tmux.conf ~/.dotfiles_backup
+    mv ~/.tmux.conf ~/dotfiles_backup
     echo ".tmux.conf Backed up"
 fi
 
@@ -29,6 +38,11 @@ ln -nsf "$PWD"/zshrc ~/.zshrc
 ln -nsf "$PWD"/bin/* ~/bin
 ln -nsf "$PWD"/gitconfig ~/.gitconfig
 ln -nsf "$PWD"/tmux.conf ~/.tmux.conf
+
+echo "Cloning zsh-plugins now:"
+rm -rf zsh-plugins
+git clone https://github.com/zsh-users/zsh-syntax-highlighting zsh-plugins/zsh-syntax-highlighting
+git clone https://github.com/hchbaw/opp.zsh zsh-plugins/opp.zsh
 
 echo "I'll clone dotvim now:"
 git clone https://github.com/gabrielalmeida/dotvim ~/dotvim

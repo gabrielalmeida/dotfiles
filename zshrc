@@ -8,8 +8,8 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="cloud"
 
 # Example aliases
- alias zshconfig="mate ~/.zshrc"
- alias ohmyzsh="mate ~/.oh-my-zsh"
+ alias zshconfig="vi ~/.zshrc"
+ alias ohmyzsh="vi ~/.oh-my-zsh"
 
 # Set this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -46,19 +46,39 @@ ZSH_THEME="cloud"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git github heroku osx command-not-found  meteor node brew
-composer bower cloudappi common-aliases compleat gitfast git-extras 
+composer bower cloudapp common-aliases compleat gitfast git-extras 
 laravel4 nyan themes npm atom last-working-dir copydir
 copyfile cp extract)
 
-# Using bindkey -v instead of vi-mode plugin(it was freezing zsh)
-bindkey -v
-
 source $ZSH/oh-my-zsh.sh
+
+# zsh-syntax-highlighting
+source ~/dotfiles/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+
+# opp vi zsh
+source ~/dotfiles/zsh-plugins/opp.zsh/opp.zsh
+source ~/dotfiles/zsh-plugins/opp.zsh/opp/*.zsh
 
 ## User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin"
 export MANPATH="/usr/local/man:$MANPATH"
+
+# Using bindkey -v instead of vi-mode plugin(it was freezing zsh)
+bindkey -v
+bindkey -M viins 'jj' vi-cmd-mode
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+export KEYTIMEOUT=1
+
 
 # # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -71,7 +91,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 
 # Homebrew Cask Application Directory
@@ -105,6 +125,11 @@ function dev() {
 # Uncomment if on Nitrous or Codio Boxes
 #export PATH="$HOME/.parts/autoparts/bin:$PATH"
 #eval "$(parts init -)"
+
+# Start eclimd
+export ECLIPSE_HOME="/Applications/eclipse/"
+alias eclimd='$ECLIPSE_HOME/eclimd&'
+
 
 CLASSPATH=~/Dev/lucene-4.9.0:$CLASSPATH
 export CLASSPATH

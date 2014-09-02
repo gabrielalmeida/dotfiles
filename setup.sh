@@ -19,7 +19,7 @@ if [ -e ~/.zshrc ]; then
 fi
 
 if [ -e ~/.gitconfig ]; then
-    mv ~/.gitconfig ~/dotfiles_backup; rm -f ~/.gitconfig
+    mv -f ~/.gitconfig ~/dotfiles_backup; rm -f ~/.gitconfig
     echo ".gitconfig Backed up"
 fi
 
@@ -29,7 +29,7 @@ if [ -e ~/dotvim ]; then
 fi
 
 if [ -e ~/.tmux.conf ]; then
-    mv ~/.tmux.conf ~/dotfiles_backup
+    mv -f ~/.tmux.conf ~/dotfiles_backup
     echo ".tmux.conf Backed up"
 fi
 
@@ -41,10 +41,10 @@ ln -nsf "$PWD"/gitconfig ~/.gitconfig
 ln -nsf "$PWD"/ssh/config ~/.ssh/config
 
 echo "Cloning zsh-plugins now:"
-cd ~/
-rm -rf zsh-plugins
-git clone https://github.com/zsh-users/zsh-syntax-highlighting zsh-plugins/zsh-syntax-highlighting
-git clone https://github.com/hchbaw/opp.zsh zsh-plugins/opp.zsh
+rm -rf "$PWD"/zsh-plugins; mkdir "$PWD"/zsh-plugins
+cd "$PWD"/zsh-plugins
+git clone https://github.com/zsh-users/zsh-syntax-highlighting
+git clone https://github.com/hchbaw/opp.zsh
 
 echo "I'll clone dotvim now:"
 git clone https://github.com/gabrielalmeida/dotvim ~/dotvim

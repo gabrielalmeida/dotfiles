@@ -1,0 +1,7 @@
+Host *
+  ServerAliveInterval 30
+  ServerAliveCountMax 2
+  ControlPath ~/.ssh/master-%r@%h:%p
+  ControlMaster auto
+Compression yes
+CompressionLevel 9

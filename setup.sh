@@ -36,10 +36,12 @@ fi
 echo "Creating dotfiles symlinks"
 ln -nsf "$PWD"/zshrc ~/.zshrc
 ln -nsf "$PWD"/bin/* ~/bin
-ln -nsf "$PWD"/gitconfig ~/.gitconfig
 ln -nsf "$PWD"/tmux.conf ~/.tmux.conf
+ln -nsf "$PWD"/gitconfig ~/.gitconfig
+ln -nsf "$PWD"/ssh/config ~/.ssh/config
 
 echo "Cloning zsh-plugins now:"
+cd ~/
 rm -rf zsh-plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting zsh-plugins/zsh-syntax-highlighting
 git clone https://github.com/hchbaw/opp.zsh zsh-plugins/opp.zsh

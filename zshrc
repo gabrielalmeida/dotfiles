@@ -63,7 +63,7 @@ source ~/dotfiles/zsh-plugins/opp.zsh/opp/*.zsh
 
 ## User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/gbr/bin"
 export MANPATH="/usr/local/man:$MANPATH"
 
 # Using bindkey -v instead of vi-mode plugin(it was freezing zsh)

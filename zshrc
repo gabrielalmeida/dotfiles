@@ -63,7 +63,7 @@ source ~/dotfiles/zsh-plugins/opp.zsh/opp/*.zsh
 
 ## User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/gbr/bin"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/gbr/bin:/Users/gbr/.meteor/android_bundle/android-sdk/tools:/Users/gbr/.meteor/android_bundle/android-sdk/platform-tools:/Users/gbr/.meteor/android_bundle/android-sdk/build-tools"
 export MANPATH="/usr/local/man:$MANPATH"
 
 # Using bindkey -v instead of vi-mode plugin(it was freezing zsh)
@@ -113,7 +113,7 @@ export LANG="en_US.UTF-8"
 # Open Dev folder
 
 function dev() {
-  cd ~/Nitrous/gbrl;
+  cd ~/Dev;
 
       if [ -e "$1" ] || [ -e "$2" ] || [ -e "$3" ] || [ -e "$4"] || [ -e "$5"]; then
             for i in "$1" "$2" "$3" "$4" "$5"; do
@@ -131,6 +131,5 @@ export ECLIPSE_HOME="/Applications/eclipse/"
 alias eclimd='$ECLIPSE_HOME/eclimd&'
 
 
-CLASSPATH=~/Dev/lucene-4.9.0:$CLASSPATH
-export CLASSPATH
-cd ~/
+# Go with hub instead of git
+eval "$(hub alias -s)"

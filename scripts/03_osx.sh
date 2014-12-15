@@ -5,6 +5,21 @@
 
 # ~/.osx — https://mths.be/osx
 
+# Update everything
+softwareupdate -ia
+
+
+
+# Set computer name (as done via System Preferences → Sharing)
+sudo scutil --set ComputerName "Gbr MacBook Pro 15"
+sudo scutil --set HostName "Gbr MacBook Pro 15"
+sudo scutil --set LocalHostName "Gbr-MacBook-Pro-15"
+sudo defaults write
+/Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName
+-string "Gbr-MacBook-Pro-15"
+
+
+
 # Ask for the administrator password upfront
 sudo -v
 
@@ -313,6 +328,16 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 # Use list view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+
+# Show the ~/Library folder, and hide Applications, Documents, Music, Pictures
+# and Public
+chflags nohidden ~/Library
+chflags nohidden ~/Applications
+chflags nohidden ~/Documents
+chflags hidden ~/Music
+chflags hidden ~/Pictures
+chflags hidden ~/Public
 
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -745,6 +770,18 @@ defaults write com.twitter.twitter-mac ShowFullNames -bool true
 
 # Hide the app in the background if it’s not the front-most window
 defaults write com.twitter.twitter-mac HideInBackground -bool true
+
+###############################################################################
+# Others                                                                      #
+###############################################################################
+
+# Use OpenDNS servers
+sudo networksetup -setdnsservers Wi-Fi 208.67.220.220 208.67.222.222
+
+# Set contact information in lock screen
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText
+"Email: ${email}\nTel: ${telephone}"
+
 
 ###############################################################################
 # Kill affected applications                                                  #

@@ -1,7 +1,6 @@
 #!/bin/bash
+
 echo "Make sure git and curl are installed to get this setup working!"
-echo "Installing oh-my-zsh shell."
-curl -L http://install.ohmyz.sh | sh
 
 if [ ! -d ~/dotfiles_backup ]; then
   echo "Creating backup directory."
@@ -34,25 +33,22 @@ if [ -e ~/.tmux.conf ]; then
 fi
 
 echo "Creating dotfiles symlinks"
-ln -nsf "$PWD"/zshrc ~/.zshrc
+ln -nsf "$PWD"/files/zshrc ~/.zshrc
 ln -nsf "$PWD"/bin/* ~/bin
-ln -nsf "$PWD"/tmux.conf ~/.tmux.conf
-ln -nsf "$PWD"/gitconfig ~/.gitconfig
-ln -nsf "$PWD"/ssh/config ~/.ssh/config
+ln -nsf "$PWD"/files/tmux.conf ~/.tmux.conf
+ln -nsf "$PWD"/files/gitconfig ~/.gitconfig
+ln -nsf "$PWD"/files/config ~/.ssh/config
+ln -nsf "$PWD"/files/vimrc ~/.vimrc
+ln -nsf "$PWD"/files/vim ~/.vim
 
-echo "Cloning zsh-plugins now:"
-rm -rf "$PWD"/zsh-plugins; mkdir "$PWD"/zsh-plugins
-cd "$PWD"/zsh-plugins
-git clone https://github.com/zsh-users/zsh-syntax-highlighting
-git clone https://github.com/hchbaw/opp.zsh
+run_scripts() {
+  git clone https://github.com/gabrielalmeida/dotfiles.git /tmp/dotfiles/
 
-echo "I'll clone dotvim now:"
-git clone https://github.com/gabrielalmeida/dotvim ~/dotvim
-echo "Starting dotvim setup automatically!"
-cd ~/dotvim
-./setup.sh
+  # concatenate all shell scripts together, so things like variables can be reused
+  cat /tmp/dotfiles/scripts/*.sh > /tmp/script
+  bash /tmp/script
+}
+
+run_scripts
 
 echo "Dotfiles setup is complete"
-
-zsh
-echo "Trying to change to zsh, if it does not occur try by yourself: \$zsh"

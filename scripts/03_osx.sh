@@ -8,8 +8,6 @@
 # Update everything
 softwareupdate -ia
 
-
-
 # Set computer name (as done via System Preferences → Sharing)
 sudo scutil --set ComputerName "Gbr MacBook Pro 15"
 sudo scutil --set HostName "Gbr MacBook Pro 15"

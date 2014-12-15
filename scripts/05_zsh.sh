@@ -3,8 +3,7 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 
 # install zsh-syntax-highlighting
 mkdir -p "${HOME}/.oh-my-zsh/custom/plugins"
-git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
-${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 # make default shell
 sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"

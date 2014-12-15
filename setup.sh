@@ -39,9 +39,9 @@ ln -nsf "$PWD"/files/tmux.conf ~/.tmux.conf
 ln -nsf "$PWD"/files/gitconfig ~/.gitconfig
 ln -nsf "$PWD"/files/config ~/.ssh/config
 ln -nsf "$PWD"/files/vimrc ~/.vimrc
-ln -nsf "$PWD"/files/vim ~/.vim
 
 run_scripts() {
+  rm -rf /tmp/dotfiles
   git clone https://github.com/gabrielalmeida/dotfiles.git /tmp/dotfiles/
 
   # concatenate all shell scripts together, so things like variables can be reused

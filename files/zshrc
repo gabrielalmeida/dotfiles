@@ -50,7 +50,7 @@ composer bower cloudapp common-aliases compleat gitfast git-extras
 laravel4 nyan themes npm atom last-working-dir copydir
 copyfile cp extract)
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # zsh-syntax-highlighting
 source ~/dotfiles/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

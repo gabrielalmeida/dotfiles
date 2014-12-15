@@ -6,8 +6,8 @@ mkdir -p "${HOME}/.oh-my-zsh/custom/plugins"
 git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 # make default shell
-sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
-chsh -s "/usr/local/bin/zsh"
+sudo sh -c "echo '/usr/bin/zsh' >> /etc/shells"
+chsh -s "/bin/zsh"
 
 # dotfiles
 #mv "/tmp/dotfiles/files/zshrc" "${HOME}/.zshrc"

@@ -147,6 +147,9 @@ NeoBundle "pangloss/vim-javascript"
 NeoBundle "groenewege/vim-less"
 NeoBundle "wavded/vim-stylus.git"
 
+" CoffeeScript 
+NeoBundle "kchmck/vim-coffee-script"
+
 " Jade
 NeoBundle "digitaltoad/vim-jade"
 
@@ -287,3 +290,12 @@ nnoremap <Leader>g :Unite -buffer-name=register -start-insert register<cr>
 nnoremap <Leader>o :Unite -buffer-name=outline -start-insert outline<cr>
 nnoremap <Leader>y :Unite -buffer-name=yank history/yank<cr>
 nnoremap <Leader>e :Unite -buffer-name=buffer buffer<cr>
+
+call unite#custom_source('file,file_rec,file_rec/async,grep',
+      \ 'ignore_pattern', join([
+      \ '\.git/',
+      \ '\.bundle/',
+      \ '\.rubygems/',
+      \ '\.meteor/',
+      \ 'vendor/',
+      \ ], '\|'))

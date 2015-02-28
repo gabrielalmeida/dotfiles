@@ -103,6 +103,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 alias cle=clear
 alias cl=clear
 alias lc=cl
+alias vi=vim
 alias tm='tmux'
 alias ta='tmux a'
 alias ts='tmux new-session -s'

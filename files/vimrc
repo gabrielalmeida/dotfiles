@@ -92,11 +92,11 @@ NeoBundle "marijnh/tern_for_vim"
 NeoBundle "coderifous/textobj-word-column.vim"
 
 NeoBundle "Yggdroot/indentLine"
-let g:indentLine_color_term = 252 
+let g:indentLine_color_term = 110 
 let g:indentLine_color_gui = '#A4E57E'
-let g:indentLine_color_tty_light = 4
-let g:indentLine_color_tty_dark = 2
-let g:indentLine_char = '¦'
+let g:indentLine_color_tty_light = 1
+let g:indentLine_color_tty_dark = 1
+let g:indentLine_char = '︙'
 
 " Snips/Completation
 let g:EclimCompletionMethod = 'omnifunc' " Eclim for JAVA

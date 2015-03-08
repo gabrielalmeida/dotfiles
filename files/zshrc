@@ -139,3 +139,10 @@ eval "$(hub alias -s)"
 
 # Force meteor watcher
 export METEOR_WATCH_FORCE_POLLING=t
+
+# Auto-fu
+#A=~/dotfiles/zsh-plugins/auto-fu.zsh; (zsh -c "source $A ; auto-fu-zcompile $A ~/.zsh") #UNCOMENT THIS LINE AT FIRST RUN
+source ~/.zsh/auto-fu; auto-fu-install
+zle-line-init () {auto-fu-init;}; zle -N zle-line-init
+zstyle ':completion:*' completer _oldlist _complete
+zle -N zle-keymap-select auto-fu-zle-keymap-select

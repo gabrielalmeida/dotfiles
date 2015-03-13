@@ -91,6 +91,15 @@ NeoBundle "Shougo/vimshell.vim"
 NeoBundle "marijnh/tern_for_vim"
 NeoBundle "coderifous/textobj-word-column.vim"
 
+" Misc
+NeoBundle "xolox/vim-misc"
+
+" Tags
+NeoBundle "majutsushi/tagbar"
+NeoBundle "xolox/vim-easytags"
+
+
+" IndentLine
 NeoBundle "Yggdroot/indentLine"
 let g:indentLine_color_term = 110 
 let g:indentLine_color_gui = '#A4E57E'

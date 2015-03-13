@@ -1,3 +1,7 @@
+###################################
+#      ZSH-DEFAULT-SETTINGS       #
+###################################
+
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -8,8 +12,8 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="cloud"
 
 # Example aliases
- alias zshconfig="vi ~/.zshrc"
- alias ohmyzsh="vi ~/.oh-my-zsh"
+alias zshconfig="vi ~/.zshrc"
+alias ohmyzsh="vi ~/.oh-my-zsh"
 
 # Set this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -23,7 +27,7 @@ ZSH_THEME="cloud"
 # Uncomment following line if you want to disable colors in ls
 #DISABLE_LS_COLORS="true"
 
-# Uncomment following line if you want to disable autosetting terminal title.
+# Uncomment following line if you want to disable autosetting terminal ttle.
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want to disable command autocorrection
@@ -42,45 +46,79 @@ ZSH_THEME="cloud"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="dd/mm/yyyy"
 
+
+###################################
+#       ZSH-DEFAULT-PLUGINS       #
+###################################
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git github heroku osx command-not-found  meteor node brew
 composer bower cloudapp common-aliases compleat gitfast git-extras 
-laravel4 nyan themes npm atom last-working-dir copydir
-copyfile cp extract)
+laravel4 nyan themes atom  copydir last-working-dir copyfile cp extract )
+
+# not used anymore plugins:
+  # vi-mode – lag
 
 source $ZSH/oh-my-zsh.sh
 
-# zsh-syntax-highlighting
-source ~/dotfiles/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+##################################
+#           ZSH-PLUGINS          #
+##################################
 
-# opp vi zsh
-source ~/dotfiles/zsh-plugins/opp.zsh/opp.zsh
-source ~/dotfiles/zsh-plugins/opp.zsh/opp/*.zsh
+
+  ##################################
+  #      ZSH-SYNTAX-HIGHLIGHT      #
+  ##################################
+
+  # zsh-syntax-highlighting
+  source ~/dotfiles/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+  ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+
+  ##################################
+  #              OPP               #
+  ##################################
+
+  # opp vi zsh
+  source ~/dotfiles/zsh-plugins/opp.zsh/opp.zsh
+  source ~/dotfiles/zsh-plugins/opp.zsh/opp/*.zsh
+
+  ##################################
+  #             AUTO-FU            #
+  ##################################
+
+  # Auto-fu bootstrap
+  #A=~/dotfiles/zsh-plugins/auto-fu.zsh; (zsh -c "source $A ; auto-fu-zcompile $A ~/.zsh") #UNCOMMENT THIS LINE AT FIRST RUN
+  source ~/.zsh/auto-fu; auto-fu-install
+  zle-line-init () {auto-fu-init;}; zle -N zle-line-init
+  zstyle ':completion:*' completer _oldlist _complete
+  zle -N zle-keymap-select auto-fu-zle-keymap-select
+
+  zstyle ':auto-fu:highlight' input bold
+  zstyle ':auto-fu:highlight' completion fg=black,bold
+  zstyle ':auto-fu:highlight' completion/one fg=white,bold,underline
+  zstyle ':auto-fu:var' postdisplay $'\n-azfu-'
+  zstyle ':auto-fu:var' track-keymap-skip opp
+  zstyle ':auto-fu:var' enable all 
+  #zstyle ':auto-fu:var' disable magic-space
+
+
+##################################
+#             PATHS              #
+##################################
 
 ## User configuration
 
 export VIMPATH="/usr/local/Cellar/vim/7.4.488/bin/"
 export ANDROIDPATH="~/.meteor/android_bundle/android-sdk/"
-export PATH="$VIMPATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/gbr/bin:$ANDROIDPATH/tools:$ANDROIDPATH/platform-tools:$ANDROIDPATH/build-tools"
+export PATH="/Users/gbr/bin:$VIMPATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$ANDROIDPATH/tools:$ANDROIDPATH/platform-tools:$ANDROIDPATH/build-tools"
 export MANPATH="/usr/local/man:$MANPATH"
 
-# Using bindkey -v instead of vi-mode plugin(it was freezing zsh)
-bindkey -v
-bindkey -M viins 'jj' vi-cmd-mode
-
-bindkey '^P' up-history
-bindkey '^N' down-history
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
-bindkey '^r' history-incremental-search-backward
-
-export KEYTIMEOUT=1
-
+##################################
+#             EDITOR             #
+##################################
 
 # # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -89,15 +127,32 @@ export KEYTIMEOUT=1
 #   export EDITOR='mvim'
 # fi
 
+
+##################################
+#             COMPILER           #
+##################################
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
+
+###################################
+#             SSH                 #
+###################################
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+##################################
+#            HOMEBREW            #
+##################################
 
 # Homebrew Cask Application Directory
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+##################################
+#         CUSTOM ALIASES         #
+##################################
 
 # Aliases
 alias cle=clear
@@ -109,40 +164,193 @@ alias ta='tmux a'
 alias ts='tmux new-session -s'
 alias tl='tmux list-sessions'
 
+##################################
+#         CUSTOM FUNC            #
+##################################
+
 # setting TERM
 export TERM="xterm-256color"
 export LANG="en_US.UTF-8"
 
+##################################
+#         CUSTOM FUNCS           #
+##################################
+
 # Open Dev folder
 
 function dev() {
-  cd ~/Dev;
+cd ~/Dev;
 
-      if [ -e "$1" ] || [ -e "$2" ] || [ -e "$3" ] || [ -e "$4"] || [ -e "$5"]; then
-            for i in "$1" "$2" "$3" "$4" "$5"; do
-                [ -e "$i" ] && cd "$i";
-            done
-     fi
+if [ -e "$1" ] || [ -e "$2" ] || [ -e "$3" ] || [ -e "$4"] || [ -e "$5"]; then
+  for i in "$1" "$2" "$3" "$4" "$5"; do
+    [ -e "$i" ] && cd "$i";
+  done
+fi
 }
+
+##################################
+#         NITROUS STUFF          #
+##################################
+
 
 # Uncomment if on Nitrous or Codio Boxes
 #export PATH="$HOME/.parts/autoparts/bin:$PATH"
 #eval "$(parts init -)"
+
+
+##################################
+#           ECLIMD               #
+##################################
 
 # Start eclimd
 export ECLIPSE_HOME="/Applications/eclipse/"
 alias eclimd='$ECLIPSE_HOME/eclimd&'
 
 
+##################################
+#              HUB               #
+##################################
+
+
 # Go with hub instead of git
 eval "$(hub alias -s)"
+
+
+##################################
+#            METEOR              #
+##################################
 
 # Force meteor watcher
 export METEOR_WATCH_FORCE_POLLING=t
 
-# Auto-fu
-#A=~/dotfiles/zsh-plugins/auto-fu.zsh; (zsh -c "source $A ; auto-fu-zcompile $A ~/.zsh") #UNCOMENT THIS LINE AT FIRST RUN
-source ~/.zsh/auto-fu; auto-fu-install
-zle-line-init () {auto-fu-init;}; zle -N zle-line-init
-zstyle ':completion:*' completer _oldlist _complete
-zle -N zle-keymap-select auto-fu-zle-keymap-select
+
+
+
+##################################
+#           ZSH VI-MODE          #
+##################################
+
+
+# Default zsh vi-mode settings(which are incompatible with auto-fu):
+
+# Using bindkey -v instead of vi-mode plugin(it was freezing zsh)
+#bindkey -v
+#bindkey -M viins 'jj' vi-cmd-mode
+
+#bindkey '^P' up-history
+#bindkey '^N' down-history
+#bindkey '^?' backward-delete-char
+#bindkey '^h' backward-delete-char
+#bindkey '^w' backward-kill-word
+#bindkey '^r' history-incremental-search-backward
+#export KEYTIMEOUT=1
+
+# Alternative vi-mode – compatible with auto-fu:
+
+# compinit registers some too-emacs-ish-to-me keybindings in ~/.zcompdump
+bindkey -e
+autoload -Uz compinit; compinit
+
+# Normal mode keybindings, please put some more.
+bindkey -v
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+export KEYTIMEOUT=1
+
+# auto-fu.zsh expects that `bindkey -e`, so change it before sourcing. (ugh!)
+bindkey -e
+bindkey $'\e' vi-cmd-mode
+. ~/dotfiles/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+. ~/dotfiles/zsh-plugins/auto-fu.zsh
+zle-line-init () auto-fu-init; zle -N zle-line-init;
+
+# Normal-mode-ish setup.
+VIM_PROMPT="[% NORMAL]%"
+RPS1="$VIM_PROMPT"
+
+my-reset-prompt-maybe () {
+  # XXX: While auto-stuff is in effect,
+  # when hitting <Return>, $KEYMAP becomes to `main`:
+  # <Return> → `reset-prompt`(*) → `accept-line` → `zle-line-init`
+  # → `zle-keymap-select` → `reset-promt` (again!)
+  # Skip unwanted `reset-prompt`(*).
+  ((auto_fu_init_p==1)) && [[ ${KEYMAP-} == main ]] && return
+
+  # XXX: Please notice that `afu` is treated as Insert-mode-ish.
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins|afu)/}"
+  zle reset-prompt
+}
+
+zle-keymap-select () {
+  auto-fu-zle-keymap-select "$@"
+  my-reset-prompt-maybe
+}
+zle -N zle-keymap-select
+
+
+##################################
+#      NPM TAB COMPLETION        #
+##################################
+
+
+# We need npm tab completion instead of default behavior to avoid conflicts with
+# auto-fu.zsh
+
+###-begin-npm-completion-###
+#
+# npm command completion script
+#
+# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
+#
+
+COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
+COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
+export COMP_WORDBREAKS
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    si=$IFS
+    #compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 #COMP_LINE=$BUFFER \
+                 #COMP_POINT=0 \
+                 #npm completion -- "${words[@]}" \
+                 #2>/dev/null)
+    #IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###

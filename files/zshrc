@@ -90,7 +90,7 @@ source $ZSH/oh-my-zsh.sh
   ##################################
 
   # Auto-fu bootstrap
-  #A=~/dotfiles/zsh-plugins/auto-fu.zsh; (zsh -c "source $A ; auto-fu-zcompile $A ~/.zsh") #UNCOMMENT THIS LINE AT FIRST RUN
+  #A=~/dotfiles/zsh-plugins/auto-fu.zsh/auto-fu.zsh; (zsh -c "source $A ; auto-fu-zcompile $A ~/.zsh") #UNCOMMENT THIS LINE AT FIRST RUN
   source ~/.zsh/auto-fu; auto-fu-install
   zle-line-init () {auto-fu-init;}; zle -N zle-line-init
   zstyle ':completion:*' completer _oldlist _complete
@@ -266,7 +266,7 @@ export KEYTIMEOUT=1
 bindkey -e
 bindkey $'\e' vi-cmd-mode
 . ~/dotfiles/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-. ~/dotfiles/zsh-plugins/auto-fu.zsh
+. ~/dotfiles/zsh-plugins/auto-fu.zsh/auto-fu.zsh
 zle-line-init () auto-fu-init; zle -N zle-line-init;
 
 # Normal-mode-ish setup.

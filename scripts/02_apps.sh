@@ -22,7 +22,9 @@ brew install caskroom/cask/brew-cask
 
 # set caskroom permissions
 mkdir -p /opt/homebrew-cask/Caskroom
-sudo chown -R ${USER}:staff /opt/homebrew-cask
+if [ "$DOTFILES_SUDO" -eq "install_with_sudo" ]
+  sudo chown -R ${USER}:staff /opt/homebrew-cask
+fi
 
 # install apps
 brew cask install --appdir="/Applications" airserver alfred apikitchen bartender

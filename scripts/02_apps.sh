@@ -8,6 +8,7 @@ brew install ffmpeg --with-libvpx --with-libvorbis --with-openssl --with-theora
 brew install macvim --with-lua --custom-icons
 brew install sox --with-flac --with-lame --with-libvorbis
 brew install vim --with-lua
+brew install hub
 
 brew install zsh --disable-etcdir
 

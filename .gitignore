@@ -3,4 +3,5 @@ vim/backup
 vim/swp
 vim/bundle
 zsh-plugins
+npm-debug.log
 .DS_Store

@@ -23,5 +23,5 @@ jekyll pry redcarpet ronn site_validator watir-webdriver
 # nodejs environment
 brew install node
 # install some packages
-npm install --global browser-sync gulp bower vtop divshot-cli gitignore grunt-cli harp
+npm install --global github-todos browser-sync gulp bower vtop divshot-cli gitignore grunt-cli harp
 html2jade imageoptim-cli nightmare pageres puer tldr

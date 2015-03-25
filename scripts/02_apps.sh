@@ -23,7 +23,7 @@ brew install caskroom/cask/brew-cask
 
 # set caskroom permissions
 mkdir -p /opt/homebrew-cask/Caskroom
-if [ "$DOTFILES_SUDO" -eq "install_with_sudo" ]
+if [ "$DOTFILES_SUDO" == "install_with_sudo" ]; then
   sudo chown -R ${USER}:staff /opt/homebrew-cask
 fi
 

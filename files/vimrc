@@ -162,6 +162,12 @@ NeoBundle "kchmck/vim-coffee-script"
 " Jade
 NeoBundle "digitaltoad/vim-jade"
 
+" Twig
+NeoBundle "evidens/vim-twig"
+
+" Symfony
+NeoBundle "docteurklein/vim-symfony"
+
 " Meteor
 NeoBundle "cmather/vim-meteor-snippets"
 

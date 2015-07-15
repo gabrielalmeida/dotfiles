@@ -54,9 +54,12 @@ alias ohmyzsh="vi ~/.oh-my-zsh"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git github heroku osx command-not-found  meteor node brew
-composer bower cloudapp common-aliases compleat gitfast git-extras 
-laravel4 nyan themes atom  copydir last-working-dir copyfile cp extract )
+plugins=(git gitfast git-extras git-flow-avh heroku osx command-not-found  meteor 
+composer bower cloudapp common-aliases compleat laravel4 nyan themes atom node brew
+copydir last-working-dir copyfile cp extract aws catimg chuck dircycle jsontools jira
+lol mercurial npm per-directory-history pip python rand-quote sublime sudo svn-fast-info
+symfony2 tmux tmuxinator urltools vagrant web-search wd 
+)
 
 # not used anymore plugins:
   # vi-mode – lag
@@ -86,15 +89,75 @@ source $ZSH/oh-my-zsh.sh
   source ~/dotfiles/zsh-plugins/opp.zsh/opp/*.zsh
 
   ##################################
+  #           ZSH VI-MODE          #
+  ##################################
+
+  # Default zsh vi-mode settings(which are incompatible with auto-fu):
+
+  # Using bindkey -v instead of vi-mode plugin(it was freezing zsh)
+  #bindkey -v
+  #bindkey -M viins 'jj' vi-cmd-mode
+
+  #bindkey '^P' up-history
+  #bindkey '^N' down-history
+  #bindkey '^?' backward-delete-char
+  #bindkey '^h' backward-delete-char
+  #bindkey '^w' backward-kill-word
+  #bindkey '^r' history-incremental-search-backward
+  #export KEYTIMEOUT=1
+
+  # Alternative vi-mode – compatible with auto-fu:
+
+  # compinit registers some too-emacs-ish-to-me keybindings in ~/.zcompdump
+  bindkey -e
+  autoload -Uz compinit; compinit
+
+  # Normal mode keybindings, please put some more.
+  bindkey -v
+  bindkey '^P' up-history
+  bindkey '^N' down-history
+  bindkey '^?' backward-delete-char
+  bindkey '^h' backward-delete-char
+  bindkey '^w' backward-kill-word
+  #bindkey '^r' history-incremental-search-backward # use fzf
+
+  export KEYTIMEOUT=1
+
+  # auto-fu.zsh expects that `bindkey -e`, so change it before sourcing. (ugh!)
+  bindkey -e
+  bindkey $'\e' vi-cmd-mode
+
+  # Normal-mode-ish setup.
+  VIM_PROMPT="[% NORMAL]%"
+  RPS1="$VIM_PROMPT"
+
+  my-reset-prompt-maybe () {
+    # XXX: While auto-stuff is in effect,
+    # when hitting <Return>, $KEYMAP becomes to `main`:
+    # <Return> → `reset-prompt`(*) → `accept-line` → `zle-line-init`
+    # → `zle-keymap-select` → `reset-promt` (again!)
+    # Skip unwanted `reset-prompt`(*).
+    ((auto_fu_init_p==1)) && [[ ${KEYMAP-} == main ]] && return
+
+    # XXX: Please notice that `afu` is treated as Insert-mode-ish.
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins|afu)/}"
+    zle reset-prompt
+  }
+
+  zle-keymap-select () {
+    auto-fu-zle-keymap-select "$@"
+    my-reset-prompt-maybe
+  }
+  zle -N zle-keymap-select
+
+
+  ##################################
   #             AUTO-FU            #
   ##################################
 
   # Auto-fu bootstrap
   #A=~/dotfiles/zsh-plugins/auto-fu.zsh/auto-fu.zsh; (zsh -c "source $A ; auto-fu-zcompile $A ~/.zsh") #UNCOMMENT THIS LINE AT FIRST RUN
   source ~/.zsh/auto-fu; auto-fu-install
-  zle-line-init () {auto-fu-init;}; zle -N zle-line-init
-  zstyle ':completion:*' completer _oldlist _complete
-  zle -N zle-keymap-select auto-fu-zle-keymap-select
 
   zstyle ':auto-fu:highlight' input bold
   zstyle ':auto-fu:highlight' completion fg=black,bold
@@ -102,7 +165,13 @@ source $ZSH/oh-my-zsh.sh
   zstyle ':auto-fu:var' postdisplay $'\n-azfu-'
   zstyle ':auto-fu:var' track-keymap-skip opp
   zstyle ':auto-fu:var' enable all 
+  zstyle ':completion:*' completer _oldlist _complete
   #zstyle ':auto-fu:var' disable magic-space
+
+  zle-line-init () {auto-fu-init;}; zle -N zle-line-init
+  zle -N zle-keymap-select auto-fu-zle-keymap-select
+
+
 
 
 ##################################
@@ -112,7 +181,8 @@ source $ZSH/oh-my-zsh.sh
 ## User configuration
 
 export VIMPATH="/usr/local/Cellar/vim/7.4.488/bin/"
-export ANDROIDPATH="~/.meteor/android_bundle/android-sdk/"
+export ANDROID_HOME="/Users/gbr/.meteor/android_bundle/android-sdk/"
+export ANDROIDPATH=$ANDROID_HOME
 export PATH="/Users/gbr/bin:$VIMPATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$ANDROIDPATH/tools:$ANDROIDPATH/platform-tools:$ANDROIDPATH/build-tools"
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -127,6 +197,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 #   export EDITOR='mvim'
 # fi
 
+export EDITOR='vim'
 
 ##################################
 #             COMPILER           #
@@ -159,17 +230,56 @@ alias cle=clear
 alias cl=clear
 alias lc=cl
 alias vi=vim
-alias tm='tmux'
+alias tm='tmux a || tmux new'
 alias ta='tmux a'
 alias ts='tmux new-session -s'
 alias tl='tmux list-sessions'
+alias rr="source ~/.zshrc"
+
+##################################
+#             IP                 #
+##################################
+
+#XXX: Make it work with ifconfig on Linux local_ip
+
+ip() {
+  GLOBAL_IP="$(curl icanhazip.com 2>/dev/null)"
+  LOCAL_IP="$(ipconfig getifaddr en0 2>/dev/null)"
+  if [[ $* == *--local* ]] ; then
+    echo $LOCAL_IP
+  elif [[ $* == *--global* ]]; then
+    echo $GLOBAL_IP
+  else
+    echo "Local: $LOCAL_IP" 
+    echo "Global: $GLOBAL_IP" 
+  fi
+}
+
+##################################
+#           TMUXINATOR           #
+##################################
+
+export DISABLE_AUTO_TITLE=true
+
+##################################
+#              TMUX              #
+##################################
+
+# Starting tmux
+export ZSH_TMUX_AUTOSTART=true
+#[[ $TERM != "screen" ]] && exec tmux
+#tm 2>/dev/null 
 
 ##################################
 #         CUSTOM FUNC            #
 ##################################
 
 # setting TERM
-export TERM="xterm-256color"
+
+#Let iTerm/tmux set it as screen-256color to
+#avoid vim bg issu
+export TERM="screen-256color" 
+
 export LANG="en_US.UTF-8"
 
 ##################################
@@ -215,6 +325,56 @@ alias eclimd='$ECLIPSE_HOME/eclimd&'
 # Go with hub instead of git
 eval "$(hub alias -s)"
 
+##################################
+#               MOTD             #
+##################################
+
+  export MOTD=1
+
+  if [ "$MOTD" -eq 1 ]; then
+
+    ##################################
+    #            FORTUNE             #
+    ##################################
+
+    QUOTE_COLOR="\e[0;34m"
+    ASCII_COLOR="\e[0;31m"
+
+    #COLON_COLOR="\e[0;35m"
+    END_COLOR="\e[m"
+
+    # quote command is available tru zsh plugins also, just do: $ quote
+    #myfortune='curl http://www.iheartquotes.com/api/v1/random?source=joel_on_software+paul_graham+prog_style'
+    printf "${QUOTE_COLOR} $(curl --connect-timeout 1 -m 1 http://www.iheartquotes.com/api/v1/random 2>/dev/null) ${END_COLOR}\n\n" | iconv -c -f ISO-8859-1 -t UTF-8 | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}'
+
+    ##################################
+    #            ASCII               #
+    ##################################
+
+    WORDS=("dragon" "movie" "cartoon" "character" "animal" "object" "small" "hand-drawn" "women") # Tags
+    SELECTED_WORD=${WORDS[$RANDOM % ${#WORDS[@]} ]}
+    LAST_PAGE="$(curl --connect-timeout 1 -m 1 -Ls http://ascii.gallery/art/tag/$SELECTED_WORD | xmllint --xpath "/html/body/div[@class='container']/div[@class='row pager']/div[@id='pagination']/ul[@class='pagination']/li[last()-1]/a/text()" --html - 2>/dev/null)"
+    if [ -z "$LAST_PAGE" ]; then
+      PAGE=1
+    else
+      PAGE="$(( ( RANDOM % $LAST_PAGE ) + 1 ))"
+    fi
+
+    ART="$(( ( RANDOM % 20 )  + 1 )) 2>/dev/null"
+    URL="http://ascii.gallery/art/tag/$SELECTED_WORD/$PAGE"
+
+    DEBUG_ASCII=0
+    if [ "$DEBUG_ASCII" -eq 1 ]; then
+      echo "$SELECTED_WORD"
+      echo "$LAST_PAGE"
+      echo "$PAGE"
+      echo $URL
+    fi
+
+    printf "${ASCII_COLOR} $(curl --connect-timeout 1 -m 1 -Ls $URL | xmllint --xpath "/html/body/div[@class='container']/div[@id='scrollingcontent']/div[@class='listitempage']/div[@class='row'][6]/pre[@class='pre pre-x-scrollable pre-art']/text()" --html - 2>/dev/null) ${END_COLOR}\n\n\n" \
+      | iconv -c -f ISO-8859-1 -t UTF-8 \
+      | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}'
+  fi
 
 ##################################
 #            METEOR              #
@@ -223,134 +383,9 @@ eval "$(hub alias -s)"
 # Force meteor watcher
 export METEOR_WATCH_FORCE_POLLING=t
 
-
-
-
 ##################################
-#           ZSH VI-MODE          #
+#              FZF               #
 ##################################
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-# Default zsh vi-mode settings(which are incompatible with auto-fu):
-
-# Using bindkey -v instead of vi-mode plugin(it was freezing zsh)
-#bindkey -v
-#bindkey -M viins 'jj' vi-cmd-mode
-
-#bindkey '^P' up-history
-#bindkey '^N' down-history
-#bindkey '^?' backward-delete-char
-#bindkey '^h' backward-delete-char
-#bindkey '^w' backward-kill-word
-#bindkey '^r' history-incremental-search-backward
-#export KEYTIMEOUT=1
-
-# Alternative vi-mode – compatible with auto-fu:
-
-# compinit registers some too-emacs-ish-to-me keybindings in ~/.zcompdump
-bindkey -e
-autoload -Uz compinit; compinit
-
-# Normal mode keybindings, please put some more.
-bindkey -v
-bindkey '^P' up-history
-bindkey '^N' down-history
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
-bindkey '^r' history-incremental-search-backward
-
-export KEYTIMEOUT=1
-
-# auto-fu.zsh expects that `bindkey -e`, so change it before sourcing. (ugh!)
-bindkey -e
-bindkey $'\e' vi-cmd-mode
-. ~/dotfiles/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-. ~/dotfiles/zsh-plugins/auto-fu.zsh/auto-fu.zsh
-zle-line-init () auto-fu-init; zle -N zle-line-init;
-
-# Normal-mode-ish setup.
-VIM_PROMPT="[% NORMAL]%"
-RPS1="$VIM_PROMPT"
-
-my-reset-prompt-maybe () {
-  # XXX: While auto-stuff is in effect,
-  # when hitting <Return>, $KEYMAP becomes to `main`:
-  # <Return> → `reset-prompt`(*) → `accept-line` → `zle-line-init`
-  # → `zle-keymap-select` → `reset-promt` (again!)
-  # Skip unwanted `reset-prompt`(*).
-  ((auto_fu_init_p==1)) && [[ ${KEYMAP-} == main ]] && return
-
-  # XXX: Please notice that `afu` is treated as Insert-mode-ish.
-  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins|afu)/}"
-  zle reset-prompt
-}
-
-zle-keymap-select () {
-  auto-fu-zle-keymap-select "$@"
-  my-reset-prompt-maybe
-}
-zle -N zle-keymap-select
-
-
-##################################
-#      NPM TAB COMPLETION        #
-##################################
-
-
-# We need npm tab completion instead of default behavior to avoid conflicts with
-# auto-fu.zsh
-
-###-begin-npm-completion-###
-#
-# npm command completion script
-#
-# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
-# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
-#
-
-COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
-COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
-export COMP_WORDBREAKS
-
-if type complete &>/dev/null; then
-  _npm_completion () {
-    local si="$IFS"
-    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
-                           COMP_LINE="$COMP_LINE" \
-                           COMP_POINT="$COMP_POINT" \
-                           npm completion -- "${COMP_WORDS[@]}" \
-                           2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  complete -F _npm_completion npm
-elif type compdef &>/dev/null; then
-  _npm_completion() {
-    si=$IFS
-    #compadd -- $(COMP_CWORD=$((CURRENT-1)) \
-                 #COMP_LINE=$BUFFER \
-                 #COMP_POINT=0 \
-                 #npm completion -- "${words[@]}" \
-                 #2>/dev/null)
-    #IFS=$si
-  }
-  compdef _npm_completion npm
-elif type compctl &>/dev/null; then
-  _npm_completion () {
-    local cword line point words si
-    read -Ac words
-    read -cn cword
-    let cword-=1
-    read -l line
-    read -ln point
-    si="$IFS"
-    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-                       COMP_LINE="$line" \
-                       COMP_POINT="$point" \
-                       npm completion -- "${words[@]}" \
-                       2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  compctl -K _npm_completion npm
-fi
-###-end-npm-completion-###
+bindkey "^E" fzf-history-widget

@@ -5,7 +5,7 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
 
   if [ $(ask "Should I install all your stuff?") == 'y' ]; then
     # homebrew apps
-    brew install atool cpulimit duff exiftool eye-d3 gifify git git-extras git-ftp
+    brew install atool cpulimit duff exiftool eye-d3 gifify git git-flow git-extras git-ftp
     hr jq lftp mackup mediainfo mkvtoolnix mp4box namebench peerflix phantomjs pup
     ranger shellcheck the_platinum_searcher trash tree watchman youtube-dl z
     brew install imagemagick --with-libtiff

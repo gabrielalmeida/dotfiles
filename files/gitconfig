@@ -4,6 +4,10 @@
     whitespace = fix
 [color]
     ui = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -37,6 +41,8 @@
     editor = /usr/bin/vim
 	autocrlf = input
 [alias]
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
     ; show merge tree + commits info
     graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
     lg = log --graph --pretty=format:'%Cred%h%Creset %C(yellow)%an%d%Creset %s %Cgreen(%cr)%Creset' --date=relative
@@ -57,6 +63,10 @@
     co = checkout
     br = branch
     dc = diff --cached
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
 [user]
 	name = Gabriel Almeida
 	email = gabriel.almeida.rj@gmail.com
@@ -64,3 +74,5 @@
 	;helper = osxkeychain
 	;helper = store
 	helper = cache --timeout=21600
+;[http]
+  ;proxy = 146.164.70.1:3128

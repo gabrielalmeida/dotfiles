@@ -24,6 +24,8 @@ set mouse=a
 set colorcolumn=80
 set backspace=indent,eol,start
 set nowrap
+set lazyredraw
+set ttyfast
 
 "maintain undo on a single session
 "set hidden 
@@ -83,24 +85,26 @@ NeoBundle "tomtom/tlib_vim"
 NeoBundle "MarcWeber/vim-addon-mw-utils"
 NeoBundle "bling/vim-airline"
 NeoBundle "flazz/vim-colorschemes"
+NeoBundle "tpope/vim-sensible"
+NeoBundle "tpope/vim-obsession"
 NeoBundle "tpope/vim-fugitive"
 NeoBundle "tpope/vim-git"
 NeoBundle "tpope/vim-surround"
 NeoBundle "Shougo/unite.vim"
-NeoBundle "Shougo/vimshell.vim"
 NeoBundle "marijnh/tern_for_vim"
+" NeoBundle "Shougo/vimshell.vim"
 
 
 " Vertical Movement
-NeoBundle "bruno-/vim-vertical-move"
-NeoBundle "coderifous/textobj-word-column.vim"
+" NeoBundle "bruno-/vim-vertical-move"
+" NeoBundle "coderifous/textobj-word-column.vim"
 
 " Misc
-NeoBundle "xolox/vim-misc"
+" NeoBundle "xolox/vim-misc"
 
 " Tags
-NeoBundle "majutsushi/tagbar"
-NeoBundle "xolox/vim-easytags"
+" NeoBundle "majutsushi/tagbar"
+" NeoBundle "xolox/vim-easytags"
 
 " IndentLine
 NeoBundle "Yggdroot/indentLine"
@@ -111,7 +115,7 @@ let g:indentLine_color_tty_dark = 1
 let g:indentLine_char = '┆'
 
 " Snips/Completation
-let g:EclimCompletionMethod = 'omnifunc' " Eclim for JAVA
+" let g:EclimCompletionMethod = 'omnifunc' " Eclim for JAVA
 
 NeoBundle "ervandew/supertab"
 NeoBundle "Shougo/neocomplete"
@@ -142,8 +146,8 @@ endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+"inoremap <expr><C-g>     neocomplete#undo_completion()
+"inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
@@ -162,28 +166,28 @@ inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+  "let g:neocomplete#sources#omni#input_patterns = {}
+"endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " UltiSnips configs
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Make it colorful
 NeoBundle "Rykka/colorv.vim"
@@ -201,6 +205,8 @@ NeoBundle "kchmck/vim-coffee-script"
 
 " Jade
 NeoBundle "digitaltoad/vim-jade"
+" Load jade syntax
+au BufNewFile,BufRead,BufReadPost *.jade.html set filetype=jade
 
 " Twig
 NeoBundle "evidens/vim-twig"
@@ -243,20 +249,20 @@ call neobundle#end()
 " Required by neobundle
 filetype plugin indent on
 
-" Are there anything new to install?
+" Lets check for new things to be installed!
 NeoBundleCheck
-
-" Load jade syntax
-au BufNewFile,BufRead,BufReadPost *.jade.html set filetype=jade
-
 
 " Colorize my colors here vim pl0x
 let g:colorv_preview_ftype='css,php,html,js,coffee,sass,scss,less,styl,svg'
 
 
 " Colorscheme
-colorscheme jellybeans 
-set background=dark
+" I like:
+" Dark: molokai, jellybeans, mustang, badwolf, vividchalk, wombat, railscast,
+" lucario
+" Light: solarized, github, summerfruit256
+colorscheme summerfruit256 
+set background=light
 syntax on
 "highlight ColorColumn ctermbg=white
 
@@ -264,55 +270,55 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
-if has("autocmd")
-  filetype plugin indent on
+"if has("autocmd")
+  "filetype plugin indent on
 
-  autocmd BufNewFile,BufRead *.txt setfiletype text
+  "autocmd BufNewFile,BufRead *.txt setfiletype text
 
-  autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
+  "autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
 
-  au FocusLost * :set number
-  au InsertEnter * :set number
+  "au FocusLost * :set number
+  "au InsertEnter * :set number
 
-  augroup vimrcEx
-    au!
+  "augroup vimrcEx
+    "au!
 
-    autocmd BufReadPost *
-          \ if line("'\"") > 0 && line("'\"") <= line("$") |
-          \   exe "normal g`\"" |
-          \ endif
+    "autocmd BufReadPost *
+          "\ if line("'\"") > 0 && line("'\"") <= line("$") |
+          "\   exe "normal g`\"" |
+          "\ endif
 
-    " Automatically load .vimrc source when saved
-    autocmd BufWritePost .vimrc source $MYVIMRC
+    "" Automatically load .vimrc source when saved
+    "autocmd BufWritePost .vimrc source $MYVIMRC
 
-  augroup END
+  "augroup END
 
-else
-  set autoindent
-endif " has("autocmd")
+"else
+  "set autoindent
+"endif " has("autocmd")
 
 " automatically open quickfix window on grep searches
-autocmd QuickFixCmdPost *grep* cwindow
+"autocmd QuickFixCmdPost *grep* cwindow
 
-if has("gui_running")
-  set guifont=Menlo\ Regular:h14
-endif
+"if has("gui_running")
+  "set guifont=Menlo\ Regular:h14
+"endif
 
 " Functions
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
+"function! NumberToggle()
+  "if(&relativenumber == 1)
+    "set number
+  "else
+    "set relativenumber
+  "endif
+"endfunc
 
 " Key Bindings
 let mapleader = ","
 
 inoremap kj <Esc>
 inoremap <C-c> <Esc>
-nnoremap <Leader>n :call NumberToggle()<cr>
+"nnoremap <Leader>n :call NumberToggle()<cr>
 
 " Is this for autocomplete?
 "imap <Tab> <C-N>
@@ -331,7 +337,7 @@ nnoremap <silent> <c-h> :wincmd h<cr>
 nnoremap <silent> <c-l> :wincmd l<cr>
 
 " VimShell
-nnoremap <Leader>c :VimShell<cr> 
+" nnoremap <Leader>c :VimShell<cr> 
 
 " Exit insert mode and write file
 inoremap <leader>w <Esc> :w<cr>

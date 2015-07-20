@@ -25,7 +25,7 @@ alias ohmyzsh="vi ~/.oh-my-zsh"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment following line if you want to disable colors in ls
-#DISABLE_LS_COLORS="true"
+# DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal ttle.
 # DISABLE_AUTO_TITLE="true"
@@ -56,13 +56,26 @@ alias ohmyzsh="vi ~/.oh-my-zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git gitfast git-extras git-flow-avh heroku osx command-not-found  meteor 
 composer bower cloudapp common-aliases compleat laravel4 nyan themes atom node brew
-copydir last-working-dir copyfile cp extract aws catimg chuck dircycle jsontools jira
+copydir last-working-dir copyfile cp extract aws catimg chuck dirhistory jsontools jira
 lol mercurial npm per-directory-history pip python rand-quote sublime sudo svn-fast-info
-symfony2 tmux tmuxinator urltools vagrant web-search wd 
+symfony2 tmuxinator urltools vagrant web-search wd 
 )
 
 # not used anymore plugins:
   # vi-mode – lag
+
+##################################
+#             PATHS              #
+##################################
+
+## User configuration
+
+export VIMPATH="/usr/local/Cellar/vim/7.4.712_1/bin"
+export ANDROID_HOME="/Users/gbr/.meteor/android_bundle/android-sdk"
+export ANDROIDPATH=$ANDROID_HOME
+export PATH="$VIMPATH:/Users/gbr/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROIDPATH/tools:$ANDROIDPATH/platform-tools:$ANDROIDPATH/build-tools"
+export MANPATH="/usr/local/man:$MANPATH"
+
 
 source $ZSH/oh-my-zsh.sh
 
@@ -172,20 +185,6 @@ source $ZSH/oh-my-zsh.sh
   zle -N zle-keymap-select auto-fu-zle-keymap-select
 
 
-
-
-##################################
-#             PATHS              #
-##################################
-
-## User configuration
-
-export VIMPATH="/usr/local/Cellar/vim/7.4.488/bin/"
-export ANDROID_HOME="/Users/gbr/.meteor/android_bundle/android-sdk/"
-export ANDROIDPATH=$ANDROID_HOME
-export PATH="/Users/gbr/bin:$VIMPATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$ANDROIDPATH/tools:$ANDROIDPATH/platform-tools:$ANDROIDPATH/build-tools"
-export MANPATH="/usr/local/man:$MANPATH"
-
 ##################################
 #             EDITOR             #
 ##################################
@@ -266,9 +265,7 @@ export DISABLE_AUTO_TITLE=true
 ##################################
 
 # Starting tmux
-export ZSH_TMUX_AUTOSTART=true
-#[[ $TERM != "screen" ]] && exec tmux
-#tm 2>/dev/null 
+#export ZSH_TMUX_AUTOSTART=true
 
 ##################################
 #         CUSTOM FUNC            #
@@ -329,7 +326,7 @@ eval "$(hub alias -s)"
 #               MOTD             #
 ##################################
 
-  export MOTD=1
+  export MOTD=0
 
   if [ "$MOTD" -eq 1 ]; then
 
@@ -344,7 +341,7 @@ eval "$(hub alias -s)"
     END_COLOR="\e[m"
 
     # quote command is available tru zsh plugins also, just do: $ quote
-    #myfortune='curl http://www.iheartquotes.com/api/v1/random?source=joel_on_software+paul_graham+prog_style'
+    myfortune='curl http://www.iheartquotes.com/api/v1/random?source=joel_on_software+paul_graham+prog_style'
     printf "${QUOTE_COLOR} $(curl --connect-timeout 1 -m 1 http://www.iheartquotes.com/api/v1/random 2>/dev/null) ${END_COLOR}\n\n" | iconv -c -f ISO-8859-1 -t UTF-8 | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}'
 
     ##################################

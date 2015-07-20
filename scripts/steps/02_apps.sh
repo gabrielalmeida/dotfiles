@@ -32,21 +32,24 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     sudo chown -R ${USER}:staff /opt/homebrew-cask
 
     # install apps
-    brew cask install --appdir="/Applications" airserver alfred apikitchen bartender
-    bettertouchtool cocoadialog couleurs dropbox enjoyable flashlight flux fontprep
-    google-chrome hex-fiend hexels hydra imageoptim instacast iterm2 joinme keka
-    key-codes leap-motion macaw node-webkit nsregextester openemu p5 platypus
-    pokerstars processing screenflow shotcut spectacle steam sublime-text subtitles
-    textexpander transmission whiskey yacreader evernote mplayerx 
-    mailbox skype
+    # airserver alfred apikitchen bartender
+    # bettertouchtool cocoadialog couleurs dropbox enjoyable flashlight flux fontprep
+    # google-chrome hex-fiend hexels hydra imageoptim instacast iterm2 joinme keka
+    # key-codes leap-motion macaw node-webkit nsregextester openemu p5 platypus
+    # pokerstars processing screenflow shotcut spectacle steam sublime-text subtitles
+    # textexpander transmission whiskey yacreader evernote mplayerx 
+    # mailbox skype
+
+    brew cask install --appdir="/Applications" evernote dropbox bettertouchtool
+    google-chrome iterm2 mplayerx maibox skype sunrise
 
     # install alternative versions
     brew cask install caskroom/versions/google-chrome-canary
-    brew cask install caskroom/versions/vmware-fusion6
+    # brew cask install caskroom/versions/vmware-fusion6
     brew cask install caskroom/versions/firefoxdeveloperedition
 
     # drivers
-    #brew cask install d235j-xbox360-controller-driver wacom-bamboo-tablet
+    # brew cask install d235j-xbox360-controller-driver wacom-bamboo-tablet
 
     # prefpanes and qlplugins
     brew cask install betterzipql epubquicklook jsonlook qlcolorcode qlimagesize
@@ -56,7 +59,7 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     brew cask install caskroom/homebrew-fonts/font-source-code-pro
 
     # games
-    brew cask install gridwars noiz2sa rootage torustrooper
+    # brew cask install gridwars noiz2sa rootage torustrooper
 
     # colorpickers
     brew cask install colorpicker-antetype colorpicker-skalacolor

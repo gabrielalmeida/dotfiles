@@ -56,13 +56,14 @@ alias ohmyzsh="vi ~/.oh-my-zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git gitfast git-extras git-flow-avh heroku osx command-not-found  meteor 
 composer bower cloudapp common-aliases compleat laravel4 nyan themes atom node brew
-copydir last-working-dir copyfile cp extract aws catimg chuck dirhistory jsontools jira
+copydir copyfile cp extract aws catimg chuck dirhistory jsontools jira
 lol mercurial npm per-directory-history pip python rand-quote sublime sudo svn-fast-info
 symfony2 tmuxinator urltools vagrant web-search wd 
 )
 
 # not used anymore plugins:
-  # vi-mode – lag
+  # vi-mode # lag
+  # last-working-dir # buggy, won't allow tmux-ressurect
 
 ##################################
 #             PATHS              #

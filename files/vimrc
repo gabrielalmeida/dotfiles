@@ -45,7 +45,8 @@ set wildmode=list:longest,list:full
 set complete=.,t
 
 " If we are on OS X, NERDTree Arrows don't work well, so disable them
-"let g:NERDTreeDirArrows=0
+let g:NERDTreeDirArrows=1
+let g:NERDTreeHijackNetrw=1
 
 " Note: Skip initialization for vim-tiny or vim-small.
   if !1 | finish | endif
@@ -343,8 +344,11 @@ nnoremap <silent> <c-l> :wincmd l<cr>
 inoremap <leader>w <Esc> :w<cr>
 nnoremap <leader>w :w<cr>
 
+" Opens split explorer inside current pane
+nnoremap <leader><Tab> :e.<cr>
+
 " NERDTreeToggle
-nnoremap <leader><Tab> :NERDTreeToggle<cr>
+nnoremap <leader>` :NERDTreeToggle<cr>
 
 " NERDCommenter
 map <leader>m  <plug>NERDCommenterToggle

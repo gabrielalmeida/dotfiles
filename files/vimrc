@@ -92,6 +92,7 @@ NeoBundle "tpope/vim-fugitive"
 NeoBundle "tpope/vim-git"
 NeoBundle "tpope/vim-surround"
 NeoBundle "Shougo/unite.vim"
+NeoBundle "Shougo/neomru.vim"
 NeoBundle "marijnh/tern_for_vim"
 " NeoBundle "Shougo/vimshell.vim"
 

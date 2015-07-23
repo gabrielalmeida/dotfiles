@@ -257,6 +257,9 @@ NeoBundle "elzr/vim-json"
 " Syntastic
 NeoBundle "scrooloose/syntastic"
 
+" Editor Config
+NeoBundle "editorconfig/editorconfig-vim"
+
 " Lolololo loremipsum!!
 NeoBundle "vim-scripts/loremipsum"
 

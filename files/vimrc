@@ -260,6 +260,10 @@ NeoBundle "scrooloose/syntastic"
 " Editor Config
 NeoBundle "editorconfig/editorconfig-vim"
 
+" JS-Beautify
+NeoBundle "einars/js-beautify"
+NeoBundle "maksimr/vim-jsbeautify"
+
 " Lolololo loremipsum!!
 NeoBundle "vim-scripts/loremipsum"
 

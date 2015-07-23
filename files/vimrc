@@ -227,6 +227,10 @@ NeoBundle "docteurklein/vim-symfony"
 " Meteor
 NeoBundle "cmather/vim-meteor-snippets"
 
+" React
+NeoBundle "justinj/vim-react-snippets"
+NeoBundle "mxw/vim-jsx"
+
 " HTML5
 NeoBundle 'othree/html5.vim'
 

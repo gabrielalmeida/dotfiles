@@ -27,9 +27,6 @@ set nowrap
 set lazyredraw
 set ttyfast
 
-"maintain undo on a single session
-"set hidden 
-
 " Store temporary files in a central spot
 " Check issue vim-obsession#18
 let vimtmp = $HOME . '/.tmp/' . getpid()

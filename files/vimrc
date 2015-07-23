@@ -115,6 +115,10 @@ NeoBundle "marijnh/tern_for_vim"
 " NeoBundle "majutsushi/tagbar"
 " NeoBundle "xolox/vim-easytags"
 
+" Procession
+" Allow vim-obsession to work automatically
+NeoBundle 'dhruvasagar/vim-prosession', {'depends': 'tpope/vim-obsession'}
+
 " IndentLine
 NeoBundle "Yggdroot/indentLine"
 let g:indentLine_color_term = 110 

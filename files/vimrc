@@ -378,8 +378,11 @@ nnoremap <leader>w :w<cr>
 " Opens split explorer inside current pane
 nnoremap <leader><Tab> :e.<cr>
 
+" Opens split explorer inside current pane on same dir of current file
+nnoremap <leader>` :e %:p:h<cr>
+
 " NERDTreeToggle
-nnoremap <leader>` :NERDTreeToggle<cr>
+nnoremap <leader>p :NERDTreeToggle<cr>
 
 " NERDCommenter
 map <leader>m  <plug>NERDCommenterToggle

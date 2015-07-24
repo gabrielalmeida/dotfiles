@@ -121,6 +121,9 @@ NeoBundle "suan/vim-instant-markdown"
 " Allow vim-obsession to work automatically
 NeoBundle 'dhruvasagar/vim-prosession', {'depends': 'tpope/vim-obsession'}
 
+" Indexed-Search
+NeoBundle "henrik/vim-indexed-search"
+
 " IndentLine
 NeoBundle "Yggdroot/indentLine"
 let g:indentLine_color_term = 110 

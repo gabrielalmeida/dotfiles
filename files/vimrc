@@ -114,6 +114,9 @@ NeoBundle "tpope/vim-unimpaired"
 " NeoBundle "majutsushi/tagbar"
 " NeoBundle "xolox/vim-easytags"
 
+" Live markdown preview
+NeoBundle "suan/vim-instant-markdown"
+
 " Procession
 " Allow vim-obsession to work automatically
 NeoBundle 'dhruvasagar/vim-prosession', {'depends': 'tpope/vim-obsession'}

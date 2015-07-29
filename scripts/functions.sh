@@ -91,7 +91,7 @@ run_scripts() {
 
   echo "Creating dotfiles symlinks"
   ln -nsf "$PWD"/files/zshrc ~/.zshrc
-  ln -nsf "$PWD"/bin/* ~/bin
+  ln -nsf "$PWD"/bin ~/bin
   ln -nsf "$PWD"/files/tmux.conf ~/.tmux.conf
   ln -nsf "$PWD"/files/eslintrc ~/.eslintrc
   ln -nsf "$PWD"/files/gitconfig ~/.gitconfig

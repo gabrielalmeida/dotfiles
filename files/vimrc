@@ -106,6 +106,9 @@ NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 " Unimpaired
 NeoBundle "tpope/vim-unimpaired"
 
+" Investigate docs with current word with gK keybind
+NeoBundle "keith/investigate.vim"
+
 " Vertical Movement
 " NeoBundle "bruno-/vim-vertical-move"
 " NeoBundle "coderifous/textobj-word-column.vim"

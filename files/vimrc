@@ -295,10 +295,10 @@ let g:colorv_preview_ftype='css,php,html,js,coffee,sass,scss,less,styl,svg'
 
 let hour = strftime("%H") " Set the background light from 7am to 7pm
 if 6 <= hour && hour < 18
-  colorscheme summerfruit256
+  colorscheme summerfruit256 
   set background=light
 else " Set to dark from 6pm to 6am
-  colorscheme wombat
+  colorscheme wombat 
   set background=dark
 endif
 
@@ -306,39 +306,39 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
-"if has("autocmd")
-  "filetype plugin indent on
+if has("autocmd")
+  filetype plugin indent on
 
-  "autocmd BufNewFile,BufRead *.txt setfiletype text
+  autocmd BufNewFile,BufRead *.txt setfiletype text
 
-  "autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
+  autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
 
-  "au FocusLost * :set number
-  "au InsertEnter * :set number
+  au FocusLost * :set number
+  au InsertEnter * :set number
 
-  "augroup vimrcEx
-    "au!
+  augroup vimrcEx
+    au!
 
-    "autocmd BufReadPost *
-          "\ if line("'\"") > 0 && line("'\"") <= line("$") |
-          "\   exe "normal g`\"" |
-          "\ endif
+    autocmd BufReadPost *
+          \ if line("'\"") > 0 && line("'\"") <= line("$") |
+          \   exe "normal g`\"" |
+          \ endif
 
-    "" Automatically load .vimrc source when saved
-    "autocmd BufWritePost .vimrc source $MYVIMRC
+    " Automatically load .vimrc source when saved
+    autocmd BufWritePost .vimrc source $MYVIMRC
 
-  "augroup END
+  augroup END
 
-"else
-  "set autoindent
-"endif " has("autocmd")
+else
+  set autoindent
+endif " has("autocmd")
 
 " automatically open quickfix window on grep searches
-"autocmd QuickFixCmdPost *grep* cwindow
+autocmd QuickFixCmdPost *grep* cwindow
 
-"if has("gui_running")
-  "set guifont=Menlo\ Regular:h14
-"endif
+if has("gui_running")
+  set guifont=Menlo\ Regular:h14
+endif
 
 " Functions
 "function! NumberToggle()

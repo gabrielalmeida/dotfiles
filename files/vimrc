@@ -287,16 +287,20 @@ NeoBundleCheck
 " Colorize my colors here vim pl0x
 let g:colorv_preview_ftype='css,php,html,js,coffee,sass,scss,less,styl,svg'
 
-
 " Colorscheme
 " I like:
 " Dark: molokai, jellybeans, mustang, badwolf, vividchalk, wombat, railscast,
 " lucario
 " Light: solarized, github, summerfruit256
-colorscheme summerfruit256 
-set background=light
-syntax on
-"highlight ColorColumn ctermbg=white
+
+let hour = strftime("%H") " Set the background light from 7am to 7pm
+if 6 <= hour && hour < 18
+  colorscheme summerfruit256
+  set background=light
+else " Set to dark from 6pm to 6am
+  colorscheme wombat
+  set background=dark
+endif
 
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on

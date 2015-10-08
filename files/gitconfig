@@ -38,7 +38,7 @@
 [core]
     excludesfile = ~/.gitignore_global
     ; setting the editor fixes git commit bug http://tooky.co.uk/2010/04/08/there-was-a-problem-with-the-editor-vi-git-on-mac-os-x.html
-    editor = /usr/bin/vim
+    editor = vim 
 	autocrlf = input
 [alias]
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -76,3 +76,7 @@
 	helper = cache --timeout=21600
 ;[http]
   ;proxy = 146.164.70.1:3128
+[github]
+	user = 
+	password = 
+	oauth-token = 

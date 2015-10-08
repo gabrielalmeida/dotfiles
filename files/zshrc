@@ -9,7 +9,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="cloud"
+ZSH_THEME="bullet-train"
 
 # Example aliases
 alias zshconfig="vi ~/.zshrc"
@@ -54,8 +54,8 @@ alias ohmyzsh="vi ~/.oh-my-zsh"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git gitfast git-extras git-flow-avh heroku osx command-not-found  meteor 
-composer bower cloudapp common-aliases compleat laravel4 nyan themes atom node brew
+plugins=(git gitfast git-extras heroku osx command-not-found  meteor 
+composer bower common-aliases compleat laravel4 nyan themes node brew
 copydir copyfile cp extract aws catimg chuck dirhistory jsontools jira
 lol mercurial npm per-directory-history pip python rand-quote sublime sudo svn-fast-info
 symfony2 tmuxinator urltools vagrant web-search wd 
@@ -74,7 +74,7 @@ symfony2 tmuxinator urltools vagrant web-search wd
 export VIMPATH="/usr/local/Cellar/vim/7.4.712_1/bin"
 export ANDROID_HOME="/Users/gbr/.meteor/android_bundle/android-sdk"
 export ANDROIDPATH=$ANDROID_HOME
-export PATH="$VIMPATH:/Users/gbr/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROIDPATH/tools:$ANDROIDPATH/platform-tools:$ANDROIDPATH/build-tools"
+export PATH="$VIMPATH:/Users/gbr/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROIDPATH/tools:$ANDROIDPATH/platform-tools:$ANDROIDPATH/build-tools"
 export MANPATH="/usr/local/man:$MANPATH"
 
 
@@ -106,26 +106,6 @@ source $ZSH/oh-my-zsh.sh
   #           ZSH VI-MODE          #
   ##################################
 
-  # Default zsh vi-mode settings(which are incompatible with auto-fu):
-
-  # Using bindkey -v instead of vi-mode plugin(it was freezing zsh)
-  #bindkey -v
-  #bindkey -M viins 'jj' vi-cmd-mode
-
-  #bindkey '^P' up-history
-  #bindkey '^N' down-history
-  #bindkey '^?' backward-delete-char
-  #bindkey '^h' backward-delete-char
-  #bindkey '^w' backward-kill-word
-  #bindkey '^r' history-incremental-search-backward
-  #export KEYTIMEOUT=1
-
-  # Alternative vi-mode – compatible with auto-fu:
-
-  # compinit registers some too-emacs-ish-to-me keybindings in ~/.zcompdump
-  bindkey -e
-  autoload -Uz compinit; compinit
-
   # Normal mode keybindings, please put some more.
   bindkey -v
   bindkey '^P' up-history
@@ -134,78 +114,6 @@ source $ZSH/oh-my-zsh.sh
   bindkey '^h' backward-delete-char
   bindkey '^w' backward-kill-word
   #bindkey '^r' history-incremental-search-backward # use fzf
-
-  export KEYTIMEOUT=1
-
-  # auto-fu.zsh expects that `bindkey -e`, so change it before sourcing. (ugh!)
-  bindkey -e
-  bindkey $'\e' vi-cmd-mode
-
-  # Normal-mode-ish setup.
-  VIM_PROMPT="[% NORMAL]%"
-  RPS1="$VIM_PROMPT"
-
-  my-reset-prompt-maybe () {
-    # XXX: While auto-stuff is in effect,
-    # when hitting <Return>, $KEYMAP becomes to `main`:
-    # <Return> → `reset-prompt`(*) → `accept-line` → `zle-line-init`
-    # → `zle-keymap-select` → `reset-promt` (again!)
-    # Skip unwanted `reset-prompt`(*).
-    ((auto_fu_init_p==1)) && [[ ${KEYMAP-} == main ]] && return
-
-    # XXX: Please notice that `afu` is treated as Insert-mode-ish.
-    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins|afu)/}"
-    zle reset-prompt
-  }
-
-  zle-keymap-select () {
-    auto-fu-zle-keymap-select "$@"
-    my-reset-prompt-maybe
-  }
-  zle -N zle-keymap-select
-
-
-  ##################################
-  #             AUTO-FU            #
-  ##################################
-
-  # Auto-fu bootstrap
-  #A=~/dotfiles/zsh-plugins/auto-fu.zsh/auto-fu.zsh; (zsh -c "source $A ; auto-fu-zcompile $A ~/.zsh") #UNCOMMENT THIS LINE AT FIRST RUN
-  source ~/.zsh/auto-fu; auto-fu-install
-
-  zstyle ':auto-fu:highlight' input bold
-  zstyle ':auto-fu:highlight' completion fg=black,bold
-  zstyle ':auto-fu:highlight' completion/one fg=white,bold,underline
-  zstyle ':auto-fu:var' postdisplay $'\n-azfu-'
-  zstyle ':auto-fu:var' track-keymap-skip opp
-  zstyle ':auto-fu:var' enable all 
-  zstyle ':completion:*' completer _oldlist _complete
-  #zstyle ':auto-fu:var' disable magic-space
-
-  zle-line-init () {auto-fu-init;}; zle -N zle-line-init
-  zle -N zle-keymap-select auto-fu-zle-keymap-select
-
-
-##################################
-#             EDITOR             #
-##################################
-
-# # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-export EDITOR='vim'
-
-##################################
-#             COMPILER           #
-##################################
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 
 ###################################
 #             SSH                 #
@@ -226,15 +134,57 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 ##################################
 
 # Aliases
+
+# Enable aliases to be sudo'ed
+alias sudo="sudo "
+
 alias cle=clear
 alias cl=clear
 alias lc=cl
+
+alias emacs="open -a emacs "
+alias em=emacs
+
+alias am="open -a \"Activity Monitor\""
+alias pref="open -a \"System Preferences\""
+
+# alias vim=emacs # In case got bored of vim
 alias vi=vim
+
+alias tmux='TERM=screen-256color tmux'
 alias tm='tmux a || tmux new'
 alias ta='tmux a'
 alias ts='tmux new-session -s'
 alias tl='tmux list-sessions'
+
 alias rr="source ~/.zshrc"
+
+alias vtop="vtop --theme monokai"
+
+# Archives
+alias mktar="tar -cvf"
+alias mkbz2="tar -cvjf"
+alias mkgz="tar -cvzf"
+alias untar="tar -xvf"
+alias unbz2="tar -xvjf"
+alias ungz="tar -xvzf"
+
+# File size
+alias fs="stat -f %z"
+
+##################################
+#             EDITOR             #
+##################################
+
+# # Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='emacs'
+ fi
+
+
+
 
 ##################################
 #             IP                 #
@@ -255,55 +205,15 @@ ip() {
   fi
 }
 
-##################################
-#           TMUXINATOR           #
-##################################
-
-export DISABLE_AUTO_TITLE=true
 
 ##################################
 #              TMUX              #
 ##################################
 
-# Starting tmux
-#export ZSH_TMUX_AUTOSTART=true
-
-##################################
-#         CUSTOM FUNC            #
-##################################
-
-# setting TERM
-
-#Let iTerm/tmux set it as screen-256color to
-#avoid vim bg issu
-export TERM="screen-256color" 
+# set TERM to xterm-256color
+[[ $TMUX = "" ]] && export TERM="xterm-256color"
 
 export LANG="en_US.UTF-8"
-
-##################################
-#         CUSTOM FUNCS           #
-##################################
-
-# Open Dev folder
-
-function dev() {
-cd ~/Dev;
-
-if [ -e "$1" ] || [ -e "$2" ] || [ -e "$3" ] || [ -e "$4"] || [ -e "$5"]; then
-  for i in "$1" "$2" "$3" "$4" "$5"; do
-    [ -e "$i" ] && cd "$i";
-  done
-fi
-}
-
-##################################
-#         NITROUS STUFF          #
-##################################
-
-
-# Uncomment if on Nitrous or Codio Boxes
-#export PATH="$HOME/.parts/autoparts/bin:$PATH"
-#eval "$(parts init -)"
 
 
 ##################################
@@ -319,7 +229,6 @@ alias eclimd='$ECLIPSE_HOME/eclimd&'
 #              HUB               #
 ##################################
 
-
 # Go with hub instead of git
 eval "$(hub alias -s)"
 
@@ -327,7 +236,13 @@ eval "$(hub alias -s)"
 #               MOTD             #
 ##################################
 
-  export MOTD=0
+  # Enable/Disable MOTD
+  if [[ -n $EMACS ]]; then
+    export MOTD=0
+  else
+    export MOTD=1
+  fi
+
 
   if [ "$MOTD" -eq 1 ]; then
 
@@ -343,7 +258,7 @@ eval "$(hub alias -s)"
 
     # quote command is available tru zsh plugins also, just do: $ quote
     myfortune='curl http://www.iheartquotes.com/api/v1/random?source=joel_on_software+paul_graham+prog_style'
-    printf "${QUOTE_COLOR} $(curl --connect-timeout 1 -m 1 http://www.iheartquotes.com/api/v1/random 2>/dev/null) ${END_COLOR}\n\n" | iconv -c -f ISO-8859-1 -t UTF-8 | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}'
+    #printf "${QUOTE_COLOR} $(curl --connect-timeout 1 -m 1 http://www.iheartquotes.com/api/v1/random 2>/dev/null) ${END_COLOR}\n\n" | iconv -c -f ISO-8859-1 -t UTF-8 | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}'
 
     ##################################
     #            ASCII               #
@@ -374,16 +289,8 @@ eval "$(hub alias -s)"
       | perl -MHTML::Entities -e 'while(<>) {print decode_entities($_);}'
   fi
 
-##################################
-#            METEOR              #
-##################################
-
-# Force meteor watcher
-export METEOR_WATCH_FORCE_POLLING=t
 
 ##################################
 #              FZF               #
 ##################################
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-bindkey "^E" fzf-history-widget

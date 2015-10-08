@@ -72,6 +72,7 @@ run_backup() {
     mkdir "${HOME}"/dotfiles_backup
   fi
 
+  backup "${HOME}"/.spacemacs
   backup "${HOME}"/.zshrc
   backup "${HOME}"/.vim
   backup "${HOME}"/.gitconfig
@@ -91,6 +92,7 @@ run_scripts() {
 
   echo "Creating dotfiles symlinks"
   ln -nsf "$PWD"/files/zshrc ~/.zshrc
+  ln -nsf "$PWD"/files/spacemacs ~/.spacemacs
   ln -nsf "$PWD"/bin ~/bin
   ln -nsf "$PWD"/files/tmux.conf ~/.tmux.conf
   ln -nsf "$PWD"/files/eslintrc ~/.eslintrc

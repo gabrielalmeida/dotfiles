@@ -11,9 +11,6 @@ if [ $(ask "Should I mess with zsh?") == 'y' ]; then
   # clone opp zsh
   git clone https://github.com/hchbaw/opp.zsh ${HOME}/dotfiles/zsh-plugins/opp.zsh
 
-  # clone auto-fu.zsh
-  git clone https://github.com/hchbaw/auto-fu.zsh ${HOME}/dotfiles/auto-fu.zsh/auto-fu.zsh
-
   # make default shell
   sudo sh -c "echo '/usr/bin/zsh' >> /etc/shells"
 

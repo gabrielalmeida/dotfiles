@@ -40,7 +40,7 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     # textexpander transmission whiskey yacreader evernote mplayerx
     # mailbox skype
 
-    brew cask install --appdir="/Applications" evernote dropbox bettertouchtool
+    brew cask install --appdir="/Applications" evernote dropbox spectacle
     google-chrome iterm2 mplayerx maibox skype sunrise
 
     # install alternative versions

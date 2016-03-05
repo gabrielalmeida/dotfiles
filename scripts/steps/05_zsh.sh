@@ -2,7 +2,7 @@
 
 if [ $(ask "Should I mess with zsh?") == 'y' ]; then
 
-  curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+  sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
   # install zsh-syntax-highlighting
   mkdir -p "${HOME}/.oh-my-zsh/custom/plugins"

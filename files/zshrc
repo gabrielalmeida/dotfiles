@@ -72,7 +72,7 @@ symfony2 tmuxinator urltools vagrant web-search wd
 ## User configuration
 
 export VIMPATH="/usr/local/Cellar/vim/7.4.712_1/bin"
-export ANDROID_HOME="/Users/gbr/.meteor/android_bundle/android-sdk"
+export ANDROID_HOME=/usr/local/opt/android-sdk
 export ANDROIDPATH=$ANDROID_HOME
 export PATH="$VIMPATH:/Users/gbr/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROIDPATH/tools:$ANDROIDPATH/platform-tools:$ANDROIDPATH/build-tools"
 export MANPATH="/usr/local/man:$MANPATH"

@@ -169,6 +169,9 @@ alias untar="tar -xvf"
 alias unbz2="tar -xvjf"
 alias ungz="tar -xvzf"
 
+# wifi cli
+alias wifi='osx-wifi-cli'
+
 # File size
 alias fs="stat -f %z"
 

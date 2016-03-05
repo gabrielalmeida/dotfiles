@@ -7,7 +7,7 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     # homebrew apps
     brew install atool cpulimit duff exiftool eye-d3 gifify git git-flow git-extras git-ftp
     hr jq lftp mackup mediainfo mkvtoolnix mp4box namebench peerflix phantomjs pup
-    ranger shellcheck the_platinum_searcher trash tree watchman youtube-dl z
+    ranger shellcheck the_platinum_searcher trash tree watchman youtube-dl fasd
     brew install imagemagick --with-libtiff
     brew install ffmpeg --with-libvpx --with-libvorbis --with-openssl --with-theora
     --with-x265

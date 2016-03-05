@@ -56,7 +56,7 @@ alias ohmyzsh="vi ~/.oh-my-zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git gitfast git-extras heroku osx command-not-found  meteor 
 composer bower common-aliases compleat laravel4 nyan themes node brew
-copydir copyfile cp extract aws catimg chuck dirhistory jsontools jira
+copydir copyfile cp extract aws catimg chuck dirhistory jsontools jira fasd
 lol mercurial npm per-directory-history pip python rand-quote sublime sudo svn-fast-info
 symfony2 tmuxinator urltools vagrant web-search wd 
 )

@@ -148,6 +148,8 @@ alias em=emacs
 alias am="open -a \"Activity Monitor\""
 alias pref="open -a \"System Preferences\""
 
+alias flushdns='dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say flushed'
+
 # alias vim=emacs # In case got bored of vim
 alias vi=vim
 

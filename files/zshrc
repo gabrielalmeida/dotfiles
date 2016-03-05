@@ -205,8 +205,8 @@ ip() {
   elif [[ $* == *--global* ]]; then
     echo $GLOBAL_IP
   else
-    echo "Local: $LOCAL_IP" 
-    echo "Global: $GLOBAL_IP" 
+    echo "Local: $LOCAL_IP"
+    echo "Global: $GLOBAL_IP"
   fi
 }
 

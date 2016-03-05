@@ -6,7 +6,7 @@ if [ $(ask "Should I mess with zsh?") == 'y' ]; then
 
   # install zsh-syntax-highlighting
   mkdir -p "${HOME}/.oh-my-zsh/custom/plugins"
-  git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
   # make default shell
   sudo sh -c "echo '/usr/bin/zsh' >> /etc/shells"

@@ -5,9 +5,9 @@ display_help() {
   Usage: ./setup.sh [options]
   Options:
     -h|--help|help                   Display help
-    -i|--install|install             Install dotfiles, apps and other settings/tweaks 
-    -d|--dotfiles|dotfiles           Install dotfiles only 
-    -u|--update|update               Update to latest remote version 
+    -i|--install|install             Install dotfiles, apps and other settings/tweaks
+    -d|--dotfiles|dotfiles           Install dotfiles only
+    -u|--update|update               Update to latest remote version
     -r|--revert|revert               Revert to your original settings
 
 EOF
@@ -20,10 +20,10 @@ backup() {
 
   else
 
-    for file in "$@"; do 
+    for file in "$@"; do
       full_path=$(python -c "import os.path; print os.path.relpath('$file', '$HOME')")
       filename=$(basename "$full_path")
-      path=$(dirname "$full_path") 
+      path=$(dirname "$full_path")
       if [ ! -d ~/dotfiles_backup/"$path" ]; then
         mkdir -p ~/dotfiles_backup/"$path"
       fi
@@ -44,7 +44,7 @@ revert() {
     while true; do
       read -p "Do you really want this?
        It will overwrite your present settings with the version that you have backuped(check "${HOME}"/dotfiles_backup dir).
-      1. YES -> Recover my stuff from backup now! I know it will overwrite my current settings, no problem, I hated them. 
+      1. YES -> Recover my stuff from backup now! I know it will overwrite my current settings, no problem, I hated them.
       2. NO  -> Ok, I'll do nothing!
       [Choose #]: " option
 
@@ -120,8 +120,8 @@ update() {
 install_only_dotfiles() {
   while true; do
     read -p "Do you really want this? It'll change some of your settings, but everything overwritten will be backuped at '${HOME}'/dotfiles_backup
-    1. YES -> I'll replace files like ~/.vim and ~/.tmux.conf, just to name a few 
-    2. NO  -> Ok, bye. 
+    1. YES -> I'll replace files like ~/.vim and ~/.tmux.conf, just to name a few
+    2. NO  -> Ok, bye.
     [Choose #]: " option
 
     case "$option" in
@@ -143,8 +143,8 @@ install_only_dotfiles() {
 ask() {
   while true; do
     read -p "$1
-    1. Yes 
-    2. No 
+    1. Yes
+    2. No
     [Choose #]: " option
 
     if [ "$INSTALL" == 'EVERYTHING' ]; then
@@ -171,7 +171,7 @@ install() {
   while true; do
     read -p "Which OS are you using?
     1. OS X -> Will be able to install everything
-    2. LINUX -> Will install only dotfiles/compatible stuff 
+    2. LINUX -> Will install only dotfiles/compatible stuff
     [Choose #]: " option
 
     case "$option" in
@@ -190,10 +190,10 @@ install() {
   if [ "$OS" == 'OSX' ]; then
     while true; do
       read -p "Do you want to install apps and other perks?
-      1. YES, just install everything 
-      2. YES, but let me choose what to install 
-      3. NO, only dotfiles please 
-      4. NO, nein, nothing, nada – Cancel install 
+      1. YES, just install everything
+      2. YES, but let me choose what to install
+      3. NO, only dotfiles please
+      4. NO, nein, nothing, nada – Cancel install
       [Choose #]: " option
 
       case "$option" in

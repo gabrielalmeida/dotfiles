@@ -6,7 +6,7 @@ echo "$INSTALL"
 
 if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CHOOSE" ]; } then
 
-    # TODO – Dependency check/solve less piggy 
+    # TODO – Dependency check/solve less piggy
     if ! exists curl; then
       echo "You MUST have curl installed";
       exit 0;
@@ -16,7 +16,7 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
       echo "You MUST have ruby installed";
       exit 0;
     fi
-  
+
   if [ $(ask "Should I check if system is up-to-date?") == 'y' ]; then
     # make sure system is up-to-date
     softwareupdate --install --all

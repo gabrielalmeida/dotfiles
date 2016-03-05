@@ -1,7 +1,7 @@
 if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CHOOSE" ]; } then
 
   # TODO – Segment/organize apps per categories
-  # TODO – Ask for install accordingly to categories 
+  # TODO – Ask for install accordingly to categories
 
   if [ $(ask "Should I install all your stuff?") == 'y' ]; then
     # homebrew apps
@@ -37,7 +37,7 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     # google-chrome hex-fiend hexels hydra imageoptim instacast iterm2 joinme keka
     # key-codes leap-motion macaw node-webkit nsregextester openemu p5 platypus
     # pokerstars processing screenflow shotcut spectacle steam sublime-text subtitles
-    # textexpander transmission whiskey yacreader evernote mplayerx 
+    # textexpander transmission whiskey yacreader evernote mplayerx
     # mailbox skype
 
     brew cask install --appdir="/Applications" evernote dropbox bettertouchtool

@@ -2,7 +2,7 @@
 
 # TODO Verify which OS is running this install and make it agnostic(remove .osx configs for eg)
 # TODO Make it more flexible/optional steps
-# TODO Check if its a full install(including apps/OS configs/etc)  or if want ONLY dotfiles installed/re-installed 
+# TODO Check if its a full install(including apps/OS configs/etc)  or if want ONLY dotfiles installed/re-installed
 # TODO #4 Make an "namespaced/isolated" mode for dotfiles, where everything overwritten will be backup'ed and can be restored to original version with a single command run(./setup.sh restore-original)
 
 echo "Make sure git and curl are installed to get this setup working!
@@ -10,14 +10,14 @@ You MUST have sudo permission to complete most of the installs.
 
 
            ********  ******   *******               *******     *******   ********** ******** ** **       ********  ********
-          **//////**/*////** /**////**             /**////**   **/////** /////**/// /**///// /**/**      /**/////  **////// 
-         **      // /*   /** /**   /**             /**    /** **     //**    /**    /**      /**/**      /**      /**       
+          **//////**/*////** /**////**             /**////**   **/////** /////**/// /**///// /**/**      /**/////  **//////
+         **      // /*   /** /**   /**             /**    /** **     //**    /**    /**      /**/**      /**      /**
         /**         /******  /*******              /**    /**/**      /**    /**    /******* /**/**      /******* /*********
         /**    *****/*//// **/**///**              /**    /**/**      /**    /**    /**////  /**/**      /**////  ////////**
         //**  ////**/*    /**/**  //**             /**    ** //**     **     /**    /**      /**/**      /**             /**
-         //******** /******* /**   //**            /*******   //*******      /**    /**      /**/********/******** ******** 
-          ////////  ///////  //     //             ///////     ///////       //     //       // //////// //////// ////////  
-            
+         //******** /******* /**   //**            /*******   //*******      /**    /**      /**/********/******** ********
+          ////////  ///////  //     //             ///////     ///////       //     //       // //////// //////// ////////
+
 "
 
 cd "${0%/*}"

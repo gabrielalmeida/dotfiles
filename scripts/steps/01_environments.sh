@@ -22,7 +22,6 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     softwareupdate --install --all --background
   fi;
 
-
   if [ $(ask "Should I install homebrew? If you choose to not install homebrew,
     most of the next install options will be skipped because they depends on
     brew to be installed") == 'y' ]; then
@@ -32,14 +31,12 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 
-  #if [ "$BREW" == 'y' ] && { [ $(ask "Should I install python?") == 'y' ]; } then
-  if [ "$BREW" == 'y' ]; then
-
+  if [ "$BREW" == 'y' ] && { [ $(ask "Should I install python?") == 'y' ]; } then
     if [ $(ask "Should I install python?") == 'y' ]; then
       # python environment
       brew install python
       # install some eggs
-      pip install asciinema livestreamer subliminal
+      pip install livestreamer subliminal
     fi
 
     if [ $(ask "Should I update ruby and install some cool gems?") == 'y' ]; then

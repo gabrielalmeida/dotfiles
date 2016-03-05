@@ -45,8 +45,6 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
 
     # install alternative versions
     brew cask install caskroom/versions/google-chrome-canary
-    # brew cask install caskroom/versions/vmware-fusion6
-    brew cask install caskroom/versions/firefoxdeveloperedition
 
     # prefpanes and qlplugins
     brew cask install betterzipql epubquicklook jsonlook qlcolorcode qlimagesize

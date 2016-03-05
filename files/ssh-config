@@ -1,7 +1,0 @@
-Host sandbox 
-  ProxyCommand          nc -X connect -x 146.164.70.1:3128 %h %p
-  ServerAliveInterval   10
-
-#Host *
-   #PermitLocalCommand yes 
-   #LocalCommand tar c -C${HOME} .oh-my-zsh .zshrc .vim .vimrc .tmux.conf \ | ssh -o PermitLocalCommand=no %n "tar mx -C${HOME} ; chsh -s /bin/zsh"

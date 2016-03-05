@@ -19,7 +19,7 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
 
   if [ $(ask "Should I check if system is up-to-date?") == 'y' ]; then
     # make sure system is up-to-date
-    softwareupdate --install --all
+    softwareupdate --install --all --background
   fi;
 
 

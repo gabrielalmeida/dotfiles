@@ -48,28 +48,9 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     # brew cask install caskroom/versions/vmware-fusion6
     brew cask install caskroom/versions/firefoxdeveloperedition
 
-    # drivers
-    # brew cask install d235j-xbox360-controller-driver wacom-bamboo-tablet
-
     # prefpanes and qlplugins
     brew cask install betterzipql epubquicklook jsonlook qlcolorcode qlimagesize
     qlmarkdown qlstephen scriptql secrets suspicious-package
-
-    # fonts
-    brew cask install caskroom/homebrew-fonts/font-source-code-pro
-
-    # games
-    # brew cask install gridwars noiz2sa rootage torustrooper
-
-    # colorpickers
-    brew cask install colorpicker-antetype colorpicker-skalacolor
-
-    # tiny-scripts
-    #brew tap vitorgalvao/tinyscripts
-    #brew install cask-repair contagem-edp crafts customise-terminal-notifier
-    #dropboxtimer gfv gifmaker labelcolor lovecolor olx-post pedir-gas
-    #pinboardlinkcheck podbook prfix seren unsplashdownload
-
 
   # cleanup homebrew's cache
   brew cleanup --force -s

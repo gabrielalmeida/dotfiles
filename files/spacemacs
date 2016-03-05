@@ -41,7 +41,6 @@
      pandoc
      php
      python
-     react
      search-engine
      semantic
      (shell :variables
@@ -54,7 +53,7 @@
      syntax-checking
      syntax-checking
      themes-megapack
-     version-control
+     ;;version-control
      vim-empty-lines
      vinegar
      wakatime
@@ -67,9 +66,10 @@
    dotspacemacs-additional-packages '(auctex-latexmk
                                       auto-complete-auctex
                                       base16-theme
+                                      fold-this
                                       kanban
-                                      org-dashboard
-                                      org-plus-contrib)
+                                      org-plus-contrib
+                                      org-dashboard)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -103,9 +103,12 @@ before layers configuration."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         dichromacy
                          twilight-bright
-                         material
                          solarized-light
+                         twilight-anti-bright
+                         wombat
+                         material
                          solarized-dark
                          spacemacs-light
                          spacemacs-dark
@@ -113,7 +116,7 @@ before layers configuration."
                          monokai
                          zenburn)
    ;; If non nil the cursor color matches the state color.
-   dotspacemacs-colorize-cursor-according-to-state t
+   dotspacemacs-colorize-cursor-according-to-state nil
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
@@ -195,10 +198,34 @@ before layers configuration."
   ;; User initialization goes here
   )
 
+(defun gbr/web-mode-hook ()
+  "Custom hooks for web-mode."
+
+
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-style-padding 2)
+  (setq web-mode-script-padding 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq-default web-mode-markup-indent-offset 2))
+
+;; Live serach the spacemacs docs with helm.
+(defun u/search-spacemacs-docs ()
+  "Search the spacemacs docs using helm-do-ag."
+  (interactive)
+  (helm-do-ag "~/.emacs.d/doc/"))
+
+
 (defun dotspacemacs/user-config ()
-  "Configuration function.
+  "Configuration function."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+
+  ;; Quick & easy C style comments prefilled
+  (defun insert-doc-comment () (interactive)
+         (insert "/**\n * Brief description. Long description.\n * @param\n * @return\n * @exception\n * @see\n * @author\n */"))
+  (define-key global-map [(S-f1)] 'insert-doc-comment)
+
 
   ;; Display current folder on window/frame title
   (setq frame-title-format
@@ -210,38 +237,18 @@ layers configuration."
             '(lambda () (hl-line-mode (if (equal major-mode 'term-mode) 0 1))))
 
   ;; Smart highlight line color base on theme
-  (defun set-hl-line-color-based-on-theme ()
-    "Sets the hl-line face to have no foregorund and a background
-    that is 10% darker/lighten than the default face's background."
-    (if (equal (frame-parameter nil 'background-mode) "light")
-        (set-face-attribute 'hl-line nil
-                            :foreground nil
-                            :background (color-darken-name (face-background 'default) 20))
-      (set-face-attribute 'hl-line nil
-                          :foreground nil
-                          :background (color-lighten-name (face-background 'default) 20))))
+  ;; (defun set-hl-line-color-based-on-theme ()
+  ;;   "Sets the hl-line face to have no foregorund and a background
+  ;;   that is 10% darker/lighten than the default face's background."
+  ;;   (if (equal (frame-parameter nil 'background-mode) "light")
+  ;;       (set-face-attribute 'hl-line nil
+  ;;                           :foreground nil
+  ;;                           :background (color-darken-name (face-background 'default) 20))
+  ;;     (set-face-attribute 'hl-line nil
+  ;;                         :foreground nil
+  ;;                         :background (color-lighten-name (face-background 'default) 20))))
 
-  (add-hook 'global-hl-line-mode-hook 'set-hl-line-color-based-on-theme)
-
-  ;; Flycheck
-  (require 'flycheck)
-
-  ;; turn on flychecking globally
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-
-  ;; disable jshint since we prefer eslint checking
-  (setq-default flycheck-disabled-checkers
-                (append flycheck-disabled-checkers
-                        '(javascript-jshint)))
-
-  ;; use eslint with web-mode for jsx files
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-
-  ;; disable json-jsonlist checking for json files
-  (setq-default flycheck-disabled-checkers
-                (append flycheck-disabled-checkers
-                        '(json-jsonlist)))
-
+  ;; (add-hook 'global-hl-line-mode-hook 'set-hl-line-color-based-on-theme)
 
   ;; Org-Agenda files
   (setq org-agenda-files '("~/org"))
@@ -281,6 +288,8 @@ layers configuration."
   (add-hook 'org-babel-after-execute-hook
             (lambda () (org-redisplay-inline-images)))
 
+  (add-hook 'org-mode-hook 'org-display-inline-images)
+
 
   ;; Make left-option accents work on OS X
   (when (eq system-type 'darwin) ;; mac specific settings
@@ -294,6 +303,7 @@ layers configuration."
   (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
 
   ;; AucTeX
+
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
@@ -301,6 +311,8 @@ layers configuration."
   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+
+
   (setq reftex-plug-into-AUCTeX t)
   (setq TeX-PDF-mode t)
 
@@ -317,6 +329,7 @@ layers configuration."
   ;; use Skim as default pdf viewer
   ;; Skim's displayline is used for forward search (from .tex to .pdf)
   ;; option -b highlights the current line; option -g opens Skim in the background
+
   (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
   (setq TeX-view-program-list
         '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
@@ -334,13 +347,106 @@ layers configuration."
 
 
   ;; PHP
-  (add-hook 'php-mode-hook 'my-php-mode-hook)
-  (defun my-php-mode-hook ()
-    "My PHP mode configuration."
+  (add-hook 'php-mode-hook 'php-mode-hook)
+  (defun php-mode-hook ()
     (setq indent-tabs-mode nil
           tab-width 4
           c-basic-offset 4))
-  )
+
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize))
+
+  ;; Flycheck
+  ;; (require 'flycheck)
+
+  ;; turn on flychecking globally
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+
+  ;; (spacemacs|use-package-add-hook flycheck
+  ;;   :post-config
+  ;;   (progn
+  ;;     (flycheck-add-mode 'javascript-standard 'web-mode)
+  ;;     (flycheck-add-mode 'javascript-standard 'react-mode))
+  ;;   (add-hook 'react-mode-hook (lambda ()
+  ;;                                (setq flycheck-select-checker 'javascript-standard))))
+
+  ;; add web-mode and react-mode to javascript-standard checker
+  ;; (with-eval-after-load 'flycheck
+  ;;   (flycheck-add-mode 'javascript-standard 'web-mode)
+  ;;   (flycheck-add-mode 'javascript-standard 'react-mode))
+
+  ;; (add-hook 'react-mode-hook (lambda ()
+  ;;                               (setq flycheck-select-checker 'javascript-standard)))
+
+  (setq-default
+   ;; js2-mode
+   js2-basic-offset 2
+   ;; web-mode
+   css-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-attr-indent-offset 2)
+
+  ;; (with-eval-after-load 'web-mode
+  ;;   (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+  ;;   (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+  ;;   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
+
+
+  (setq magit-repository-directories '("~/Dev/"))
+
+;; jsx strikes again
+  (require 'web-mode)
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+  (setq web-mode-content-types-alist
+        '(("jsx" . "\\.js[x]?\\'")))
+
+
+  ;; Silence some js2-mode errors (instead lint with eslint)
+  (setq-default js2-strict-trailing-comma-warning nil)
+  (setq js2-highlight-external-variables nil)
+  ;; We want company-mode enabled globally
+  (global-company-mode)
+  ;; Always truncate lines
+  (setq-default truncate-lines t)
+  ;; Disable smartparens
+  (turn-off-show-smartparens-mode)
+  ;; Paste behaviour
+  (fset 'evil-visual-update-x-selection 'ignore)
+  ;; Set powerline separators
+  (setq powerline-default-separator 'arrow)
+  ;; Load custom themes (not included in spacemacs)
+  ;; (load-theme 'andreas t)
+  ;; Enable line numbers as default in some modes
+  ;; (setq flycheck-checker-error-threshold 700)
+  ;;(add-to-hooks #'linum-mode '(js2-mode-hook))
+  ;; Add web-mode as default when working with php files
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+  (setq-default company-idle-delay 0.0)
+  ;; Set indents to two spaces, override some defaults.
+  (setq-default js2-basic-offset 2)
+  (setq-default css-indent-offset 2)
+  (setq-default web-mode-markup-indent-offset 2)
+  (setq tab-width 2)
+  (setq-default flycheck-jshintrc "~/.jshintrc")
+  (setq-default flycheck-jscsrc "~/.jscsrc")
+  ;; Initialize web-mode custom hooks
+  (add-hook 'web-mode-hook 'stormpat/web-mode-hook)
+  ;; Set helm ignore folders
+  ;;(add-to-list 'projectile-ignored-directories "node_modules")
+  (add-to-list 'exec-path "~/bin/")
+  ;; testing on osx pbpaste
+  (setq x-select-enable-clipboard t)
+  ;; Disable neotree vc-integration -> spacemacs/issues/2943
+  (setq neo-vc-integration nil)
+  ;; Try to fix heavy font-locks on large buffers
+  ;; Try to speed up js2-mode
+  ;; (setq js2-idle-timer-delay 2)
+  (setq blink-matching-paren t)
+  ;;(setq font-lock-maximum-decoration nil)
+
+  ) ;; End of user-config
 
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -350,6 +456,12 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(exec-path-from-shell-check-startup-files nil)
+ '(js2-basic-offset 2)
+ '(js2-missing-semi-one-line-override t)
+ '(js2-strict-missing-semi-warning nil)
+ '(mac-option-modifier nil)
+ '(paradox-github-token t)
  '(wakatime-api-key "0450a87c-fc3e-4624-9c7c-a94ca1218ac7")
  '(wakatime-cli-path "/usr/local/bin/wakatime"))
 (custom-set-faces

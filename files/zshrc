@@ -54,11 +54,12 @@ alias ohmyzsh="vi ~/.oh-my-zsh"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git gitfast git-extras heroku osx command-not-found  meteor 
-composer bower common-aliases compleat laravel4 nyan themes node brew
-copydir copyfile cp extract aws catimg chuck dirhistory jsontools jira fasd
-lol mercurial npm per-directory-history pip python rand-quote sublime sudo svn-fast-info
-symfony2 urltools vagrant web-search wd
+plugins=(
+git gitfast git-extras heroku osx command-not-found meteor composer bower
+common-aliases compleat laravel4 nyan themes node brew copydir copyfile cp
+extract aws catimg chuck dirhistory jsontools jira fasd lol mercurial npm
+per-directory-history pip python rand-quote sublime sudo svn-fast-info symfony2
+urltools vagrant web-search wd
 )
 
 # not used anymore plugins:

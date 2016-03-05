@@ -8,12 +8,8 @@ if [ $(ask "Should I mess with zsh?") == 'y' ]; then
   mkdir -p "${HOME}/.oh-my-zsh/custom/plugins"
   git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
-  # clone opp zsh
-  git clone https://github.com/hchbaw/opp.zsh ${HOME}/dotfiles/zsh-plugins/opp.zsh
-
   # make default shell
   sudo sh -c "echo '/usr/bin/zsh' >> /etc/shells"
-
   chsh -s "/bin/zsh"
 
   # dotfiles

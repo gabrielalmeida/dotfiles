@@ -36,7 +36,7 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
       # python environment
       brew install python
       # install some eggs
-      pip install livestreamer subliminal
+      pip install livestreamer subliminal cheat
     fi
 
     if [ $(ask "Should I update ruby and install some cool gems?") == 'y' ]; then

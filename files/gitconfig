@@ -1,5 +1,5 @@
  ;git config --global user.name "Gabriel Almeida"
- ;git config --global user.email gabriel.almeida.rj@gmail.com
+ ;git config --global user.email "gabriel_almeida@me.com"
 [apply]
     whitespace = fix
 [color]
@@ -69,7 +69,7 @@
     prompt = false
 [user]
 	name = Gabriel Almeida
-	email = gabriel.almeida.rj@gmail.com
+	email = gabriel_almeida@me.com
 [credential]
 	;helper = osxkeychain
 	;helper = store

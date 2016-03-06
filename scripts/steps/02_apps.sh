@@ -9,12 +9,12 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     hr jq lftp mackup mediainfo mkvtoolnix mp4box namebench peerflix phantomjs pup
     ranger shellcheck the_platinum_searcher trash tree watchman youtube-dl fasd
     brew install imagemagick --with-libtiff
-    brew install ffmpeg --with-libvpx --with-libvorbis --with-openssl --with-theora
-    --with-x265
+    brew install ffmpeg --with-libvpx --with-libvorbis --with-openssl --with-theora --with-x265
     brew install macvim --with-lua --custom-icons
-    brew install sox --with-flac --with-lame --with-libvorbis
     brew install vim --with-lua
+    brew install sox --with-flac --with-lame --with-libvorbis
     brew install hub
+    brew install railwaycat/emacsmacport/emacs-mac --with-spacemacs-icon --with-imagemagick 
 
     brew install zsh --disable-etcdir
 
@@ -41,7 +41,8 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     # mailbox skype
 
     brew cask install --appdir="/Applications" evernote dropbox spectacle
-    google-chrome iterm2 mplayerx maibox skype sunrise
+    google-chrome iterm2 mplayerx skype sunrise transmission sublime-text3
+    atom vlc amethyst
 
     # install alternative versions
     brew cask install caskroom/versions/google-chrome-canary

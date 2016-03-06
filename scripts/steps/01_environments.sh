@@ -52,8 +52,8 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
       # nodejs environment
       brew install node
       # install some packages
-      npm install --global github-todos browser-sync gulp bower vtop divshot-cli gitignore grunt-cli harp
-      html2jade imageoptim-cli nightmare pageres puer tldr
+      npm install --global eslint gulp bower vtop divshot-cli gitignore
+      grunt-cli harp imageoptim-cli nightmare pageres puer tldr
     fi
 
   fi

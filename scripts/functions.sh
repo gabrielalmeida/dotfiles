@@ -76,8 +76,8 @@ run_backup() {
   backup "${HOME}"/.zshrc
   backup "${HOME}"/.vim
   backup "${HOME}"/.gitconfig
+  backup "${HOME}"/.gitignore
   backup "${HOME}"/.tmux.conf
-  backup "${HOME}"/.ssh/config
   echo "Backup complete, check restore command or ~/dotfiles_backup folder"
 }
 
@@ -95,9 +95,8 @@ run_scripts() {
   ln -nsf "$PWD"/files/spacemacs ~/.spacemacs
   ln -nsf "$PWD"/bin ~/bin
   ln -nsf "$PWD"/files/tmux.conf ~/.tmux.conf
-  ln -nsf "$PWD"/files/eslintrc ~/.eslintrc
   ln -nsf "$PWD"/files/gitconfig ~/.gitconfig
-  ln -nsf "$PWD"/files/ssh-config ~/.ssh/config
+  ln -nsf "$PWD"/files/gitignore ~/.gitignore
   ln -nsf "$PWD"/files/vimrc ~/.vimrc
 
   #rm -rf /tmp/dotfiles

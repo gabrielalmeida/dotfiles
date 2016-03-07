@@ -8,5 +8,6 @@
 ### Inspired on the following dotfiles
 * [https://github.com/vitorgalvao/dotfiles](vitorgalvao/dotfiles)
 * ...
+
 #### License
 The Unlicense

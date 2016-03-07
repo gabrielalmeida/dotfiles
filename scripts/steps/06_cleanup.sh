@@ -10,7 +10,8 @@ cleanup_brew() {
 
 final_message() {
     clear
-    echo "All the automated scripts have now finished. DONE √√√"
+    echo "All the automated scripts have now finished."
+    echo "Dotfiles setup is complete! ♥️ ♥️ ♥️"
 }
 
 cleanup_brew

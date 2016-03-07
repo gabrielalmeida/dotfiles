@@ -40,5 +40,3 @@ else
     shift
   done
 fi
-
-echo "Dotfiles setup is complete."

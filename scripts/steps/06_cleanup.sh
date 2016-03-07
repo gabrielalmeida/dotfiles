@@ -15,4 +15,5 @@ final_message() {
 }
 
 cleanup_brew
+killall caffeinate # computer can go back to sleep
 final_message

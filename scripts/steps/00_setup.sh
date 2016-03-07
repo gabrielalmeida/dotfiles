@@ -22,12 +22,17 @@ initial_setup() {
 ask_details() {
     clear
     bold_echo 'Some contact information to be set in the lock screen:'
+    read -p 'Message > ' message
     read -p 'Email address > ' email
     read -p 'Telephone number > ' telephone
-    sudo -S defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Email: ${email}\nTel: ${telephone}" <<< "${sudo_password}" 2> /dev/null
-}
+    sudo -S defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "${message}\n✉️ ${email} 📞 ${telephone}" <<< "${sudo_password}" 2> /dev/null
 
 }
 
 initial_setup
-ask_details
+
+if [ "$OS" == 'OSX' ]; then
+    if [ $(ask "Should I setup a message with your email and telephone on start screen?") == 'y' ]; then
+        ask_details
+    fi
+fi

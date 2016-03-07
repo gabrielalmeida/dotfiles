@@ -6,7 +6,7 @@
 > ./setup.sh
 ```
 ### Inspired on the following dotfiles
-* [https://github.com/vitorgalvao/dotfiles](vitorgalvao/dotfiles)
+* [vitorgalvao/dotfiles](https://github.com/vitorgalvao/dotfiles)
 * ...
 
 #### License

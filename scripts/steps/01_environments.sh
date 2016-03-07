@@ -79,9 +79,14 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
     most of the next install options will be skipped because they depends on
     brew to be installed") == 'y' ]; then
        install_brew
+       BREW='y'
    fi
 
-   if [ "$BREW" == 'y' ] && { [ $(ask "Should I install python?") == 'y' ]; } then
+   if exists brew; then
+       BREW='y'
+   fi
+
+   if [ "$BREW" == 'y' ]; then
       if [ $(ask "Should I install python?") == 'y' ]; then
           install_python
       fi

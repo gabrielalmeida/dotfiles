@@ -9,11 +9,6 @@ initial_setup() {
     trap 'exit 0' SIGINT # exit cleanly if aborted with ⌃C
     caffeinate & # prevent computer from going to sleep
 
-    # variables for helper files and directories
-    helper_files='/tmp/dotfiles-master/files'
-    post_install_files="${HOME}/Desktop/post_install_files"
-    post_install_script="${HOME}/Desktop/post_install_script.sh"
-
     # ask for the administrator password upfront, for commands that require 'sudo'
     clear
     bold_echo 'Insert the "sudo" password now (will not be echoed).'

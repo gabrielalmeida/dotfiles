@@ -7,14 +7,6 @@ if [ $(ask "Should I mess with vim?") == 'y' ]; then
     mkdir ~/.vim_swp
   fi
 
-  #if [ -d ~/.vim ]; then
-  #echo "Creating vim backup directory."
-  #cp -R ~/.vim ~/.vim_backup; rm -rf ~/.vim
-  #fi
-
-  #echo "Creating vim symlinks"
-  #mv "/tmp/dotfiles/files/vimrc" "${HOME}/.vimrc"
-
   if [ -d "$PWD"/vim/bundle ]; then
     echo "Cleaning bundle directory."
     rm -rf "$PWD"/vim/bundle/*
@@ -30,5 +22,4 @@ if [ $(ask "Should I mess with vim?") == 'y' ]; then
   "$HOME"/.vim/bundle/neobundle.vim/bin/neoinstall
 
   echo "Vim setup is complete"
-
 fi

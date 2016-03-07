@@ -83,11 +83,6 @@ run_backup() {
 
 run_scripts() {
 
-  if [ ! -d ~/bin ]; then
-    echo "Creating bin directory."
-    mkdir ~/bin
-  fi
-
   run_backup
 
   echo "Creating dotfiles symlinks"
@@ -107,10 +102,6 @@ run_scripts() {
   bash /tmp/script
 }
 
-exists() {
-  command -v "$1" >/dev/null 2>&1;
-}
-
 update() {
   echo "Sorry, update not implemented yet, do it with git!"
   exit 0;
@@ -119,7 +110,7 @@ update() {
 install_only_dotfiles() {
   while true; do
     read -p "Do you really want this? It'll change some of your settings, but everything overwritten will be backuped at '${HOME}'/dotfiles_backup
-    1. YES -> I'll replace files like ~/.vim and ~/.tmux.conf, just to name a few
+    1. YES -> I'll replace files like ~/.vimrc and ~/.tmux.conf, just to name a few
     2. NO  -> Ok, bye.
     [Choose #]: " option
 
@@ -223,4 +214,16 @@ install() {
     echo "Installing!"
     run_scripts
   fi
+}
+
+exists() {
+    command -v "$1" >/dev/null 2>&1;
+}
+
+bold_echo() { # helper function for bold text
+    echo "$(tput bold)$1$(tput sgr0)"
+}
+
+renew_sudo() { # helper function for when the following command needs 'sudo' active but shouldn't be called with it
+    sudo -S -v <<< "${sudo_password}" 2> /dev/null
 }

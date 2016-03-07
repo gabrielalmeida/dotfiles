@@ -12,6 +12,7 @@ install_brew_apps() {
 
     brew install aria2 asciinema atool ccat cpulimit duff duti exiftool eye-d3 gifify git git-extras ghi hub git-ftp haskell-stack hr httpie jq lftp mediainfo mkvtoolnix mp4v2 onepass phantomjs pup shellcheck the_silver_searcher trash tree wiki youtube-dl fasd ranger peerflix watchman namebench mackup
 
+    brew install tmux
     brew install vim --with-lua
     brew install railwaycat/emacsmacport/emacs-mac --with-spacemacs-icon --with-imagemagick
 
@@ -31,7 +32,7 @@ make_caskroom() {
 }
 
 install_cask_apps() {
-  brew cask install --appdir='/Applications' calibre drop-to-gif dropbox duelystlauncher enjoyable flux fog gifloopcoder gitup google-chrome handbrakecli imageoptim jadengeller-helium key-codes screenflow shotcut spectacle torbrowser transmission yacreader vlc mplayerx skype sunrise evernote sublime-text3 amethyst pokerstars teamviewer
+  brew cask install --appdir='/Applications' calibre drop-to-gif dropbox flux fog gifloopcoder gitup google-chrome handbrakecli imageoptim jadengeller-helium key-codes screenflow shotcut spectacle torbrowser transmission yacreader vlc mplayerx skype sunrise evernote sublime-text3 amethyst pokerstars teamviewer
 
   # install alternative versions
   brew tap caskroom/versions

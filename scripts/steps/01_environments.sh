@@ -2,6 +2,22 @@ if [ "$FUNCTIONS_LOADED" != 'TRUE' ]; then
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     source "${DIR}/../functions.sh"
 fi
+
+install_xcode() {
+    if ! xcode-select --print-path 2> /dev/null; then
+        xcode-select --install
+
+        until xcode-select --print-path 2> /dev/null; do
+            sleep 5
+        done
+    fi
+}
+
+update_osx() {
+    # make sure system is up-to-date
+    softwareupdate --install --all
+}
+
 install_brew() {
     renew_sudo
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null

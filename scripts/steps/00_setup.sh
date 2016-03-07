@@ -32,19 +32,6 @@ ask_details() {
     sudo -S defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Email: ${email}\nTel: ${telephone}" <<< "${sudo_password}" 2> /dev/null
 }
 
-install_xcode() {
-    if ! xcode-select --print-path 2> /dev/null; then
-        xcode-select --install
-
-        until xcode-select --print-path 2> /dev/null; do
-            sleep 5
-        done
-    fi
-}
-
-update_osx() {
-    # make sure system is up-to-date
-    softwareupdate --install --all --background
 }
 
 initial_setup

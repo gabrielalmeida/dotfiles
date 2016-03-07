@@ -227,3 +227,5 @@ bold_echo() { # helper function for bold text
 renew_sudo() { # helper function for when the following command needs 'sudo' active but shouldn't be called with it
     sudo -S -v <<< "${sudo_password}" 2> /dev/null
 }
+
+FUNCTIONS_LOADED=TRUE

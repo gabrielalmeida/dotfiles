@@ -1,3 +1,7 @@
+if [ "$FUNCTIONS_LOADED" != 'TRUE' ]; then
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    source "${DIR}/../functions.sh"
+fi
 
 install_brew_apps() {
     brew install imagemagick --with-libtiff

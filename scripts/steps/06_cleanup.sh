@@ -1,3 +1,8 @@
+if [ "$FUNCTIONS_LOADED" != 'TRUE' ]; then
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    source "${DIR}/../functions.sh"
+fi
+
 cleanup_brew() {
     brew cleanup --force
     rm -rf "$(brew --cache)"

@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
+if [ "$FUNCTIONS_LOADED" != 'TRUE' ]; then
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    source "${DIR}/../functions.sh"
+fi
 
 if [ $(ask "Should I mess with vim?") == 'y' ]; then
 

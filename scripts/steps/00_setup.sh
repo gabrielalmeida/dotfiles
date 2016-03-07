@@ -1,3 +1,8 @@
+if [ "$FUNCTIONS_LOADED" != 'TRUE' ]; then
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    source "${DIR}/../functions.sh"
+fi
+
 initial_setup() {
     export PATH="/usr/local/bin:$PATH"
 

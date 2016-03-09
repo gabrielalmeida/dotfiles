@@ -218,6 +218,7 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
        request_chrome_extension 'Google Chrome' 'httpseverywhere' 'gcbommkclmclpchllfjekcdonpmejbdp'
        request_chrome_extension 'Google Chrome' 'thegreatsuspender' 'klbibkeccnjlkjkiokjodocebajanakg'
        request_chrome_extension 'Google Chrome' 'ublockorigin' 'cjpalhdlnbpafiamejdnhcphjbkeiagm'
+       request_chrome_extension 'Google Chrome' 'zenhub-for-github' 'ogcgkffhplmphkaahpmffcafajaocjbd'
 
        request_chrome_extension 'Google Chrome Canary' 'chromeextensionsdeveloper' 'ohmmkhmmmpcnpikjeljgnaoabkaalbgc'
        request_chrome_extension 'Google Chrome Canary' 'daydream' 'oajnmbophdhdobfpalhkfgahchpcoali'
@@ -229,6 +230,7 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
        request_chrome_extension 'Google Chrome Canary' 'tape' 'jmfleijdbicilompnnombcbkcgidbefb'
        request_chrome_extension 'Google Chrome Canary' 'thecamelizer' 'ghnomdcacenbmilgjigehppbamfndblo'
        request_chrome_extension 'Google Chrome Canary' 'tincr' 'lfjbhpnjiajjgnjganiaggebdhhpnbih'
+       request_chrome_extension 'Google Chrome Canary' 'zenhub-for-github' 'ogcgkffhplmphkaahpmffcafajaocjbd'
    fi
 
 fi

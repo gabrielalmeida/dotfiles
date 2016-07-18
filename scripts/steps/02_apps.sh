@@ -23,7 +23,7 @@ install_cask_apps() {
   brew cask install google-chrome handbrakecli imageoptim jadengeller-helium key-codes screenflow
   brew cask install shotcut spectacle transmission vlc mplayerx skype 
   brew cask install evernote sublime-text3 amethyst teamviewer spotify robomongo
-  brew cask install franz hyperterm mou launchrocket
+  brew cask install franz hyperterm mou launchrocket karabiner
 
   # install alternative versions
   brew tap caskroom/versions

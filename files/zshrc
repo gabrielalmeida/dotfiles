@@ -168,14 +168,6 @@ export LANG="en_US.UTF-8"
 
 
 ##################################
-#           ECLIMD               #
-##################################
-
-# Start eclimd
-export ECLIPSE_HOME="/Applications/eclipse/"
-alias eclimd='$ECLIPSE_HOME/eclimd&'
-
-
 ##################################
 #              HUB               #
 ##################################

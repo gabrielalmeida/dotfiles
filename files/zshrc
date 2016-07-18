@@ -18,76 +18,11 @@ export LANG="en_US.UTF-8"
    export EDITOR='vim'
  fi
 
-##################################
-#            ALIASES             #
-##################################
+# Source Aliases
+source "$HOME/dotfiles/files/aliases.zsh"
 
-# Enable aliases to be sudo'ed
-alias sudo="sudo "
-# clear
-alias cle=clear
-alias cl=clear
-alias lc=clear
-alias cls=clear
-# editors
-alias e=$EDITOR
-alias vi=vim
-alias emacs="open -a emacs "
-alias em=emacs
-alias zshconfig="vi ~/.zshrc"
-# osx
-alias am="open -a \"Activity Monitor\""
-alias pref="open -a \"System Preferences\""
-alias flushdns='dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say flushed'
-# tmux
-alias tmux='TERM=screen-256color tmux'
-alias tm='tmux a || tmux new'
-alias ta='tmux a'
-alias ts='tmux new-session -s'
-alias tl='tmux list-sessions'
-# refresh zshrc
-alias rr="source ~/.zshrc"
-alias vtop="vtop --theme monokai"
-# archives
-alias mktar="tar -cvf"
-alias mkbz2="tar -cvjf"
-alias mkgz="tar -cvzf"
-alias untar="tar -xvf"
-alias unbz2="tar -xvjf"
-alias ungz="tar -xvzf"
-# wifi cli
-alias wifi='osx-wifi-cli'
-# file size
-alias fs="stat -f %z"
-# git
-alias gl='git pull --prune'
-alias glg="git log --graph --decorate --oneline --abbrev-commit"
-alias glga="glg --all"
-alias gp='git push origin HEAD'
-alias gpa='git push origin --all'
-alias gd='git diff'
-alias gc='git commit'
-alias gca='git commit -a'
-alias gco='git checkout'
-alias gb='git branch'
-alias ga='git add'
-alias gaa='git add -A'
-alias gcm='git commit -m'
-alias gcam='git commit -a -m'
-alias gs='git status -sb'
-alias gst='git status'
-alias gcl='git clone'
-alias gcb='git-copy-branch-name'
-alias gpr='gp && open-pr'
+# Use hub binary instead of git
+[ -f hub ] && eval "$(hub alias -s)"
 
-##################################
-#              HUB               #
-##################################
-
-# Go with hub instead of git
-hub && eval "$(hub alias -s)"
-
-##################################
-#              FZF               #
-##################################
+# Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

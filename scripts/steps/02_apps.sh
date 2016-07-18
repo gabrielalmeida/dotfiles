@@ -9,7 +9,7 @@ install_brew_apps() {
     brew install zsh --without-etcdir
     brew install --HEAD --with-bundle mpv
 
-    brew install subliminal cheat livestreamer aria2 asciinema atool ccat cpulimit duff duti exiftool eye-d3 gifify git git-extras ghi hub git-ftp haskell-stack hr httpie jq lftp mediainfo mkvtoolnix mp4v2 phantomjs pup shellcheck the_silver_searcher trash tree wiki youtube-dl fasd ranger peerflix watchman namebench mackup
+    brew install subliminal cheat livestreamer aria2 asciinema atool ccat cpulimit duff duti exiftool eye-d3 gifify git git-extras ghi hub git-ftp haskell-stack hr httpie jq lftp mediainfo mkvtoolnix mp4v2 phantomjs pup shellcheck the_silver_searcher trash tree wiki youtube-dl fasd ranger watchman namebench mackup
 
     brew install tmux
     brew install vim --with-lua
@@ -23,7 +23,7 @@ install_cask_apps() {
   brew cask install google-chrome handbrakecli imageoptim jadengeller-helium key-codes screenflow
   brew cask install shotcut spectacle transmission vlc mplayerx skype 
   brew cask install evernote sublime-text3 amethyst teamviewer spotify robomongo
-  brew cask install franz hyperterm
+  brew cask install franz hyperterm mou
 
   # install alternative versions
   brew tap caskroom/versions

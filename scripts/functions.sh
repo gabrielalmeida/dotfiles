@@ -83,7 +83,7 @@ run_backup() {
 
 run_scripts() {
 
-  run_backup
+  # run_backup
 
   echo "Creating dotfiles symlinks"
   ln -nsf "$PWD"/files/zshrc ~/.zshrc
@@ -94,12 +94,9 @@ run_scripts() {
   ln -nsf "$PWD"/files/gitignore ~/.gitignore
   ln -nsf "$PWD"/files/vimrc ~/.vimrc
 
-  #rm -rf /tmp/dotfiles
-  #git clone https://github.com/gabrielalmeida/dotfiles.git /tmp/dotfiles/
-
   ## concatenate all shell scripts together, so things like variables can be reused
-  cat "$PWD"/scripts/steps/*.sh > /tmp/script
-  bash /tmp/script
+  cat "$PWD"/scripts/steps/*.sh > /tmp/dotfiles_script
+  bash /tmp/dotfiles_script
 }
 
 update() {

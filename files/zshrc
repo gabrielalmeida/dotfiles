@@ -80,43 +80,6 @@ alias gcl='git clone'
 alias gcb='git-copy-branch-name'
 alias gpr='gp && open-pr'
 
-# Gitignore fetch
-gi() {
-  curl -s "https://www.gitignore.io/api/$*";
-}
-
-
-##################################
-#             IP                 #
-##################################
-
-#XXX: Make it work with ifconfig on Linux local_ip
-
-ip() {
-  GLOBAL_IP="$(curl icanhazip.com 2>/dev/null)"
-  LOCAL_IP="$(ipconfig getifaddr en0 2>/dev/null)"
-  if [[ $* == *--local* ]] ; then
-    echo $LOCAL_IP
-  elif [[ $* == *--global* ]]; then
-    echo $GLOBAL_IP
-  else
-    echo "Local: $LOCAL_IP"
-    echo "Global: $GLOBAL_IP"
-  fi
-}
-
-
-##################################
-#              TMUX              #
-##################################
-
-# set TERM to xterm-256color
-[[ $TMUX = "" ]] && export TERM="xterm-256color"
-
-export LANG="en_US.UTF-8"
-
-
-##################################
 ##################################
 #              HUB               #
 ##################################

@@ -1,87 +1,65 @@
 ##################################
-#             PATHS              #
+#            EXPORTS             #
 ##################################
-
-## User configuration
 
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin"
 export MANPATH="/usr/local/man:$MANPATH"
-
-##################################
-#           ZSH-PLUGINS          #
-##################################
-
-
-  ##################################
-  #      ZSH-SYNTAX-HIGHLIGHT      #
-  ##################################
-
-
-###################################
-#             SSH                 #
-###################################
-
-# ssh
 export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-##################################
-#            HOMEBREW            #
-##################################
-
-# Homebrew Cask Application Directory
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export LANG="en_US.UTF-8"
+
+# set TERM to xterm-256color
+[[ $TMUX = "" ]] && export TERM="xterm-256color"
+
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='vim'
+ fi
 
 ##################################
-#         CUSTOM ALIASES         #
+#            ALIASES             #
 ##################################
-
-# Aliases
-
-alias zshconfig="vi ~/.zshrc"
 
 # Enable aliases to be sudo'ed
 alias sudo="sudo "
-
+# clear
 alias cle=clear
 alias cl=clear
-alias lc=cl
-
+alias lc=clear
+alias cls=clear
+# editors
+alias e=$EDITOR
+alias vi=vim
 alias emacs="open -a emacs "
 alias em=emacs
-
+alias zshconfig="vi ~/.zshrc"
+# osx
 alias am="open -a \"Activity Monitor\""
 alias pref="open -a \"System Preferences\""
-
 alias flushdns='dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say flushed'
-
-# alias vim=emacs # In case got bored of vim
-alias vi=vim
-
+# tmux
 alias tmux='TERM=screen-256color tmux'
 alias tm='tmux a || tmux new'
 alias ta='tmux a'
 alias ts='tmux new-session -s'
 alias tl='tmux list-sessions'
-
+# refresh zshrc
 alias rr="source ~/.zshrc"
-
 alias vtop="vtop --theme monokai"
-
-# Archives
+# archives
 alias mktar="tar -cvf"
 alias mkbz2="tar -cvjf"
 alias mkgz="tar -cvzf"
 alias untar="tar -xvf"
 alias unbz2="tar -xvjf"
 alias ungz="tar -xvzf"
-
 # wifi cli
 alias wifi='osx-wifi-cli'
-
-# File size
+# file size
 alias fs="stat -f %z"
-
-# Git
+# git
 alias gl='git pull --prune'
 alias glg="git log --graph --decorate --oneline --abbrev-commit"
 alias glga="glg --all"
@@ -102,22 +80,10 @@ alias gcl='git clone'
 alias gcb='git-copy-branch-name'
 alias gpr='gp && open-pr'
 
-# Gitignore
+# Gitignore fetch
 gi() {
   curl -s "https://www.gitignore.io/api/$*";
 }
-
-##################################
-#             EDITOR             #
-##################################
-
-# # Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='vim'
- fi
-
 
 
 ##################################

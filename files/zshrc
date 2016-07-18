@@ -72,10 +72,11 @@ urltools vagrant web-search wd
 
 ## User configuration
 
-export VIMPATH="/usr/local/Cellar/vim/7.4.712_1/bin"
+export VIMPATH="/usr/local/Cellar/vim/7.4.1589"
 export ANDROID_HOME=/usr/local/opt/android-sdk
 export ANDROIDPATH=$ANDROID_HOME
 export PATH="$VIMPATH:/Users/gbr/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROIDPATH/tools:$ANDROIDPATH/platform-tools:$ANDROIDPATH/build-tools"
+export PATH="$(brew --prefix homebrew/php/php70)/bin:$PATH"
 export MANPATH="/usr/local/man:$MANPATH"
 
 
@@ -299,3 +300,4 @@ eval "$(hub alias -s)"
 #              FZF               #
 ##################################
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}

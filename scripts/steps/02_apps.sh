@@ -6,37 +6,28 @@ fi
 install_brew_apps() {
     brew install imagemagick --with-libtiff
     brew install ffmpeg --with-libvpx --with-libvorbis --with-openssl --with-theora --with-x265
-    brew install mpv --with-bundle
-    brew install sox --with-flac --with-lame --with-libvorbis
     brew install zsh --without-etcdir
+    brew install --HEAD --with-bundle mpv
 
-    brew install aria2 asciinema atool ccat cpulimit duff duti exiftool eye-d3 gifify git git-extras ghi hub git-ftp haskell-stack hr httpie jq lftp mediainfo mkvtoolnix mp4v2 onepass phantomjs pup shellcheck the_silver_searcher trash tree wiki youtube-dl fasd ranger peerflix watchman namebench mackup
+    brew install aria2 asciinema atool ccat cpulimit duff duti exiftool eye-d3 gifify git git-extras ghi hub git-ftp haskell-stack hr httpie jq lftp mediainfo mkvtoolnix mp4v2 phantomjs pup shellcheck the_silver_searcher trash tree wiki youtube-dl fasd ranger peerflix watchman namebench mackup
 
     brew install tmux
     brew install vim --with-lua
-    brew install railwaycat/emacsmacport/emacs-mac --with-spacemacs-icon --with-imagemagick
 
-    # install apps from other taps
-    brew install laurent22/massren/massren
-    brew install peco/peco/peco
-
-    # install and configure tor
-    brew install tor torsocks
-    cp "$(brew --prefix)/etc/tor/torrc.sample" "$(brew --prefix)/etc/tor/torrc"
-    echo 'ExitNodes {us}' >> "$(brew --prefix)/etc/tor/torrc"
-}
-
-make_caskroom() {
-  sudo -S mkdir -p /opt/homebrew-cask/Caskroom <<< "${sudo_password}" 2> /dev/null
-  sudo -S chown -R ${USER}:staff /opt/homebrew-cask <<< "${sudo_password}" 2> /dev/null
+    brew tap railwaycat/emacsmacport
+    brew install emacs-mac --with-spacemacs-icon --with-imagemagick
 }
 
 install_cask_apps() {
-  brew cask install --appdir='/Applications' calibre drop-to-gif dropbox flux fog gifloopcoder gitup google-chrome handbrakecli imageoptim jadengeller-helium key-codes screenflow shotcut spectacle torbrowser transmission yacreader vlc mplayerx skype sunrise evernote sublime-text3 amethyst pokerstars teamviewer
+  brew cask install calibre drop-to-gif dropbox flux fog gifloopcoder gitup
+  brew cask install google-chrome handbrakecli imageoptim jadengeller-helium key-codes screenflow
+  brew cask install shotcut spectacle transmission vlc mplayerx skype 
+  brew cask install evernote sublime-text3 amethyst teamviewer spotify robomongo
+  brew cask install franz hyperterm
 
   # install alternative versions
   brew tap caskroom/versions
-  brew cask install --appdir='/Applications' atom-beta google-chrome-canary iterm2-beta openemu-experimental
+  brew cask install atom-beta google-chrome-canary
 
   # prefpanes, qlplugins, colorpickers
   brew cask install betterzipql colorpicker-skalacolor epubquicklook qlcolorcode qlimagesize qlplayground qlstephen quicklook-json ttscoff-mmd-quicklook qlmarkdown
@@ -79,7 +70,6 @@ if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CH
   fi
 
   if [ $(ask "Should I install cask apps?") == 'y' ]; then
-      make_caskroom
       install_cask_apps
   fi
 

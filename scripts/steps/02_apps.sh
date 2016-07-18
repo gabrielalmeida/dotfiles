@@ -6,7 +6,6 @@ fi
 install_brew_apps() {
     brew install imagemagick --with-libtiff
     brew install ffmpeg --with-libvpx --with-libvorbis --with-openssl --with-theora --with-x265
-    brew install zsh --without-etcdir
     brew install --HEAD --with-bundle mpv
 
     brew install subliminal cheat livestreamer aria2 asciinema atool ccat cpulimit duff duti exiftool eye-d3 gifify git git-extras ghi hub git-ftp haskell-stack hr httpie jq lftp mediainfo mkvtoolnix mp4v2 phantomjs pup shellcheck the_silver_searcher trash tree wiki youtube-dl fasd ranger watchman namebench mackup

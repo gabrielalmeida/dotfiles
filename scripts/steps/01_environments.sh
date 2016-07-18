@@ -24,34 +24,22 @@ install_brew() {
 }
 
 install_python() {
-    brew reinstall pyenv
-    local python2="$(pyenv install --list | tr -d ' ' | grep '^2' | grep --invert-match 'dev\|a\|b' | tail -1)"
-    local python_latest="$(pyenv install --list | tr -d ' ' | grep '^\d' | grep --invert-match 'dev\|a\|b' | tail -1)"
-    pyenv install "${python2}"
-    pyenv install "${python_latest}"
-    if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-    pyenv global "${python_latest}"
+    brew install python
+
     # install some eggs
-    pip install livestreamer subliminal cheat proselint
+    # pip3 install ...
 }
 
 install_ruby() {
-    brew reinstall chruby ruby-install
-    ruby-install --src-dir "$(mktemp -d)" --latest ruby
-    source '/usr/local/share/chruby/chruby.sh'
-    chruby ruby
+    brew install ruby
     # install some gems
-    gem install --no-document bundler chromedriver2-helper maid pry redcarpet rubocop seeing_is_believing site_validator video_transcoding watir-webdriver
+    gem install --no-document pygments.rb # needed for installing ghi with brew
 }
 
 install_node() {
-    brew reinstall nvm
-    export NVM_DIR="${HOME}/.nvm"
-    source "$(brew --prefix nvm)/nvm.sh"
-    nvm install node
-    nvm alias default node
+    brew install node0
     # install some packages
-    npm install --global eslint how2 jsonlint nativefier nightmare pageres-cli updtr watch gulp grunt-cli bower vtop gitignore harp puer imageoptim-cli
+    npm install --global eslint how2 jsonlint nativefier nightmare pageres-cli updtr gulp
 }
 
 if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CHOOSE" ]; } then

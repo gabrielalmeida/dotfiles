@@ -23,11 +23,13 @@ values."
      (colors :variables
              colors-enable-nyan-cat-progress-bar t
              colors-enable-rainbow-identifiers t)
+     dockerfile
      emacs-lisp
      emoji
      ess
      git
      github
+     go
      html
      javascript
      latex
@@ -47,10 +49,12 @@ values."
             shell-default-position 'bottom)
      sql
      syntax-checking
+     terraform
      themes-megapack
-     ;; version-control
+     version-control
      vim-empty-lines
      vinegar
+     yaml
      wakatime
      )
    ;; List of additional packages that will be installed without being
@@ -59,7 +63,8 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(auctex-latexmk
                                       auto-complete-auctex
-                                      org-plus-contrib)
+                                      org-plus-contrib
+                                      editorconfig)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -114,13 +119,13 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(dichromacy
+   dotspacemacs-themes '(solarized-light
+                         dichromacy
                          twilight-bright
-                         solarized-light
+                         solarixed-dark
                          twilight-anti-bright
                          wombat
                          material
-                         solarized-dark
                          spacemacs-light
                          spacemacs-dark
                          leuven
@@ -130,8 +135,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("Operator Mono"
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -260,7 +265,7 @@ values."
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
-any user code here.  The exception is org related code, which should be placed
+any user code here.  The exception is org related code, which should be pla
 in `dotspacemacs/user-config'."
 
 
@@ -400,23 +405,15 @@ layers configuration. You are free to put any user code."
   ;; Org-Agenda files
   (setq org-agenda-files '("~/org"))
 
-  ;; Babel Mode for Org-Mode (enable code interpretation during export)
-  (when (require 'ob nil t)
+    ;; Babel Mode for Org-Mode (enable code interpretation during export)
     ;; ditaa path
     (setq org-ditaa-jar-path "/usr/local/bin/ditaa")
 
-    ;; Code evaluation of C++ source with the name 'c++' doesn't work
-    ;; but the fontify-source works. For 'C++' fontify doesn't work but
-    ;; code evaluations works. This line allows babel to works with
-    ;; 'c++' for code evaluation.
-    (unless (fboundp 'org-babel-execute:c++)
-      (defalias 'org-babel-execute:c++ 'org-babel-execute:cpp))
 
     ;; Appending MacTeX to PATH
     (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
 
     ;; AucTeX
-
     (setq TeX-auto-save t)
     (setq TeX-parse-self t)
     (setq-default TeX-master nil)
@@ -450,10 +447,10 @@ layers configuration. You are free to put any user code."
     ;; Active Babel languages
     (org-babel-do-load-languages
      'org-babel-load-languages
-     '((C          . t)
-       (emacs-lisp . t)
+     '((emacs-lisp . t)
        (ditaa      . t)
        (sh         . t)
+       (javascript . t)
        (R          . t)
        (org        . t)
        (latex      . t)
@@ -464,7 +461,7 @@ layers configuration. You are free to put any user code."
     ;; It's really annoying to enter 'yes' every time I export a org-file
     ;; with ditaa diagrams. It's dangerous on Shell script for example,
     ;; should be used with caution.
-    (setq org-confirm-babel-evaluate nil))
+    (setq org-confirm-babel-evaluate nil)
 
   ;; Live refresh of inline images with org-display-inline-images
   (add-hook 'org-babel-after-execute-hook
@@ -477,6 +474,7 @@ layers configuration. You are free to put any user code."
   ;;             (flycheck-select-checker "javascript-standard")))
   (add-to-list 'magic-mode-alist '("^import React" . react-mode))
 
+  ;; (load-file "~/flow-types.el")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

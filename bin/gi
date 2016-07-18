@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Gitignore fetch
+curl -s "https://www.gitignore.io/api/$*";
+

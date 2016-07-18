@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+global_ip="$(curl icanhazip.com 2>/dev/null)"
+local_ip="$(ipconfig getifaddr en0 2>/dev/null)"
+if [[ $* == *--local* ]] ; then
+  echo $local_ip
+elif [[ $* == *--global* ]]; then
+  echo $global_ip
+else
+  echo "Local: $local_ip"
+  echo "Global: $global_ip"
+fi

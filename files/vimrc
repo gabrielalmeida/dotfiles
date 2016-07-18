@@ -49,8 +49,8 @@ set wildmode=list:longest,list:full
 set complete=.,t
 
 " If we are on OS X, NERDTree Arrows don't work well, so disable them
-let g:NERDTreeDirArrows=1
-let g:NERDTreeHijackNetrw=1
+" let g:NERDTreeDirArrows=1
+" let g:NERDTreeHijackNetrw=1
 
 " Note: Skip initialization for vim-tiny or vim-small.
   if !1 | finish | endif
@@ -102,6 +102,9 @@ NeoBundle "marijnh/tern_for_vim"
 " Nerdtree
 NeoBundle "scrooloose/nerdtree"
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
+
+" Vinegar
+NeoBundle "tpope/vim-vinegar"
 
 " Unimpaired
 NeoBundle "tpope/vim-unimpaired"

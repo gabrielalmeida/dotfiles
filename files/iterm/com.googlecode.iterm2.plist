@@ -17,7 +17,7 @@
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>CheckTestRelease</key>
-	<true/>
+	<false/>
 	<key>ClosingHotkeySwitchesSpaces</key>
 	<true/>
 	<key>CommandSelection</key>
@@ -30573,15 +30573,17 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>0 158 1916 742 0 0 1920 1177 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>525 824 606 456 0 0 2048 1280 </string>
+	<string>525 800 606 456 0 0 2048 1280 </string>
+	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
+	<string>0 1106 616 174 0 0 2048 1280 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>968 906 620 392 0 0 2560 1600 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>0 0 1916 1200 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 2552 1600 0 0 2560 1600 </string>
+	<string>0 7 2041 1273 0 0 2048 1280 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 12 1915 1165 0 0 1920 1177 </string>
+	<string>0 7 2041 1273 0 0 2048 1280 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -32285,10 +32287,18 @@
 			<string>/Users/gbr/Dev</string>
 		</dict>
 	</array>
+	<key>NoSyncConfirmBeta</key>
+	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
 	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
 	<integer>0</integer>
+	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
+	<integer>1</integer>
+	<key>NoSyncInstallationId</key>
+	<string>7985D1BA-201C-4F3B-82CB-CC24E75E84DD</string>
 	<key>NoSyncLastTipTime</key>
 	<real>464516752.32251698</real>
 	<key>NoSyncPermissionToShowTip</key>
@@ -32300,7 +32310,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>458695670.80816901</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>460463152.13126802</real>
+	<real>487804852.69572598</real>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
 		<string>000</string>
@@ -32399,15 +32409,17 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/nightly.xml</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=44</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-11-08T20:25:57Z</date>
+	<date>2016-06-21T09:46:04Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
 	<true/>
+	<key>ShowFullScreenTabBar</key>
+	<false/>
 	<key>ShowPaneTitles</key>
 	<true/>
 	<key>SmartPlacement</key>
@@ -32451,6 +32463,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20151103-nightly</string>
+	<string>3.0.2</string>
 </dict>
 </plist>

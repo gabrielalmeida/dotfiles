@@ -21,18 +21,6 @@ export MANPATH="/usr/local/man:$MANPATH"
   #      ZSH-SYNTAX-HIGHLIGHT      #
   ##################################
 
-  ##################################
-  #           ZSH VI-MODE          #
-  ##################################
-
-  # Normal mode keybindings, please put some more.
-  bindkey -v
-  bindkey '^P' up-history
-  bindkey '^N' down-history
-  bindkey '^?' backward-delete-char
-  bindkey '^h' backward-delete-char
-  bindkey '^w' backward-kill-word
-  #bindkey '^r' history-incremental-search-backward # use fzf
 
 ###################################
 #             SSH                 #

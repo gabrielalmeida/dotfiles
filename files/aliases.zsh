@@ -1,5 +1,10 @@
 # enable aliases to be sudo'ed
 alias sudo="sudo "
+alias ..="\cd .."
+alias ...='\cd ../..'
+alias ....='\cd ../../..'
+alias .....='\cd ../../../..'
+alias ......='\cd ../../../../..'
 # clear
 alias cle=clear
 alias cl=clear

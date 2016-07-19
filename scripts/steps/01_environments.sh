@@ -27,7 +27,7 @@ install_python() {
   brew install python
 
   # install some eggs
-  # pip3 install ...
+  pip3 install glances
 }
 
 install_ruby() {

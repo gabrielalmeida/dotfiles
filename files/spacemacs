@@ -122,7 +122,7 @@ values."
    dotspacemacs-themes '(solarized-light
                          dichromacy
                          twilight-bright
-                         solarixed-dark
+                         solarized-dark
                          twilight-anti-bright
                          wombat
                          material

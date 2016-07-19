@@ -8,7 +8,7 @@ install_brew_apps() {
     brew install ffmpeg --with-libvpx --with-libvorbis --with-openssl --with-theora --with-x265
     brew install --HEAD --with-bundle mpv
 
-    brew wakatime-cli install z reattach-to-user-namespace subliminal cheat livestreamer aria2 asciinema atool ccat cpulimit duff duti exiftool eye-d3 gifify git git-extras ghi hub git-ftp haskell-stack hr httpie jq lftp mediainfo mkvtoolnix mp4v2 phantomjs pup shellcheck the_silver_searcher trash tree wiki youtube-dl fasd ranger watchman namebench mackup
+    brew install pandoc wakatime-cli z reattach-to-user-namespace subliminal cheat livestreamer aria2 asciinema atool ccat cpulimit duff duti exiftool eye-d3 gifify git git-extras ghi hub git-ftp haskell-stack hr httpie jq lftp mediainfo mkvtoolnix mp4v2 phantomjs pup shellcheck the_silver_searcher trash tree wiki youtube-dl fasd ranger watchman namebench mackup
 
     brew tap railwaycat/emacsmacport
     brew install emacs-mac --with-spacemacs-icon --with-imagemagick

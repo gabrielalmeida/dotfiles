@@ -21,8 +21,57 @@ export LANG="en_US.UTF-8"
 # Source Aliases
 source "$HOME/dotfiles/files/aliases.zsh"
 
+# Zplug
+if [[ ! -d ~/.zplug ]]; then
+    echo "ya"
+    git clone https://github.com/zplug/zplug ~/.zplug
+    source ~/.zplug/init.zsh && zplug update --self
+fi
+
+source ~/.zplug/init.zsh
+zplugs=()
+
+zplug "mafredri/zsh-async", nice:-1
+zplug "sindresorhus/pure", on:mafredri/zsh-async
+zplug "b4b4r07/enhancd", use:init.sh, nice:10
+
+zplug 'plugins/git', from:oh-my-zsh, nice:10
+zplug "plugins/brew", from:oh-my-zsh, nice:10
+zplug "plugins/brew-cask", from:oh-my-zsh, nice:10
+zplug "plugins/git",   from:oh-my-zsh, nice:10
+zplug "plugins/osx", from:oh-my-zsh, nice:10, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "plugins/colorize", from:oh-my-zsh
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting", nice:19
+zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "lib/directories", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "tcnksm/docker-alias", use:zshrc
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
+
+# Vi mode
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
 # Use hub binary instead of git
 [ -f hub ] && eval "$(hub alias -s)"
 
-# Source fzf
+# fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

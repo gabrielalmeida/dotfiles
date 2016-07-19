@@ -33,6 +33,7 @@ alias ungz="tar -xvzf"
 # wifi cli
 alias wifi='osx-wifi-cli'
 # ls, the common ones
+alias ls="ls -G"      # always colorize
 alias l='ls -lFh'     # size,show type,human readable
 alias la='ls -lAFh'   # long list,show almost all,show type,human readable
 alias lr='ls -tRFh'   # sorted by date,recursive,show type,human readable
@@ -78,23 +79,3 @@ alias whereami=display_info
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-# git
-alias gl='git pull --prune'
-alias glg="git log --graph --decorate --oneline --abbrev-commit"
-alias glga="glg --all"
-alias gp='git push origin HEAD'
-alias gpa='git push origin --all'
-alias gd='git diff'
-alias gc='git commit'
-alias gca='git commit -a'
-alias gco='git checkout'
-alias gb='git branch'
-alias ga='git add'
-alias gaa='git add -A'
-alias gcm='git commit -m'
-alias gcam='git commit -a -m'
-alias gs='git status -sb'
-alias gst='git status'
-alias gcl='git clone'
-alias gcb='git-copy-branch-name'
-alias gpr='gp && open-pr'

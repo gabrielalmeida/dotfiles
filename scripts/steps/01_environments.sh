@@ -37,7 +37,7 @@ install_ruby() {
 }
 
 install_node() {
-  brew install node0
+  brew install node
   # install some packages
   npm install --global eslint how2 jsonlint nativefier nightmare pageres-cli updtr gulp
 }

@@ -90,6 +90,7 @@ run_scripts() {
   ln -nsf "$PWD"/files/spacemacs ~/.spacemacs
   ln -nsf "$PWD"/bin ~/bin
   ln -nsf "$PWD"/files/tmux.conf ~/.tmux.conf
+  ln -nsf "$PWD"/files/hyperterm.js ~/.hyperterm.js
   ln -nsf "$PWD"/files/gitconfig ~/.gitconfig
   ln -nsf "$PWD"/files/gitignore ~/.gitignore
   ln -nsf "$PWD"/files/vimrc ~/.vimrc

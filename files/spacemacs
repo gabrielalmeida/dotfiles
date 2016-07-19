@@ -454,7 +454,6 @@ layers configuration. You are free to put any user code."
      '((emacs-lisp . t)
        (ditaa      . t)
        (sh         . t)
-       (javascript . t)
        (R          . t)
        (org        . t)
        (latex      . t)

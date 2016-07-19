@@ -45,6 +45,10 @@ preferences_pane_anchor() { # open 'System Preferences' is specified pane and ta
 if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CHOOSE" ]; } then
    clear
 
+   # Install mac-cli
+   echo "Installing mac-cli"
+   sh -c "$(curl -fsSL https://raw.githubusercontent.com/guarinogabriel/mac-cli/master/mac-cli/tools/install)"
+
    echo "This script will help configure the rest of OS X. It is divided in two parts:
 
   $(tput setaf 2)•$(tput sgr0) Commands that will change settings without needing intervetion.

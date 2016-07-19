@@ -17,9 +17,9 @@ install_brew_apps() {
 install_cask_apps() {
   brew cask install calibre drop-to-gif dropbox flux fog gifloopcoder gitup
   brew cask install google-chrome handbrakecli imageoptim jadengeller-helium key-codes screenflow
-  brew cask install shotcut spectacle transmission vlc mplayerx skype 
+  brew cask install shotcut spectacle transmission vlc mplayerx skype
   brew cask install evernote sublime-text3 amethyst teamviewer spotify robomongo
-  brew cask install franz hyperterm mou launchrocket karabiner
+  brew cask install franz hyperterm mou launchrocket karabiner resolutionator
 
   # install alternative versions
   brew tap caskroom/versions

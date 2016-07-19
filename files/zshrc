@@ -75,7 +75,7 @@ bindkey '^r' history-incremental-search-backward
 source "$HOME/dotfiles/files/aliases.zsh"
 
 # Use hub binary instead of git
-[ -f hub ] && eval "$(hub alias -s)"
+command -v hub >/dev/null 2>&1 && eval "$(hub alias -s)"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

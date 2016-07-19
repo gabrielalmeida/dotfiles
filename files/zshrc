@@ -77,6 +77,9 @@ source "$HOME/dotfiles/files/aliases.zsh"
 # Use hub binary instead of git
 command -v hub >/dev/null 2>&1 && eval "$(hub alias -s)"
 
+# Load thefuck
+command -v fuck >/dev/null 2>&1 && eval $(thefuck --alias) 
+
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

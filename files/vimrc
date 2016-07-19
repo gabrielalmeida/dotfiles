@@ -75,6 +75,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Shougo/neomru.vim'
 Plug 'marijnh/tern_for_vim'
 " Plug 'Shougo/vimshell.vim'
@@ -460,7 +461,7 @@ endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
 " Use file_rec/git option instead of async if it's too lazy
-nnoremap <Leader>t :Unite -start-insert -no-empty j -resume -buffer-name=files buffer file_rec/async:!<cr> -buffer-name=files buffer file_rec/git<CR>
+nnoremap <Leader>t :Unite -start-insert -no-empty -resume -buffer-name=files buffer file_rec/async:!<cr> -buffer-name=files buffer file_rec/git<CR>
 
 nnoremap <Leader>f :Unite -buffer-name=files -start-insert file<cr>
 nnoremap <Leader>r :Unite -buffer-name=mru -start-insert file_mru<cr>

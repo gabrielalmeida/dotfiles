@@ -336,9 +336,9 @@ endif
 "" automatically open quickfix window on grep searches
 "autocmd QuickFixCmdPost *grep* cwindow
 
-"if has("gui_running")
-  "set guifont=Menlo\ Regular:h14
-"endif
+if has("gui_running")
+  set guifont=Operator\ Mono:h14
+endif
 
 " Functions
 "function! NumberToggle()

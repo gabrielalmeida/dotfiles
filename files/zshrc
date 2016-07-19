@@ -75,3 +75,6 @@ bindkey '^r' history-incremental-search-backward
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# z
+source `brew --prefix`/etc/profile.d/z.sh

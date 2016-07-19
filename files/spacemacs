@@ -494,7 +494,8 @@ layers configuration. You are free to put any user code."
  '(mac-option-modifier nil)
  '(paradox-github-token t)
  '(wakatime-api-key "0450a87c-fc3e-4624-9c7c-a94ca1218ac7")
- '(wakatime-cli-path "/usr/local/bin/wakatime"))
+ '(wakatime-cli-path "/usr/local/bin/wakatime")
+ '(wakatime-python-bin "/usr/local/bin/python"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

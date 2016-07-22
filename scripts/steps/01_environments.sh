@@ -39,7 +39,7 @@ install_ruby() {
 install_node() {
   brew install node
   # install some packages
-  npm install --global eslint how2 jsonlint nativefier nightmare pageres-cli updtr gulp
+  npm install --global eslint how2 jsonlint nativefier nightmare pageres-cli updtr gulp tldr
 }
 
 if [ "$OS" == 'OSX' ] && { [ "$INSTALL" == 'EVERYTHING' ] || [ "$INSTALL" == "CHOOSE" ]; } then

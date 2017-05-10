@@ -504,7 +504,7 @@ layers configuration. You are free to put any user code."
  '(js2-missing-semi-one-line-override t)
  '(js2-strict-missing-semi-warning nil)
  '(mac-option-modifier nil)
- '(paradox-github-token t)
+ '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

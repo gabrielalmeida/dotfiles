@@ -38,7 +38,7 @@
 [url "git@github.com:biguHQ/"]
     insteadOf = "bigu:"
 [core]
-    excludesfile = ~/.gitignore_global
+	excludesfile = /Users/gbr/.gitignore
     ; setting the editor fixes git commit bug http://tooky.co.uk/2010/04/08/there-was-a-problem-with-the-editor-vi-git-on-mac-os-x.html
     editor = vim 
 	autocrlf = input

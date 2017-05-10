@@ -387,8 +387,6 @@ in `dotspacemacs/user-config'."
   (setq tab-width 2)
   (setq-default flycheck-jshintrc "~/.jshintrc")
   (setq-default flycheck-jscsrc "~/.jscsrc")
-  ;; Initialize web-mode custom hooks
-  (add-hook 'web-mode-hook 'stormpat/web-mode-hook)
   ;; Set helm ignore folders
   ;;(add-to-list 'projectile-ignored-directories "node_modules")
   (add-to-list 'exec-path "~/bin/")

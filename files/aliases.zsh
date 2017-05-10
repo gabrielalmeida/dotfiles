@@ -10,6 +10,8 @@ alias cle=clear
 alias cl=clear
 alias lc=clear
 alias cls=clear
+# reattach to user namespace
+alias open='reattach-to-user-namespace open'
 # editors
 alias e=$EDITOR
 alias vi=vim

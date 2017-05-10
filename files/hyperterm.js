@@ -9,6 +9,8 @@ module.exports = {
     // terminal cursor background color (hex)
     cursorColor: '#F81CE5',
 
+    cursorShape: 'BEAM',
+
     // color of the text
     foregroundColor: '#fff',
 
@@ -49,6 +51,8 @@ module.exports = {
     ]
   },
 
+  shell: 'zsh',
+
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
   // examples:
@@ -56,8 +60,10 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    `hyperterm-snazzy`,
-    `hyperterm-blink`
+    `hyperterm-one-light`,
+    `hyperterm-blink`,
+    `hyperterm-mactabs`,
+    `hypercwd`,
   ],
 
   // in development, you can create a directory under

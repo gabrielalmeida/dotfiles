@@ -368,8 +368,6 @@ in `dotspacemacs/user-config'."
   ;; (global-company-mode)
   ;; Always truncate lines
   (setq-default truncate-lines t)
-  ;; Disable smartparens
-  (turn-off-show-smartparens-mode)
   ;; Paste behaviour
   (fset 'evil-visual-update-x-selection 'ignore)
   ;; Set powerline separators

@@ -57,7 +57,10 @@ values."
      vim-empty-lines
      vinegar
      yaml
-     wakatime
+     (wakatime :variables
+               wakatime-api-key "0450a87c-fc3e-4624-9c7c-a94ca1218ac7"
+               wakatime-cli-path "/usr/local/bin/wakatime"
+               wakatime-python-bin "/usr/local/bin/python")
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -501,9 +504,6 @@ layers configuration. You are free to put any user code."
  '(js2-strict-missing-semi-warning nil)
  '(mac-option-modifier nil)
  '(paradox-github-token t)
- '(wakatime-api-key "0450a87c-fc3e-4624-9c7c-a94ca1218ac7")
- '(wakatime-cli-path "/usr/local/bin/wakatime")
- '(wakatime-python-bin "/usr/local/bin/python"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

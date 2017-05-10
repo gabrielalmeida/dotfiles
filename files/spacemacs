@@ -25,7 +25,7 @@ values."
      (colors :variables
              colors-enable-nyan-cat-progress-bar t
              colors-enable-rainbow-identifiers t)
-     dockerfile
+     docker
      emacs-lisp
      emoji
      ess

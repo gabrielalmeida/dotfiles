@@ -477,6 +477,12 @@ layers configuration. You are free to put any user code."
   ;;             (flycheck-select-checker "javascript-standard")))
   (add-to-list 'magic-mode-alist '("^import React" . react-mode))
 
+  ;; Disable auto-save on current dir
+  (setq backup-directory-alist
+        `((".*" . "~/.saves")))
+  (setq auto-save-file-name-transforms
+        `((".*" "~/.saves" t)))
+
   ;; (load-file "~/flow-types.el")
   )
 

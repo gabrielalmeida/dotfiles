@@ -60,10 +60,10 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    `hyperterm-one-light`,
+    "hyper-dracula",
     `hyperterm-blink`,
     `hyperterm-mactabs`,
-    `hypercwd`,
+    `hypercwd`
   ],
 
   // in development, you can create a directory under

@@ -73,9 +73,9 @@
 	name = Gabriel Almeida
 	email = gabriel_almeida@me.com
 [credential]
-	;helper = osxkeychain
+	helper = osxkeychain
 	;helper = store
-	helper = cache --timeout=21600
+  ;helper = cache --timeout=21600
 ;[http]
   ;proxy = 146.164.70.1:3128
 [github]

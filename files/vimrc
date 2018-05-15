@@ -69,7 +69,17 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tomtom/tlib_vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'bling/vim-airline'
+
+" Color Schemes
+Plug 'daylerees/colour-schemes', { 'rtp': 'vim/' }
+"Plug 'baeuml/summerfruit256.vim'
+Plug 'chriskempson/base16-vim'
+"Plug 'mkarmona/colorsbox'
+"Plug 'KabbAmine/yowish.vim'
 Plug 'flazz/vim-colorschemes'
+"Plug 'edkolev/promptline.vim'
+"Plug 'morhetz/gruvbox'
+
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'

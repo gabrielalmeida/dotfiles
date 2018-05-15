@@ -15,8 +15,8 @@ alias open='reattach-to-user-namespace open'
 # editors
 alias e=$EDITOR
 alias vi=vim
-alias emacs="open -a emacs "
-alias em=emacs
+alias em="open -a emacs"
+
 # osx
 alias am="open -a \"Activity Monitor\""
 alias pref="open -a \"System Preferences\""

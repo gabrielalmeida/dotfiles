@@ -62,7 +62,7 @@ module.exports = {
   plugins: [
     "hyper-dracula",
     `hyperterm-blink`,
-    `hyperterm-mactabs`,
+    // `hyperterm-mactabs`,
     `hypercwd`
   ],
 

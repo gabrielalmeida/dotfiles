@@ -2,14 +2,19 @@
 #            EXPORTS             #
 ##################################
 
-export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 export MANPATH="/usr/local/man:$MANPATH"
 export SSH_KEY_PATH="~/.ssh/dsa_id"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export LANG="en_US.UTF-8"
 
-export ANDROID_HOME=/usr/local/opt/android-sdk
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home"
+# export ANDROID_HOME=/usr/local/opt/android-sdk
+export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+export JAVA_HOME=`/usr/libexec/java_home`
+export SDKMANAGER_OPTS="--add-modules java.se.ee"
+# export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROID_SDK_ROOT/platform-tools"
+export DYLD_LIBRARY_PATH="$ANDROID_HOME/emulator/lib64/qt/lib:$DYLD_LIBRARY_PATH"
 
 # History
 HISTFILE=~/.histfile
@@ -36,20 +41,20 @@ fi
 source ~/.zplug/init.zsh
 zplugs=()
 
-zplug "mafredri/zsh-async", nice:-1
+zplug "mafredri/zsh-async", defer:0
 zplug "sindresorhus/pure", on:mafredri/zsh-async
-zplug 'plugins/git', from:oh-my-zsh, nice:10
-zplug "plugins/brew", from:oh-my-zsh, nice:10
-zplug "plugins/brew-cask", from:oh-my-zsh, nice:10
-zplug "plugins/git",   from:oh-my-zsh, nice:10
-zplug "plugins/osx", from:oh-my-zsh, nice:10, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "lib/directories", from:oh-my-zsh, nice:10, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "b4b4r07/enhancd", use:init.sh, nice:10
+zplug 'plugins/git', from:oh-my-zsh, defer:1
+zplug "plugins/brew", from:oh-my-zsh, defer:1
+zplug "plugins/brew-cask", from:oh-my-zsh, defer:1
+zplug "plugins/git",   from:oh-my-zsh, defer:1
+zplug "plugins/osx", from:oh-my-zsh, defer:1, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "lib/directories", from:oh-my-zsh, defer:1, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "b4b4r07/enhancd", use:init.sh, defer:1
 zplug "plugins/colorize", from:oh-my-zsh
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", nice:19
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "tcnksm/docker-alias", use:zshrc
 
@@ -63,6 +68,11 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load
+
+# Grab default PS1 from theme and append a Unicode Whitespace
+# (A char that very rarely will be on the output of the terminal and is not visible)
+# Enables tmux go-to-prev-prompt binding to work by going to last White-char position
+export PS1="$PS1"
 
 # Vi mode
 bindkey -v
@@ -88,3 +98,6 @@ command -v fuck >/dev/null 2>&1 && eval $(thefuck --alias)
 
 # z
 source `brew --prefix`/etc/profile.d/z.sh
+
+#doctl
+source <(doctl completion zsh)

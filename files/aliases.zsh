@@ -71,8 +71,9 @@ alias -g P="2>&1| pygmentize -l pytb"
 # fs info
 alias dud='du -d 1 -h'
 alias duf='du -sh *'
-alias fd='find . -type d -name'
-alias ff='find . -type f -name'
+# find alias, or just use fd which is much more friendly
+alias findd='find . -type d -name'
+alias findf='find . -type f -name'
 # file size
 alias fs="stat -f %z"
 alias h='history'

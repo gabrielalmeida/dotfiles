@@ -15,7 +15,7 @@ alias open='reattach-to-user-namespace open'
 # editors
 alias e=$EDITOR
 alias vi=vim
-alias em="open -a /Applications/Emacs.app"
+alias em=$EDITOR
 
 # osx
 alias am="open -a \"Activity Monitor\""

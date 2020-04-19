@@ -20,20 +20,33 @@ export DYLD_LIBRARY_PATH="$ANDROID_HOME/emulator/lib64/qt/lib:$DYLD_LIBRARY_PATH
 HISTFILE=~/.histfile
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
-setopt hist_ignore_all_dups #Ignore duplicate entries
-HISTDUP=erase               #Erase duplicates in the history file
-setopt    appendhistory     #Append history to the history file (no overwriting)
-setopt    sharehistory      #Share history across terminals
-setopt    incappendhistory  #Immediately append to the history file, not just when a term is killed
+setopt HIST_IGNORE_ALL_DUPS # Ignore duplicate entries
+HISTDUP=erase               # Erase duplicates in the history file
+setopt    APPEND_HISTORY     # Append history to the history file (no overwriting)
+setopt    SHARE_HISTORY      # Share history across terminals
+setopt    INC_APPEND_HISTORY  # Immediately append to the history file, not just when a term is killed
+
+# Tab completion on cd
+setopt  autocd autopushd pushdignoredups
+
+# Aggressive tab completion
+autoload -U compinit
+compinit 
 
 # set TERM to xterm-256color
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
 
+# As a special exception, if command is the empty string, then emacsclient starts
+# Emacs in daemon mode (as ‘emacs --daemon’) and then tries connecting again.
+# https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html  
+export ALTERNATE_EDITOR=""
+
+export VISUAL='emacsclient -t'
 # Preferred editor for local and remote sessions
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
  else
-   export EDITOR='vim'
+   export EDITOR='emacsclient -t'
  fi
 
 # Zplug
@@ -87,12 +100,14 @@ bindkey '^N' down-history
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
+bindkey '^a' vi-beginning-of-line 
 bindkey '^r' history-incremental-search-backward
 
-# Enable Ctrl-x-e to edit command line
+# Enable C-x-e, C-x-C-e and C-e to edit command line
 autoload -U edit-command-line
 # Emacs style
 zle -N edit-command-line
+bindkey '^e' edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 

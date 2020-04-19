@@ -11,15 +11,20 @@ export LANG="en_US.UTF-8"
 export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export JAVA_HOME=`/usr/libexec/java_home`
-export SDKMANAGER_OPTS="--add-modules java.se.ee"
+# export SDKMANAGER_OPTS="--add-modules java.se.ee"
 # export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
-export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROID_SDK_ROOT/platform-tools"
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_HOME/ndk/20.1.5948944"
 export DYLD_LIBRARY_PATH="$ANDROID_HOME/emulator/lib64/qt/lib:$DYLD_LIBRARY_PATH"
 
 # History
 HISTFILE=~/.histfile
-HISTSIZE=100000
-SAVEHIST=100000
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups #Ignore duplicate entries
+HISTDUP=erase               #Erase duplicates in the history file
+setopt    appendhistory     #Append history to the history file (no overwriting)
+setopt    sharehistory      #Share history across terminals
+setopt    incappendhistory  #Immediately append to the history file, not just when a term is killed
 
 # set TERM to xterm-256color
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
@@ -84,6 +89,13 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+
 # Source Aliases
 source "$HOME/dotfiles/files/aliases.zsh"
 
@@ -101,3 +113,19 @@ source `brew --prefix`/etc/profile.d/z.sh
 
 #doctl
 source <(doctl completion zsh)
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/gbr/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/gbr/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/gbr/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/gbr/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# Jenv
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+export JAVA_HOME="$(jenv prefix)"
+
+# Pyenv
+eval "$(pyenv init -)"

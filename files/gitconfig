@@ -72,6 +72,7 @@
 [user]
 	name = Gabriel Almeida
 	email = gabriel_almeida@me.com
+	signingkey = 85011F38F29BEDD2
 [credential]
 	helper = osxkeychain
 	;helper = store
@@ -82,3 +83,15 @@
 	user = 
 	password = 
 	oauth-token = 
+[magithub]
+	online = false
+[magithub "status"]
+	includeStatusHeader = false
+	includePullRequestsSection = false
+	includeIssuesSection = false
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[hub]
+	protocol = https

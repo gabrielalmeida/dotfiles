@@ -42,6 +42,7 @@
     ; setting the editor fixes git commit bug http://tooky.co.uk/2010/04/08/there-was-a-problem-with-the-editor-vi-git-on-mac-os-x.html
     editor = vim 
 	autocrlf = input
+	whitespace = cr-at-eol
 [alias]
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -65,6 +66,11 @@
     co = checkout
     br = branch
     dc = diff --cached
+    stash-untracked = "!f() {      \
+          git stash;               \
+          git stash -u;            \
+          git stash pop stash@{1}; \
+      }; f"
 [diff]
     tool = vimdiff
 [difftool]

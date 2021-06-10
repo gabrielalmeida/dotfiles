@@ -1,54 +1,3 @@
-##################################
-#            EXPORTS             #
-##################################
-
-export MANPATH="/usr/local/man:$MANPATH"
-export SSH_KEY_PATH="~/.ssh/dsa_id"
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-export LANG="en_US.UTF-8"
-
-# export ANDROID_HOME=/usr/local/opt/android-sdk
-export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
-export ANDROID_HOME=$ANDROID_SDK_ROOT
-export JAVA_HOME=`/usr/libexec/java_home`
-# export SDKMANAGER_OPTS="--add-modules java.se.ee"
-# export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
-export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_HOME/ndk/20.1.5948944"
-export DYLD_LIBRARY_PATH="$ANDROID_HOME/emulator/lib64/qt/lib:$DYLD_LIBRARY_PATH"
-
-# History
-HISTFILE=~/.histfile
-HISTSIZE=999999999
-SAVEHIST=$HISTSIZE
-setopt HIST_IGNORE_ALL_DUPS # Ignore duplicate entries
-HISTDUP=erase               # Erase duplicates in the history file
-setopt    APPEND_HISTORY     # Append history to the history file (no overwriting)
-setopt    SHARE_HISTORY      # Share history across terminals
-setopt    INC_APPEND_HISTORY  # Immediately append to the history file, not just when a term is killed
-
-# Tab completion on cd
-setopt  autocd autopushd pushdignoredups
-
-# Aggressive tab completion
-autoload -U compinit
-compinit 
-
-# set TERM to xterm-256color
-[[ $TMUX = "" ]] && export TERM="xterm-256color"
-
-# As a special exception, if command is the empty string, then emacsclient starts
-# Emacs in daemon mode (as ‘emacs --daemon’) and then tries connecting again.
-# https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html  
-export ALTERNATE_EDITOR=""
-
-export VISUAL='emacsclient -t'
-# Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='emacsclient -t'
- fi
-
 # Zplug
 if [[ ! -d ~/.zplug ]]; then
     echo "ya"
@@ -59,8 +8,8 @@ fi
 source ~/.zplug/init.zsh
 zplugs=()
 
-zplug "mafredri/zsh-async", defer:0
-zplug "sindresorhus/pure", on:mafredri/zsh-async
+zplug "mafredri/zsh-async", from:github
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 zplug 'plugins/git', from:oh-my-zsh, defer:1
 zplug "plugins/brew", from:oh-my-zsh, defer:1
 zplug "plugins/brew-cask", from:oh-my-zsh, defer:1
@@ -75,6 +24,15 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "tcnksm/docker-alias", use:zshrc
+zplug "agkozak/zsh-z"
+
+# Pure theme
+autoload -U promptinit; promptinit
+
+# turn on git stash status
+zstyle :prompt:pure:git:stash show yes
+
+prompt pure
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -87,32 +45,6 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-# Grab default PS1 from theme and append a Unicode Whitespace
-# (A char that very rarely will be on the output of the terminal and is not visible)
-# Enables tmux go-to-prev-prompt binding to work by going to last White-char position
-export PS1="$PS1"
-
-# Vi mode
-bindkey -v
-
-bindkey '^P' up-history
-bindkey '^N' down-history
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
-bindkey '^a' vi-beginning-of-line 
-bindkey '^r' history-incremental-search-backward
-
-# Enable C-x-e, C-x-C-e and C-e to edit command line
-autoload -U edit-command-line
-# Emacs style
-zle -N edit-command-line
-bindkey '^e' edit-command-line
-bindkey '^xe' edit-command-line
-bindkey '^x^e' edit-command-line
-
-# Source Aliases
-source "$HOME/dotfiles/files/aliases.zsh"
 
 # Use hub binary instead of git
 command -v hub >/dev/null 2>&1 && eval "$(hub alias -s)"
@@ -123,19 +55,19 @@ command -v fuck >/dev/null 2>&1 && eval $(thefuck --alias)
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# z
-source `brew --prefix`/etc/profile.d/z.sh
+# z -- using fasd for now
+# source `brew --prefix`/etc/profile.d/z.sh
+
+# fasd 
+fasd_cache="$HOME/.fasd-init-bash"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+  fasd --init auto >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
 
 #doctl
 source <(doctl completion zsh)
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/gbr/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/gbr/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/gbr/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/gbr/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 
 # Jenv
@@ -144,3 +76,9 @@ export JAVA_HOME="$(jenv prefix)"
 
 # Pyenv
 eval "$(pyenv init -)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/gbr/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gbr/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/gbr/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gbr/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

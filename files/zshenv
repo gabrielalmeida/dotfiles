@@ -1,0 +1,76 @@
+##################################
+#            EXPORTS             #
+##################################
+
+export MANPATH="/usr/local/man:$MANPATH"
+export SSH_KEY_PATH="~/.ssh/dsa_id"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export LANG="en_US.UTF-8"
+
+# export ANDROID_HOME=/usr/local/opt/android-sdk
+export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+export JAVA_HOME=`/usr/libexec/java_home`
+# export SDKMANAGER_OPTS="--add-modules java.se.ee"
+# export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_HOME/ndk/20.1.5948944"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export DYLD_LIBRARY_PATH="$ANDROID_HOME/emulator/lib64/qt/lib:$DYLD_LIBRARY_PATH"
+
+# History
+HISTFILE=~/.histfile
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+setopt HIST_IGNORE_ALL_DUPS # Ignore duplicate entries
+HISTDUP=erase               # Erase duplicates in the history file
+setopt    APPEND_HISTORY     # Append history to the history file (no overwriting)
+setopt    SHARE_HISTORY      # Share history across terminals
+setopt    INC_APPEND_HISTORY  # Immediately append to the history file, not just when a term is killed
+
+# Tab completion on cd
+setopt  autocd autopushd pushdignoredups
+
+# set TERM to xterm-256color
+[[ $TMUX = "" ]] && export TERM="xterm-256color"
+
+# As a special exception, if command is the empty string, then emacsclient starts
+# Emacs in daemon mode (as ‘emacs --daemon’) and then tries connecting again.
+# https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html  
+export ALTERNATE_EDITOR=""
+
+export VISUAL='emacsclient -t'
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='emacsclient -t'
+ fi
+
+# Grab default PS1 from theme and append a Unicode Whitespace
+# (A char that very rarely will be on the output of the terminal and is not visible)
+# Enables tmux go-to-prev-prompt binding to work by going to last White-char position
+# export PS1="$PS1"
+
+# Vi mode
+bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^a' vi-beginning-of-line 
+bindkey '^r' history-incremental-search-backward
+
+# Enable C-x-e, C-x-C-e and C-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^e' edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+
+# Source Aliases
+source "$HOME/dotfiles/files/aliases.zsh"
+
+export GITHUB_TOKEN=159cf2bd76810d163c421facc4f0143ecf8a668b

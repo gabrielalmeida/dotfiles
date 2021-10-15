@@ -72,5 +72,3 @@ bindkey '^x^e' edit-command-line
 
 # Source Aliases
 source "$HOME/dotfiles/files/aliases.zsh"
-
-export GITHUB_TOKEN=159cf2bd76810d163c421facc4f0143ecf8a668b

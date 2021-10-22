@@ -108,6 +108,9 @@
 		      "-" 'dired-up-directory
 		      "SPC" nil)
   (general-define-key
+   :keymaps 'motion
+   "RET"   nil)
+  (general-define-key
    :keymaps 'visual
    "SPC ;"   'comment-or-uncomment-region)
   (general-define-key
@@ -362,21 +365,97 @@
   (general-define-key :keymaps 'normal
 		      "SPC g s" 'magit-status))
 
+;; Org-Roam basic configuration
+(setq org-roam-directory (concat (getenv "HOME") "/Notes/"))
+(setq org-roam-v2-ack t)
+
+(setq org-startup-indented t
+          org-pretty-entities t
+          org-hide-emphasis-markers t
+          org-startup-with-inline-images t
+          org-image-actual-width '(300))
+
+  ;; Nice bullets
+  (use-package org-superstar
+      :config
+      (setq org-superstar-special-todo-items t)
+      (add-hook 'org-mode-hook (lambda ()
+                                 (org-superstar-mode 1))))
+
+(use-package org-appear
+   :config
+   (add-hook 'org-mode-hook 'org-appear-mode)
+   (setq org-appear-autolinks t))
+
+(setq browse-url-browser-function 'browse-url-default-windows-browser)
+(setq browse-url-browser-function 'browse-url-default-macosx-browser)
+
 (use-package org-roam
   :ensure t
   :custom
-  (org-roam-directory (file-truename "~/Notes"))
+  (org-roam-directory (file-truename org-roam-directory))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
+         ("C-c n G" . org-roam-graph)
+         ("C-c n g" . org-id-get-create)
+         ("C-c n t" . org-roam-tag-add)
+         ("C-c n a" . org-roam-alias-add)
+         ("C-c n r" . org-roam-ref-add)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n c" . org-roam-capture)
+         ("C-c n R" . org-roam-node-random)
          ;; Dailies
-         ("C-c n j" . org-roam-dailies-capture-today))
+         ("C-c n j" . org-roam-dailies-capture-today)
+         ("C-c n d" . org-roam-dailies-goto-today))
   :config
   (org-roam-db-autosync-mode)
   ;; If using org-roam-protocol
   (require 'org-roam-protocol))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :general
+  (general-define-key :keymaps 'normal
+		      "-" 'org-ctrl-c-minus
+		      "|" 'org-table-goto-column
+		      "M-o" (evil-org-define-eol-command org-insert-heading)
+		      "M-t" (evil-org-define-eol-command org-insert-todo))
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (setq evil-want-C-i-jump nil)
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+;; Distraction-free screen
+  (use-package olivetti
+    :init
+    (setq olivetti-body-width 0.7)
+    :config
+    (defun distraction-free ()
+      "Distraction-free writing environment"
+      (interactive)
+      (if (equal olivetti-mode nil)
+          (progn
+            (window-configuration-to-register 1)
+            (delete-other-windows)
+            (text-scale-increase 2)
+            (olivetti-mode t))
+        (progn
+          (jump-to-register 1)
+          (olivetti-mode 0)
+          (text-scale-decrease 2))))
+    :bind
+    (("<f9>" . distraction-free)))
+
+(use-package deft
+    :config
+    (setq deft-directory org-roam-directory
+          deft-recursive t
+          deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"
+          deft-use-filename-as-title t)
+    :bind
+    ("C-c n s" . deft))
 
 (use-package evil-magit
   :after (evil magit)
@@ -429,8 +508,11 @@
  '(custom-safe-themes
    '("3263bd17a7299449e6ffe118f0a14b92373763c4ccb140f4a30c182a85516d7f" default))
  '(debug-on-error nil)
+ '(evil-want-C-i-jump nil)
  '(ivy-use-selectable-prompt t)
  '(max-specpdl-size 500000)
+ '(olivetti-lighter " Olv")
+ '(olivetti-minimum-body-width 80)
  '(package-selected-packages
    '(wakatime-mode org-appear org-superstar olivetti deft emacsql org-roam indent-guide diminish osx-clipboard exec-path-from-shell evil-escape evil-surround prettier prettier-js evil-magit transient magit golden-ratio smooth-scrolling smooth-scrooling exotica-theme web-mode js2-mode smartparens which-key company use-package tide ivy-rich general evil counsel bug-hunter all-the-icons))
  '(wakatime-api-key "e7abc5cc-6ed3-4085-a84a-a7f0f3d9300e")

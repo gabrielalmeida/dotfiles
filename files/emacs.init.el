@@ -53,6 +53,10 @@
 
   (add-hook 'post-command-hook 'xterm-title-update)
 
+;; Save recentf every 5min so we don't lose history when Emacs is not
+;; gracefully exited
+(run-at-time (current-time) 300 'recentf-save-list)
+
 ;; Sync Emacs PATH to OSX PATH env var values
 (use-package exec-path-from-shell
   :config 

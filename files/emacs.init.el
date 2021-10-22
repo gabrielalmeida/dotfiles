@@ -36,6 +36,23 @@
 
 ;; Wakatime
 (global-wakatime-mode)
+
+;; XTerm title
+;; (setq frame-title-format "%b")
+(setq frame-title-format
+ '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
+ (defun xterm-title-update ()
+    (interactive)
+    (send-string-to-terminal (concat "\033]1; Emacs: " (buffer-name) "\007"))
+    (if buffer-file-name
+        (send-string-to-terminal (concat "\033]2; " (buffer-file-name) "\007"))
+      (send-string-to-terminal (concat "\033]2; " (buffer-name) "\007"))))
+
+  (add-hook 'post-command-hook 'xterm-title-update)
+
 ;; Sync Emacs PATH to OSX PATH env var values
 (use-package exec-path-from-shell
   :config 

@@ -14,7 +14,7 @@
 ;; Always download if not available
 (setq use-package-always-ensure t)
 
-;; genral settings
+;; general settings
 (setq delete-old-versions -1 ) ; delete excess backups silently
 (setq version-control t )
 (setq vc-make-backup-files t )
@@ -34,6 +34,8 @@
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
 
+;; Wakatime
+(global-wakatime-mode)
 ;; Sync Emacs PATH to OSX PATH env var values
 (use-package exec-path-from-shell
   :config 
@@ -430,7 +432,9 @@
  '(ivy-use-selectable-prompt t)
  '(max-specpdl-size 500000)
  '(package-selected-packages
-   '(org-roam indent-guide diminish osx-clipboard exec-path-from-shell evil-escape evil-surround prettier prettier-js evil-magit transient magit golden-ratio smooth-scrolling smooth-scrooling exotica-theme web-mode js2-mode smartparens which-key company use-package tide ivy-rich general evil counsel bug-hunter all-the-icons)))
+   '(wakatime-mode org-appear org-superstar olivetti deft emacsql org-roam indent-guide diminish osx-clipboard exec-path-from-shell evil-escape evil-surround prettier prettier-js evil-magit transient magit golden-ratio smooth-scrolling smooth-scrooling exotica-theme web-mode js2-mode smartparens which-key company use-package tide ivy-rich general evil counsel bug-hunter all-the-icons))
+ '(wakatime-api-key "e7abc5cc-6ed3-4085-a84a-a7f0f3d9300e")
+ '(wakatime-cli-path "/usr/local/bin/wakatime"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -328,7 +328,7 @@
   (which-key-setup-minibuffer)
   (setq which-key-sort-order 'which-key-key-order-alpha
 	which-key-side-window-max-width 0.33
-	which-key-idle-delay 0.1)
+	which-key-idle-delay 0.5)
   :diminish which-key-mode)
 
 (use-package smartparens

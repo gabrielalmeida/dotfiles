@@ -86,11 +86,13 @@ run_scripts() {
   # run_backup
 
   echo "Creating dotfiles symlinks"
+  ln -nsf "$PWD"/files/zshenv ~/.zshenv
   ln -nsf "$PWD"/files/zshrc ~/.zshrc
-  ln -nsf "$PWD"/files/spacemacs ~/.spacemacs
   ln -nsf "$PWD"/bin ~/bin
   ln -nsf "$PWD"/files/tmux.conf ~/.tmux.conf
-  ln -nsf "$PWD"/files/hyperterm.js ~/.hyperterm.js
+  ln -nsf "$PWD"/files/alacritty.yml ~/.alacritty.yml
+  ln -nsf "$PWD"/files/hammerspoon.lua ~/.hammerspoon/init.lua
+  ln -nsf "$PWD"/files/hs ~/.hammerspoon/hs
   ln -nsf "$PWD"/files/gitconfig ~/.gitconfig
   ln -nsf "$PWD"/files/gitignore ~/.gitignore
   ln -nsf "$PWD"/files/vimrc ~/.vimrc

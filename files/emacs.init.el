@@ -3,6 +3,7 @@
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
 			 ("gnu"       . "http://elpa.gnu.org/packages/")
 			 ("melpa"     . "https://melpa.org/packages/")))
+(package-refresh-contents)
 (package-initialize)
 
 ;; bootstrap use-package
@@ -10,6 +11,16 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+
+;; quelpa (download from source)
+(use-package quelpa)
+
+;; quelpa-use-package extensions to use quelpa w/ use-package
+(quelpa
+ '(quelpa-use-package
+   :fetcher git
+   :url "https://github.com/quelpa/quelpa-use-package.git"))
+(require 'quelpa-use-package)
 
 ;; Always download if not available
 (setq use-package-always-ensure t)
@@ -57,6 +68,18 @@
 ;; gracefully exited
 (run-at-time (current-time) 300 'recentf-save-list)
 
+;; Kill all other buffers except the currently selected one
+;; TODO: Automaatically kill all other buffers except the last X recently visited buffers
+(defun kill-other-buffers ()
+  "Kill all buffers but current buffer and special buffers"
+  (interactive)
+  (dolist (buffer (delq (current-buffer) (buffer-list)))
+    (let ((name (buffer-name buffer)))
+      (when (and name (not (string-equal name ""))
+             (/= (aref name 0) ?\s)
+             (string-match "^[^\*]" name))
+        (funcall 'kill-buffer buffer)))))
+
 ;; Sync Emacs PATH to OSX PATH env var values
 (use-package exec-path-from-shell
   :config 
@@ -73,14 +96,11 @@
     (osx-clipboard-mode +1)
     (diminish 'osx-clipboard-mode)))
 
-;; prettier-eslint
-(add-to-list 'load-path "~/.emacs.d/prettier-eslint-emacs")
-(require 'prettier-eslint)
+(use-package apheleia
+  :quelpa (apheleia :fetcher github :repo "raxod502/apheleia")
+  :config
+  (apheleia-global-mode +1))
 
-(add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'prettier-eslint nil t)))
-(add-hook 'react-mode-hook (lambda () (add-hook 'after-save-hook 'prettier-eslint nil t)))
-(add-hook 'typescript-mode-hook (lambda () (add-hook 'after-save-hook 'prettier-eslint nil t)))
-(add-hook 'rjsx-mode-hook (lambda () (add-hook 'after-save-hook 'prettier-eslint nil t)))
 
 ;; Indentation
 (use-package indent-guide
@@ -104,10 +124,20 @@
   (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
   (setq css-indent-offset n) ; css-mode
   (setq typescript-indent-level n) ; ts
-  )
+  (setq indent-tabs-mode nil)
+  (setq tab-width 2)
+  (setq-default evil-shift-width 2)
+  (setq evil-shift-width 2))
 
 (my-setup-indent 2) ; indent 2 spaces width
 
+(use-package color-identifiers-mode
+  :config 
+  (add-hook 'after-init-hook 'global-color-identifiers-mode))
+
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package exotica-theme 
   :ensure t
@@ -257,6 +287,8 @@
 ;;    "SPC p p" 'project-switch-project
 ;;    "SPC p f" 'project-find-file))
 
+(use-package projectile)
+
 (use-package counsel-projectile
   :general
   (general-define-key
@@ -265,8 +297,11 @@
    "SPC p f" 'counsel-projectile-find-file
    "SPC p b" 'counsel-projectile-switch-buffer
    "SPC p p" 'counsel-projectile-switch-project)
+  
   (general-define-key :keymaps 'projectile-mode-map
-		      "SPC p" 'projectile-command-map))
+		                  "SPC p" 'projectile-command-map)
+  :config
+  (setq projectile-project-search-path '("~/Dev/Whats/Meta" "~/Dev/Personal")))
 
 
 ;; (define-key projectile-mode-map (kbd "SPC p") 'projectile-command-map)
@@ -286,8 +321,14 @@
   (evil-make-overriding-map ivy-occur-mode-map 'normal)
   )
 
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
 (use-package ivy-rich
   :after ivy
+  :ensure t
+  :init (ivy-rich-mode 1)
   :custom
   (ivy-virtual-abbreviate 'full
                           ivy-rich-switch-buffer-align-virtual-buffer t
@@ -319,10 +360,20 @@
    "p" 'flycheck-previous-error
    "y" 'flycheck-copy-errors-as-kill)
 
-  (setq flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled))
-  (setq flycheck-display-errors-delay 0)
-  (setq flycheck-idle-change-delay 0)
+  (setq flycheck-check-syntax-automatically '(save idle-change mode-enabled))
+  (setq flycheck-buffer-switch-check-intermediate-buffers nil)
+  (setq flycheck-idle-buffer-switch-delay 0.9)
+  (setq flycheck-display-errors-delay 0.9)
+  (setq flycheck-idle-change-delay 0.9)
   (setq-default flycheck-emacs-lisp-load-path 'inherit)
+
+  (add-to-list 'display-buffer-alist
+             `(,(rx bos "*Flycheck errors*" eos)
+              (display-buffer-reuse-window
+               display-buffer-in-side-window)
+              (side            . bottom)
+              (reusable-frames . visible)
+              (window-height   . 0.20)))
 
   (setq flycheck-error-list-format
         `[("File" 12)
@@ -369,6 +420,22 @@
 	  evil-window-down
 	  )))
 
+;; Enable desktop-mode (auto save session/restore when re-opening Emacs)
+(setq desktop-path '("~/"))
+(desktop-save-mode 1) 
+
+(use-package better-jumper
+  :after 'evil-maps
+  :general
+  (general-define-key
+   :keymaps 'motion
+   "C-o" 'better-jumper-jump-backward
+   "C-i" 'better-jumper-jump-forward
+   "<tab>" 'better-jumper-jump-forward)
+  :config
+  (setq better-jumper-context 'buffer) ;; defaults to 'window
+  (better-jumper-mode +1))
+
 (use-package smooth-scrolling
   :init (smooth-scrolling-mode 1))
 
@@ -385,6 +452,11 @@
   :general
   (general-define-key :keymaps 'normal
 		      "SPC g s" 'magit-status))
+
+;; Org indent/visual-line-mode (visually jump to next line automatically as you type)
+(with-eval-after-load 'org       
+  (setq org-startup-indented t) ; Enable `org-indent-mode' by default
+  (add-hook 'org-mode-hook #'visual-line-mode))
 
 ;; Org-Roam basic configuration
 (setq org-roam-directory (concat (getenv "HOME") "/Notes/"))
@@ -490,8 +562,8 @@
 ;; Set default font
 (set-face-attribute 'default nil
                     :family "Operator Mono"
-                    :height 110
-                    :weight 'normal
+                    :height 150
+                    :weight 'normal 
                     :width 'normal)
 
 (use-package js2-mode)
@@ -527,7 +599,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("3263bd17a7299449e6ffe118f0a14b92373763c4ccb140f4a30c182a85516d7f" default))
+   '("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "a44bca3ed952cb0fd2d73ff3684bda48304565d3eb9e8b789c6cca5c1d9254d1" "3263bd17a7299449e6ffe118f0a14b92373763c4ccb140f4a30c182a85516d7f" default))
  '(debug-on-error nil)
  '(evil-want-C-i-jump nil)
  '(ivy-use-selectable-prompt t)
@@ -535,7 +607,7 @@
  '(olivetti-lighter " Olv")
  '(olivetti-minimum-body-width 80)
  '(package-selected-packages
-   '(wakatime-mode org-appear org-superstar olivetti deft emacsql org-roam indent-guide diminish osx-clipboard exec-path-from-shell evil-escape evil-surround prettier prettier-js evil-magit transient magit golden-ratio smooth-scrolling smooth-scrooling exotica-theme web-mode js2-mode smartparens which-key company use-package tide ivy-rich general evil counsel bug-hunter all-the-icons))
+   '(better-jumper rainbow-delimiters color-identifiers-mode colors-identifiers-mode color-theme-sanityinc-tomorrow leuven-theme all-the-icons-ivy-rich apheleia aphelia ivy-rich alphelia quelpa-use-package quelpa typescript-mode wakatime-mode org-appear org-superstar olivetti deft emacsql org-roam indent-guide diminish osx-clipboard exec-path-from-shell evil-escape evil-surround prettier prettier-js evil-magit transient magit golden-ratio smooth-scrolling smooth-scrooling exotica-theme web-mode js2-mode smartparens which-key company use-package tide general evil counsel bug-hunter all-the-icons))
  '(wakatime-api-key "e7abc5cc-6ed3-4085-a84a-a7f0f3d9300e")
  '(wakatime-cli-path "/usr/local/bin/wakatime"))
 (custom-set-faces

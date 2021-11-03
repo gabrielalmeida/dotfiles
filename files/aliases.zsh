@@ -10,12 +10,12 @@ alias cle=clear
 alias cl=clear
 alias lc=clear
 alias cls=clear
-# reattach to user namespace
-alias open='reattach-to-user-namespace open'
+
 # editors
 alias ed=$EDITOR
 alias vi=vim
-alias em=$EDITOR
+alias em=$VISUAL
+alias en=$VISUAL "-c"
 
 # fasd
 alias a='fasd -a'        # any

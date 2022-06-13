@@ -82,3 +82,9 @@ if [ -f '/Users/gbr/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/g
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/gbr/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gbr/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+if [ -f ~/.private-tokens ]; then
+  source ~/.private-tokens
+fi

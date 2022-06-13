@@ -10,7 +10,7 @@
 local spaces = require('hs._asm.undocumented.spaces') 
 
 -- Switch alacritty
-hs.hotkey.bind({'ctrl','alt'}, 'space', function ()
+hs.hotkey.bind({'alt'}, '\'', function ()
   local APP_NAME = 'Alacritty'
   function moveWindow(alacritty, space, mainScreen)
     -- move to main space
@@ -76,3 +76,12 @@ end)
 --      alacritty:hide()
 --   end
 -- end)
+
+-- emacs-everywhere Shortcut
+hyper = {"ctrl", "shift"}
+hs.hotkey.bindSpec({hyper, "e"},
+  function ()
+    print("Running emacs-everywhere")
+    hs.task.new("/bin/bash", nil, { "-l", "-c", "emacsclient --eval '(emacs-everywhere)'" }):start()
+  end
+)

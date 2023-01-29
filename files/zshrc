@@ -9,6 +9,7 @@ source ~/.zplug/init.zsh
 zplugs=()
 
 zplug "mafredri/zsh-async", from:github
+zplug "marlonrichert/zsh-autocomplete", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 zplug 'plugins/git', from:oh-my-zsh, defer:1
 zplug "plugins/brew", from:oh-my-zsh, defer:1

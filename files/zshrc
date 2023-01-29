@@ -26,14 +26,6 @@ zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "tcnksm/docker-alias", use:zshrc
 zplug "agkozak/zsh-z"
 
-# Pure theme
-autoload -U promptinit; promptinit
-
-# turn on git stash status
-zstyle :prompt:pure:git:stash show yes
-
-prompt pure
-
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -44,7 +36,13 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load
+# Pure theme
+autoload -U promptinit; promptinit
 
+# turn on git stash status
+zstyle :prompt:pure:git:stash show yes
+
+prompt pure
 
 # Use hub binary instead of git
 command -v hub >/dev/null 2>&1 && eval "$(hub alias -s)"
@@ -60,22 +58,21 @@ command -v fuck >/dev/null 2>&1 && eval $(thefuck --alias)
 
 # fasd 
 fasd_cache="$HOME/.fasd-init-bash"
-if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+if [ "$(command -v fasd >/dev/null 2>&1)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
   fasd --init auto >| "$fasd_cache"
 fi
 source "$fasd_cache"
 unset fasd_cache
 
 #doctl
-source <(doctl completion zsh)
-
+command -v doctl >/dev/null 2>&1 && source <(doctl completion zsh)
 
 # Jenv
-if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+command -v jenv >/dev/null 2>&1 && eval "$(jenv init -)" && \
 export JAVA_HOME="$(jenv prefix)"
 
 # Pyenv
-eval "$(pyenv init -)"
+command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/gbr/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gbr/Downloads/google-cloud-sdk/path.zsh.inc'; fi

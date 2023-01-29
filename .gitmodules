@@ -1,0 +1,3 @@
+[submodule "mac-cli"]
+	path = mac-cli
+	url = https://github.com/guarinogabriel/mac-cli.git

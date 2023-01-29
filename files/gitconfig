@@ -81,6 +81,8 @@
 	signingkey = 85011F38F29BEDD2
 [credential]
 	helper = osxkeychain
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager-core
 	;helper = store
   ;helper = cache --timeout=21600
 ;[http]
@@ -95,9 +97,11 @@
 	includeStatusHeader = false
 	includePullRequestsSection = false
 	includeIssuesSection = false
-[commit]
-	gpgsign = true
-[gpg]
-	program = gpg
+;[commit]
+;	gpgsign = true
+;[gpg]
+;	program = gpg
 [hub]
 	protocol = https
+[credential "https://dev.azure.com"]
+	useHttpPath = true

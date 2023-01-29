@@ -12,6 +12,8 @@
   (package-install 'use-package))
 (require 'use-package)
 
+;; Always download if not available
+(setq use-package-always-ensure t)
 ;; quelpa (download from source)
 (use-package quelpa)
 
@@ -21,10 +23,6 @@
    :fetcher git
    :url "https://github.com/quelpa/quelpa-use-package.git"))
 (require 'quelpa-use-package)
-
-;; Always download if not available
-(setq use-package-always-ensure t)
-
 
 ;; utf-8 default everywhere
 (setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
@@ -59,11 +57,12 @@
 (setq max-specpdl-size 50000)
 (global-display-line-numbers-mode t )
 (menu-bar-mode -1)
-(toggle-scroll-bar -1)
 (tool-bar-mode -1)
 
 ;; Wakatime
-(global-wakatime-mode)
+(use-package wakatime-mode
+ :config
+(global-wakatime-mode +1))
 
 ;; XTerm title
 ;; (setq frame-title-format "%b")
@@ -72,8 +71,14 @@
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
 
+
+
  (defun xterm-title-update ()
     (interactive)
+    (setq xterm-set-window-title t)
+    (defadvice! fix-xterm-set-window-title (&optional terminal)
+      :before-while #'xterm-set-window-title
+      (not (display-graphic-p terminal)))
     (send-string-to-terminal (concat "\033]1; Emacs: " (buffer-name) "\007"))
     (if buffer-file-name
         (send-string-to-terminal (concat "\033]2; " (buffer-file-name) "\007"))
@@ -83,9 +88,9 @@
 
 ;; Save recentf every 5min so we don't lose history when Emacs is not
 ;; gracefully exited
-(run-at-time (current-time) 300 'recentf-save-list)
+(run-at-time " 5min" 300 'recentf-save-list)
 
-;; Kill all other buffers except the currently selected one
+;; KILL all other buffers except the currently selected one
 ;; TODO: Automaatically kill all other buffers except the last X recently visited buffers
 (defun kill-other-buffers ()
   "Kill all buffers but current buffer and special buffers"
@@ -180,6 +185,9 @@
   (general-define-key :keymaps 'dired-mode-map
 		      "-" 'dired-up-directory
 		      "SPC" nil)
+  ;; use ls-dired binary because OS X built-in ls has no --dired flag
+  (when (string= system-type "darwin")       
+    (setq dired-use-ls-dired nil))
   (general-define-key
    :keymaps 'motion
    "RET"   nil)
@@ -218,6 +226,8 @@
 (use-package undo-tree
   :ensure t
   :config (global-undo-tree-mode)
+  :init
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   :diminish undo-tree-mode)
 
 ;; load evil
@@ -237,11 +247,11 @@
 
   :config (evil-mode));; tweak evil after loading it
 
-;; (use-package evil-collection
-;;   :after evil
-;;   :ensure t
-;;   :config
-;;   (evil-collection-init)
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
 (use-package evil-surround
   :ensure t
@@ -569,6 +579,7 @@
 (use-package evil-org
   :ensure t
   :after org
+  :hook (org-mode . (lambda () evil-org-mode))
   :general
   (general-define-key :keymaps 'normal
 		      "-" 'org-ctrl-c-minus
@@ -576,7 +587,6 @@
 		      "M-o" (evil-org-define-eol-command org-insert-heading)
 		      "M-t" (evil-org-define-eol-command org-insert-todo))
   :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
   (setq evil-want-C-i-jump nil)
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
@@ -611,30 +621,21 @@
     :bind
     ("C-c n s" . deft))
 
-(use-package evil-magit
-  :after (evil magit)
-  :config
-  (with-eval-after-load 'magit
-    (require 'evil-magit))
-  ;; :general
-  ;; ('normal magit-mode-map "SPC" leader-map)
-  )
-
 ;; set proper language (fixes cyrillic letters in ansi-term)
 (setenv "LANG" "pt_BR.UTF-8")
 ;; Set default font
 
 (set-face-attribute 'default nil
                     :family "Operator Mono"
-                    :height 150
-                    :weight 'normal 
+                    :height 175
+                    :weight 'bold
                     :width 'normal)
 
 ;; font for all unicode characters
-(set-fontset-font t 'unicode "Symbola" nil 'prepend)
+;;(set-fontset-font t 'unicode "Symbola" nil 'prepend)
 
 ;; override font for cyrillic characters
-(set-fontset-font t 'cyrillic "Droid Sans Mono")
+;;(set-fontset-font t 'cyrillic "Droid Sans Mono")
 
 ;; https://fakedrake.github.io/teaching-emacs-to-copy-utf-8-on-mac-os-x.html
 (defun paste-to-osx (text &optional push)
@@ -689,9 +690,9 @@
  '(olivetti-lighter " Olv")
  '(olivetti-minimum-body-width 80)
  '(package-selected-packages
-   '(highlight-indentation dap-mode lsp-tailwindcss lsp-mode markdown-mode ht emacs-everywhere edit-server kaolin-themes ag org-download better-jumper rainbow-delimiters color-identifiers-mode colors-identifiers-mode color-theme-sanityinc-tomorrow leuven-theme all-the-icons-ivy-rich apheleia aphelia ivy-rich alphelia quelpa-use-package quelpa typescript-mode wakatime-mode org-appear org-superstar olivetti deft emacsql org-roam indent-guide diminish osx-clipboard exec-path-from-shell evil-escape evil-surround prettier prettier-js evil-magit transient magit golden-ratio smooth-scrolling smooth-scrooling exotica-theme web-mode js2-mode smartparens which-key company use-package tide general evil counsel bug-hunter all-the-icons))
+   '(yaml-mode flycheck-yamllint flymake-yaml evil-collection highlight-indentation dap-mode lsp-tailwindcss lsp-mode markdown-mode ht emacs-everywhere edit-server kaolin-themes ag org-download better-jumper rainbow-delimiters color-identifiers-mode colors-identifiers-mode color-theme-sanityinc-tomorrow leuven-theme all-the-icons-ivy-rich apheleia aphelia ivy-rich alphelia quelpa-use-package quelpa typescript-mode wakatime-mode org-appear org-superstar olivetti deft emacsql org-roam indent-guide diminish osx-clipboard exec-path-from-shell evil-escape evil-surround prettier prettier-js evil-magit transient magit golden-ratio smooth-scrolling smooth-scrooling exotica-theme web-mode js2-mode smartparens which-key company use-package tide general evil counsel bug-hunter all-the-icons))
  '(wakatime-api-key "e7abc5cc-6ed3-4085-a84a-a7f0f3d9300e")
- '(wakatime-cli-path "/usr/local/bin/wakatime"))
+ '(wakatime-cli-path "/usr/local/bin/wakatime-cli"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

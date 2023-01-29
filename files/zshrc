@@ -37,13 +37,9 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load
-# Pure theme
-autoload -U promptinit; promptinit
 
 # turn on git stash status
 zstyle :prompt:pure:git:stash show yes
-
-prompt pure
 
 # Use hub binary instead of git
 command -v hub >/dev/null 2>&1 && eval "$(hub alias -s)"

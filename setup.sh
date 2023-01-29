@@ -26,7 +26,11 @@ set -a
 . /tmp/script
 
 if [ $# -eq 0 ]; then
-  display_help
+  if [ "$CODESPACES" = "true" ]; then
+    install_only_dotfiles_no_confirm
+  else
+    display_help
+  fi
 else
   while [ $# -ne 0 ]; do
     case $1 in

@@ -107,6 +107,12 @@ update() {
   exit 0;
 }
 
+install_only_dotfiles_no_confirm() {
+  INSTALL="DOTFILES"
+  echo "Installing dotfiles without asking for confirmation..."
+  run_scripts
+}
+
 install_only_dotfiles() {
   while true; do
     read -p "Do you really want this? It'll change some of your settings, but everything overwritten will be backuped at '${HOME}'/dotfiles_backup

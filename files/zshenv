@@ -71,5 +71,4 @@ bindkey '^e' edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
-# Source Aliases
-source "$HOME/dotfiles/files/aliases.zsh"
+source "files/aliases.zsh"

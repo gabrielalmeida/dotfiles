@@ -28,7 +28,10 @@ setopt    SHARE_HISTORY      # Share history across terminals
 setopt    INC_APPEND_HISTORY  # Immediately append to the history file, not just when a term is killed
 
 # Tab completion on cd
-setopt  autocd autopushd pushdignoredups
+setopt autocd autopushd pushdignoredups
+
+# Read original dotfiles folder based on ~/.zshenv symbolic link
+FILES_DIR=$(dirname $(readlink ~/.zshenv))
 
 # set TERM to xterm-256color
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
@@ -38,7 +41,7 @@ setopt  autocd autopushd pushdignoredups
 # https://www.gnu.org/software/emacs/manual/html_node/emacs/emacsclient-Options.html  
 export ALTERNATE_EDITOR=""
 
-export VISUAL='~/dotfiles/files/emacs.sh'
+export VISUAL="${FILES_DIR}/emacs.sh"
 
 # Preferred editor for local and remote sessions
  if [[ -n $SSH_CONNECTION ]]; then
@@ -71,4 +74,4 @@ bindkey '^e' edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
-source "files/aliases.zsh"
+source "${FILES_DIR}/aliases.zsh"

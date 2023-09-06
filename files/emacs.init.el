@@ -158,6 +158,12 @@
 
 (my-setup-indent 2) ; indent 2 spaces width
 
+;; Codespaces TRAMP integration
+(use-package use-package-ensure-system-package :ensure t)
+(use-package codespaces
+  :ensure-system-package gh
+  :config (codespaces-setup))
+
 (use-package color-identifiers-mode
   :config 
   (add-hook 'after-init-hook 'global-color-identifiers-mode))
@@ -690,7 +696,7 @@
  '(olivetti-lighter " Olv")
  '(olivetti-minimum-body-width 80)
  '(package-selected-packages
-   '(yaml-mode flycheck-yamllint flymake-yaml evil-collection highlight-indentation dap-mode lsp-tailwindcss lsp-mode markdown-mode ht emacs-everywhere edit-server kaolin-themes ag org-download better-jumper rainbow-delimiters color-identifiers-mode colors-identifiers-mode color-theme-sanityinc-tomorrow leuven-theme all-the-icons-ivy-rich apheleia aphelia ivy-rich alphelia quelpa-use-package quelpa typescript-mode wakatime-mode org-appear org-superstar olivetti deft emacsql org-roam indent-guide diminish osx-clipboard exec-path-from-shell evil-escape evil-surround prettier prettier-js evil-magit transient magit golden-ratio smooth-scrolling smooth-scrooling exotica-theme web-mode js2-mode smartparens which-key company use-package tide general evil counsel bug-hunter all-the-icons))
+   '(codespaces use-package-ensure-system-package yaml-mode flycheck-yamllint flymake-yaml evil-collection highlight-indentation dap-mode lsp-tailwindcss lsp-mode markdown-mode ht emacs-everywhere edit-server kaolin-themes ag org-download better-jumper rainbow-delimiters color-identifiers-mode colors-identifiers-mode color-theme-sanityinc-tomorrow leuven-theme all-the-icons-ivy-rich apheleia aphelia ivy-rich alphelia quelpa-use-package quelpa typescript-mode wakatime-mode org-appear org-superstar olivetti deft emacsql org-roam indent-guide diminish osx-clipboard exec-path-from-shell evil-escape evil-surround prettier prettier-js evil-magit transient magit golden-ratio smooth-scrolling smooth-scrooling exotica-theme web-mode js2-mode smartparens which-key company use-package tide general evil counsel bug-hunter all-the-icons))
  '(wakatime-api-key "e7abc5cc-6ed3-4085-a84a-a7f0f3d9300e")
  '(wakatime-cli-path "/usr/local/bin/wakatime-cli"))
 (custom-set-faces
